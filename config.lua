@@ -72,7 +72,7 @@
         healthHealingColor = COLOR_BLUE
 
 	worldId = 0
-	ip = "191.28.23.216"
+	ip = "158.69.12.112"
 	bindOnlyConfiguredIpAddress = false
 	loginPort = 7171
 	gamePort = 7172
@@ -87,19 +87,19 @@
 	onePlayerOnlinePerAccount = true
 	allowClones = false
 	serverName = "Baiak Cartoon"
-	loginMessage = "Bem Vindo ao Baiak ROX Feito por Diego!!"
+	loginMessage = "Bem Vindo ao Baiak ROX !!"
 	statusTimeout = 5 * 60 * 1000
 	replaceKickOnLogin = true
 	forceSlowConnectionsToDisconnect = false
 	loginOnlyWithLoginServer = false
 	premiumPlayerSkipWaitList = false
 
-	sqlType = "sqlite"
+	sqlType = "mysql"
 	sqlHost = "localhost"
 	sqlPort = 3306
 	sqlUser = "root"
-	sqlPass = ""
-	sqlDatabase = "theforgottenserver"
+	sqlPass = "trocar123"
+	sqlDatabase = "baiakrox"
 	sqlFile = "BaiakRox.s3db"
 	sqlKeepAlive = 0
 	mysqlReadTimeout = 10
