@@ -150,7 +150,7 @@ bool ChatChannel::removeUser(Player* player)
 	return true;
 }
 
-bool ChatChannel::talk(Player* player, SpeakClasses type, const std::string& text, uint32_t _time, ProtocolGame* pg) //CA
+bool ChatChannel::talk(Player* player, SpeakClasses type, const std::string& text, uint32_t _time/* = 0*/)
 {
 	UsersMap::iterator it = m_users.find(player->getID());
 	if(it == m_users.end())
@@ -163,7 +163,7 @@ bool ChatChannel::talk(Player* player, SpeakClasses type, const std::string& tex
 	}
 
 	for(it = m_users.begin(); it != m_users.end(); ++it)
-		it->second->sendToChannel(player, type, text, m_id, _time, pg);
+		it->second->sendToChannel(player, type, text, m_id, _time);
 
 	if(hasFlag(CHANNELFLAG_LOGGED) && m_file->is_open())
 		*m_file << "[" << formatDate() << "] " << player->getName() << ": " << text << std::endl;
@@ -496,7 +496,7 @@ void Chat::removeUserFromAllChannels(Player* player)
 	}
 }
 
-bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& text, uint16_t channelId, ProtocolGame* pg) //CA
+bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& text, uint16_t channelId)
 {
 	if(text.empty())
 		return false;
@@ -547,7 +547,7 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 			}
 		}
 
-		return channel->talk(player, type, text, 0, pg); //CA
+		return channel->talk(player, type, text);
 	}
 
 	if(!player->getGuildId())
@@ -567,8 +567,9 @@ bool Chat::talkToChannel(Player* player, SpeakClasses type, const std::string& t
 	{
 		if(player->getGuildLevel() == GUILDLEVEL_LEADER)
 		{
-			IOGuild::getInstance()->disbandGuild(player->getGuildId());
+			uint32_t guildId = player->getGuildId();
 			channel->talk(player, SPEAK_CHANNEL_W, "The guild has been disbanded.");
+			IOGuild::getInstance()->disbandGuild(guildId);
 		}
 		else
 			player->sendCancel("You are not the leader of your guild.");

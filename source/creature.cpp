@@ -337,6 +337,21 @@ void Creature::stopEventWalk()
 	eventWalk = 0;
 }
 
+void Creature::internalCreatureDisappear(const Creature* creature, bool isLogout)
+{
+	if(attackedCreature == creature)
+	{
+		setAttackedCreature(NULL);
+		onAttackedCreatureDisappear(isLogout);
+	}
+
+	if(followCreature == creature)
+	{
+		setFollowCreature(NULL);
+		onFollowCreatureDisappear(isLogout);
+	}
+}
+
 void Creature::updateMapCache()
 {
 	const Position& pos = getPosition();
@@ -367,6 +382,12 @@ void Creature::validateMapCache()
 }
 #endif
 
+void Creature::updateTileCache(const Tile* tile)
+{
+	if(isMapLoaded && tile->getPosition().z == getPosition().z)
+		updateTileCache(tile, tile->getPosition());
+}
+
 void Creature::updateTileCache(const Tile* tile, int32_t dx, int32_t dy)
 {
 	if((std::abs(dx) <= (mapWalkWidth - 1) / 2) && (std::abs(dy) <= (mapWalkHeight - 1) / 2))
@@ -386,12 +407,6 @@ void Creature::updateTileCache(const Tile* tile, const Position& pos)
 	const Position& myPos = getPosition();
 	if(pos.z == myPos.z)
 		updateTileCache(tile, pos.x - myPos.x, pos.y - myPos.y);
-}
-
-void Creature::updateTileCache(const Tile* tile)
-{
-	if(isMapLoaded && tile->getPosition().z == getPosition().z)
-		updateTileCache(tile, tile->getPosition());
 }
 
 int32_t Creature::getWalkCache(const Position& pos) const
@@ -467,19 +482,9 @@ void Creature::onCreatureAppear(const Creature* creature)
 		updateTileCache(creature->getTile(), creature->getPosition());
 }
 
-void Creature::internalCreatureDisappear(const Creature* creature, bool isLogout)
+void Creature::onCreatureDisappear(const Creature* creature, bool)
 {
-	if(attackedCreature == creature)
-	{
-		setAttackedCreature(NULL);
-		onAttackedCreatureDisappear(isLogout);
-	}
-
-	if(followCreature == creature)
-	{
-		setFollowCreature(NULL);
-		onFollowCreatureDisappear(isLogout);
-	}
+	internalCreatureDisappear(creature, true);
 }
 
 void Creature::onRemovedCreature()
@@ -927,7 +932,7 @@ void Creature::drainMana(Creature* attacker, CombatType_t combatType, int32_t da
 }
 
 BlockType_t Creature::blockHit(Creature* attacker, CombatType_t combatType, int32_t& damage,
-	bool checkDefense/* = false*/, bool checkArmor/* = false*/, bool/* reflect = true*/, bool/* field = false*/)
+	bool checkDefense/* = false*/, bool checkArmor/* = false*/, bool /*reflect = true*/)
 {
 	BlockType_t blockType = BLOCK_NONE;
 	if(isImmune(combatType))
@@ -1171,15 +1176,6 @@ void Creature::onTickCondition(ConditionType_t type, int32_t, bool& _remove)
 				break;
 			case CONDITION_POISON:
 				_remove = field->getCombatType() != COMBAT_EARTHDAMAGE;
-				break;
-			case CONDITION_FREEZING:
-				_remove = field->getCombatType() != COMBAT_ICEDAMAGE;
-				break;
-			case CONDITION_DAZZLED:
-				_remove = field->getCombatType() != COMBAT_HOLYDAMAGE;
-				break;
-			case CONDITION_CURSED:
-				_remove = field->getCombatType() != COMBAT_DEATHDAMAGE;
 				break;
 			case CONDITION_DROWN:
 				_remove = field->getCombatType() != COMBAT_DROWNDAMAGE;

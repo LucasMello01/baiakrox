@@ -26,7 +26,7 @@
 #include "position.h"
 #include <libxml/parser.h>
 
-#define ITEMS 12660
+#define ITEMS 11500
 #define SLOTP_WHEREEVER 0xFFFFFFFF
 #define SLOTP_HEAD 1 << 0
 #define	SLOTP_NECKLACE 1 << 1
@@ -73,7 +73,6 @@ enum FloorChange_t
 	CHANGE_SOUTH_EX = 7,
 	CHANGE_WEST_EX = 8,
 	CHANGE_NONE = 9,
-	CHANGE_PRE_LAST = 8,
 	CHANGE_LAST = CHANGE_NONE
 };
 
@@ -87,7 +86,6 @@ struct Abilities
 		memset(statsPercent, 0, sizeof(statsPercent));
 
 		memset(absorb, 0, sizeof(absorb));
-		memset(fieldAbsorb, 0, sizeof(fieldAbsorb));
 		memset(increment, 0, sizeof(increment));
 		memset(reflect[REFLECT_PERCENT], 0, sizeof(reflect[REFLECT_PERCENT]));
 		memset(reflect[REFLECT_CHANCE], 0, sizeof(reflect[REFLECT_CHANCE]));
@@ -100,8 +98,7 @@ struct Abilities
 	bool manaShield, invisible, regeneration, preventLoss, preventDrop;
 	CombatType_t elementType;
 
-	int16_t elementDamage, absorb[COMBAT_LAST + 1], increment[INCREMENT_LAST + 1],
-		reflect[REFLECT_LAST + 1][COMBAT_LAST + 1], fieldAbsorb[COMBAT_LAST + 1];
+	int16_t elementDamage, absorb[COMBAT_LAST + 1], increment[INCREMENT_LAST + 1], reflect[REFLECT_LAST + 1][COMBAT_LAST + 1];
 	int32_t skills[SKILL_LAST + 1], skillsPercent[SKILL_LAST + 1], stats[STAT_LAST + 1], statsPercent[STAT_LAST + 1],
 		speed, healthGain, healthTicks, manaGain, manaTicks, conditionSuppressions;
 };

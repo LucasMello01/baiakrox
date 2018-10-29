@@ -31,8 +31,7 @@ enum cylinderflags_t
 	FLAG_CHILDISOWNER = 8,			//Used by containers to query capacity of the carrier (player)
 	FLAG_PATHFINDING = 16,			//An additional check is done for floor changing/teleport items
 	FLAG_IGNOREFIELDDAMAGE = 32,	//Bypass field damage checks
-	FLAG_IGNORENOTMOVEABLE = 64,	//Bypass check for movability
-	FLAG_IGNOREAUTOSTACK = 128		//__queryDestination will not try to stack items together
+	FLAG_IGNORENOTMOVEABLE = 64		//Bypass check for movability
 };
 
 enum cylinderlink_t
@@ -69,7 +68,8 @@ class Cylinder
 			* if FLAG_NOLIMIT is set blocking items/container limits is ignored
 		  * \returns ReturnValue holds the return value
 		  */
-		virtual ReturnValue __queryAdd(int32_t index, const Thing* Item, uint32_t count, uint32_t flags, Creature* actor = NULL) const = 0;
+		virtual ReturnValue __queryAdd(int32_t index, const Thing* Item, uint32_t count,
+			uint32_t flags) const = 0;
 
 		/**
 		  * Query the cylinder how much it can accept
@@ -91,7 +91,7 @@ class Cylinder
 		  * \param flags optional flags to modifiy the default behaviour
 		  * \returns ReturnValue holds the return value
 		  */
-		virtual ReturnValue __queryRemove(const Thing* thing, uint32_t count, uint32_t flags, Creature* actor = NULL) const = 0;
+		virtual ReturnValue __queryRemove(const Thing* thing, uint32_t count, uint32_t flags) const = 0;
 
 		/**
 		  * Query the destination cylinder
@@ -196,14 +196,16 @@ class Cylinder
 		  * \param itemCount if set to true it will only count items and not other subtypes like charges
 		  * \param returns the amount of items of the asked item type
 		  */
-		virtual uint32_t __getItemTypeCount(uint16_t itemId, int32_t subType = -1, bool itemCount = true) const {return 0;}
+		virtual uint32_t __getItemTypeCount(uint16_t, int32_t = -1) const {return 0;}
+
 		/**
 		  * Get the amount of items of a all types
 		  * \param countMap a map to put the itemID:count mapping in
 		  * \param itemCount if set to true it will only count items and not other subtypes like charges
 		  * \param returns a map mapping item id to count (same as first argument)
 		  */
-		virtual std::map<uint32_t, uint32_t>& __getAllItemTypeCount(std::map<uint32_t, uint32_t>& countMap, bool itemCount = true) const {return countMap;}
+		virtual std::map<uint32_t, uint32_t>& __getAllItemTypeCount(std::map<uint32_t,
+			uint32_t>& countMap) const {return countMap;}
 
 		/**
 		  * Adds an object to the cylinder without sending to the client(s)
@@ -238,10 +240,12 @@ class VirtualCylinder : public Cylinder
 		virtual Creature* getCreature() {return NULL;}
 		virtual const Creature* getCreature() const {return NULL;}
 
-		virtual ReturnValue __queryAdd(int32_t, const Thing*, uint32_t, uint32_t, Creature* = NULL) const {return RET_NOTPOSSIBLE;}
+		virtual ReturnValue __queryAdd(int32_t, const Thing*, uint32_t,
+			uint32_t) const {return RET_NOTPOSSIBLE;}
 		virtual ReturnValue __queryMaxCount(int32_t, const Thing*, uint32_t,
 			uint32_t&, uint32_t) const {return RET_NOTPOSSIBLE;}
-		virtual ReturnValue __queryRemove(const Thing* thing, uint32_t, uint32_t, Creature* = NULL) const {return (thing->getParent() == this ? RET_NOERROR : RET_NOTPOSSIBLE);}
+		virtual ReturnValue __queryRemove(const Thing* thing, uint32_t,
+			uint32_t) const {return (thing->getParent() == this ? RET_NOERROR : RET_NOTPOSSIBLE);}
 		virtual Cylinder* __queryDestination(int32_t&, const Thing*, Item**,
 			uint32_t&) {return NULL;}
 

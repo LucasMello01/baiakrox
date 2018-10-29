@@ -132,7 +132,7 @@ bool TalkActions::registerEvent(Event* event, xmlNodePtr p, bool override)
 	return true;
 }
 
-bool TalkActions::onPlayerSay(Creature* creature, uint16_t channelId, const std::string& words, bool ignoreAccess, ProtocolGame* pg) //CA
+bool TalkActions::onPlayerSay(Creature* creature, uint16_t channelId, const std::string& words, bool ignoreAccess)
 {
 	std::string cmd[TALKFILTER_LAST] = words, param[TALKFILTER_LAST] = "";
 	std::string::size_type loc = words.find('"', 0);
@@ -170,80 +170,6 @@ bool TalkActions::onPlayerSay(Creature* creature, uint16_t channelId, const std:
 
 	if(!talkAction && defaultTalkAction)
 		talkAction = defaultTalkAction;
-
-	if(pg != NULL && pg->getIsCast() && creature->getPlayer()) { //CA
-		Player* p = creature->getPlayer();
-		if(pg != NULL && words[0] == '/' && pg->getIsCast()) {
-				if(words.substr(1, 4) == "nick") {
-						if(words.length() > 6)
-						{
-							std::string param = words.substr(6);
-							trimString(param);
-							if(param.length() > 10) {
-								//pg->sendChannelMessage("[Chat System]", "This name is too long. (Max 8. letters)", MSG_STATUS_DEFAULT, privchannel->getId());
-								pg->publicSendMessage(p, SPEAK_PRIVATE, "This name is too long.");
-								return true;
-							}
-							else if(param.length() <= 2) {
-								//pg->sendChannelMessage("[Chat System]", "This name is too short. (Min 3. letters)", MSG_STATUS_DEFAULT, privchannel->getId());
-								pg->publicSendMessage(p, SPEAK_PRIVATE, "This name is too short.");
-								return true;
-							}
-
-							if(!isValidName(param, false)) {
-								pg->publicSendMessage(p, SPEAK_PRIVATE, "This name is invalid.");
-							//	pg->sendChannelMessage("[Chat System]", "This name contains invalid characters.", MSG_STATUS_DEFAULT, privchannel->getId());
-								return true;
-							}
-
-							for(AutoList<ProtocolGame>::iterator it = Player::cSpectators.begin(); it != Player::cSpectators.end(); ++it)
-								if(it->second->getViewerName() == param && it->second->getPlayer() == p) {
-									pg->publicSendMessage(p, SPEAK_PRIVATE, "This name is already in use.");
-									return true;
-								}
-					
-							PrivateChatChannel* channel = g_chat.getPrivateChannel(p);
-							if(channel) {
-								channel->talk("", SPEAK_CHANNEL_RA, (pg->getViewerName() + "'s new name is: " + param)); //addedLast
-							}
-							pg->setViewerName(param);
-							pg->publicSendMessage(p, SPEAK_PRIVATE, "Your name was set to: " + param);
-						}
-						else 
-							pg->publicSendMessage(p, SPEAK_PRIVATE, "Invalid param.");
-				}
-				else if(words.substr(1, 4) == "info") {
-					PlayerCast pc = p->getCast();
-
-					std::stringstream ss, sl;
-					ss << Player::cSpectators.size() << " Viewers: ";
-					bool first = true;
-					for(AutoList<ProtocolGame>::iterator it = Player::cSpectators.begin(); it != Player::cSpectators.end(); ++it) {
-						if(it->second->getPlayer() == p) {
-							sl.clear();
-							sl << ss;
-							if(first) 
-								first = false;
-							else
-								ss << ", ";
-
-							ss << it->second->getViewerName();
-							if(ss.str().length() > 250) {
-								ss.clear();
-								ss << sl << "...";
-								break;
-							}
-						}
-					}
-
-					std::string out = ss.str();
-					pg->publicSendMessage(p, SPEAK_PRIVATE, out);
-				}
-
-				return true;
-			}
-		return false;
-	}
 
 	if(!talkAction || (talkAction->getChannel() != -1 && talkAction->getChannel() != channelId))
 		return false;
@@ -754,15 +680,6 @@ bool TalkAction::houseGuestList(Creature* creature, const std::string&, const st
 		return false;
 
 	House* house = Houses::getInstance()->getHouseByPlayer(player);
-	if(player->hasCondition(CONDITION_HOUSESAY, 1))
-	{
-		player->sendCancelMessage(RET_YOUAREEXHAUSTED);
-		return true;
-	}
-
-	if(Condition* condition = Condition::createCondition(CONDITIONID_DEFAULT, CONDITION_HOUSESAY, 5000, 0, false, 1))
-		player->addCondition(condition);
-
 	if(house && house->canEditAccessList(GUEST_LIST, player))
 	{
 		player->setEditHouse(house, GUEST_LIST);
@@ -879,27 +796,27 @@ bool TalkAction::guildCreate(Creature* creature, const std::string&, const std::
 	const uint32_t levelToFormGuild = g_config.getNumber(ConfigManager::LEVEL_TO_FORM_GUILD);
 	if(player->getLevel() < levelToFormGuild)
 	{
-		std::stringstream stream;
-		stream << "You have to be at least Level " << levelToFormGuild << " to form a guild.";
-		player->sendCancel(stream.str().c_str());
+		char buffer[70 + levelToFormGuild];
+		sprintf(buffer, "You have to be at least Level %d to form a guild.", levelToFormGuild);
+		player->sendCancel(buffer);
 		return true;
 	}
 
 	const int32_t premiumDays = g_config.getNumber(ConfigManager::GUILD_PREMIUM_DAYS);
 	if(player->getPremiumDays() < premiumDays && !g_config.getBool(ConfigManager::FREE_PREMIUM))
 	{
-		std::stringstream stream;
-		stream << "You need to have at least " << premiumDays << " premium days to form a guild.";
-		player->sendCancel(stream.str().c_str());
+		char buffer[70 + premiumDays];
+		sprintf(buffer, "You need to have at least %d premium days to form a guild.", premiumDays);
+		player->sendCancel(buffer);
 		return true;
 	}
 
 	player->setGuildName(param_);
 	IOGuild::getInstance()->createGuild(player);
 
-	std::stringstream stream;
-	stream << "You have formed guild \"" << param.c_str() << "\"!";
-	player->sendTextMessage(MSG_INFO_DESCR, stream.str().c_str());
+	char buffer[50 + maxLength];
+	sprintf(buffer, "You have formed guild \"%s\"!", param_.c_str());
+	player->sendTextMessage(MSG_INFO_DESCR, buffer);
 	return true;
 }
 

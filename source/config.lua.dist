@@ -1,29 +1,5 @@
 -- The Forgotten Server Config
 
-	-- Extras
-	allowedMaxSizedPackets = 3
-	mysqlReconnectionAttempts = 3
-	tradelimit = 100
-	skipItemsVersionCheck = true
-		-- Mailbox Block
-		mailMaxAttempts = 2
-		mailBlockPeriod = 60 * 60 * 1000
-		mailAttemptsFadeTime = 60 * 60 * 1000
-
-		-- Depot System
-		-- 1000 depot limet defined on depot.cpp
-		defaultDepotSizePremium = 1000
-		defaultDepotSizefree = 500
-
-	-- Removed Config
-	-- useHouseDataStorage = false
-	-- houseDataStorage (binary-tilebased) or (binary) performs much faster map saving than relational (up to 60x faster).
-	-- binary - uses house_data table to store house data in giant blob for each house.
-	-- binary-tilebased - uses tile_store table to store house data in blob for each tile (benefit: if blob becomes corrupted, only specific tile will be wiped, not entire house).
-	-- relational - uses `tiles` and `tile_items` tables, doesn't store data in blob, easier to manage but is up to 60 times slower and uses up more space in database.
-	-- Default: binary-tilebased
-	houseDataStorage = "binary-tilebased"
-
 	-- Account manager
 	accountManager = true
 	namelockManager = true
@@ -181,14 +157,12 @@
 
 	-- Map
 	-- NOTE: storeTrash costs more memory, but will perform alot faster cleaning.
-	mapName = "forgotten.otbm"
+	mapName = "forgotten.otbm.gz"
 	mapAuthor = "Komic"
 	randomizeTiles = true
 	storeTrash = true
 	cleanProtectedZones = true
 	mailboxDisabledTowns = ""
-		-- Example disable rook depot (temple) "4"
-		-- mailboxDisabledTowns = "4"
 
 	-- Process
 	-- NOTE: defaultPriority works only on Windows and niceLevel on *nix
@@ -237,6 +211,7 @@
 	-- Saving-related
 	-- useHouseDataStorage usage may be found at README.
 	saveGlobalStorage = true
+	useHouseDataStorage = false
 	storePlayerDirection = false
 
 	-- Loot

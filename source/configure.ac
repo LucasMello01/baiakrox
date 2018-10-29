@@ -1,15 +1,13 @@
 AC_PREREQ([2.50])
 AC_INIT([TheForgottenServer], [0.4])
-AM_INIT_AUTOMAKE([1.10 foreign silent-rules])
+AM_INIT_AUTOMAKE([1.10 foreign])
 AC_CONFIG_SRCDIR([account.h])
 AM_CONFIG_HEADER([config.h])
-m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
 AC_PROG_CXX
 AC_LANG(C++)
-
-OPTIONAL_FLAGS="-D__WAR_SYSTEM__"
-DEBUG_FLAGS="-Os -march=native -fomit-frame-pointer"
+# add own flags in here
+OPTIONAL_FLAGS=""
 
 # check if we want server diag enabled
 serverDiag=no

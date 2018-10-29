@@ -276,7 +276,9 @@ ReturnValue Combat::canDoCombat(const Creature* attacker, const Creature* target
 		{
 			checkZones = true;
 			if((g_game.getWorldType() == WORLDTYPE_OPTIONAL && !Combat::isInPvpZone(attacker, target)
+#ifdef __WAR_SYSTEM__
 				&& !attackerPlayer->isEnemy(targetPlayer, true)
+#endif
 				) || isProtected(const_cast<Player*>(attackerPlayer), const_cast<Player*>(targetPlayer))
 				|| (g_config.getBool(ConfigManager::CANNOT_ATTACK_SAME_LOOKFEET)
 				&& attackerPlayer->getDefaultOutfit().lookFeet == targetPlayer->getDefaultOutfit().lookFeet)
@@ -1374,11 +1376,12 @@ void CombatArea::setupExtArea(const std::list<uint32_t>& list, uint32_t rows)
 
 bool MagicField::isBlocking(const Creature* creature) const
 {
-	if(!isUnstepable())
+	if(id != ITEM_MAGICWALL_SAFE && id != ITEM_WILDGROWTH_SAFE)
 		return Item::isBlocking(creature);
 
 	if(!creature || !creature->getPlayer())
 		return true;
+#ifdef __WAR_SYSTEM__
 
 	uint32_t ownerId = getOwner();
 	if(!ownerId)
@@ -1386,13 +1389,14 @@ bool MagicField::isBlocking(const Creature* creature) const
 
 	if(Creature* owner = g_game.getCreatureByID(ownerId))
 		return creature->getPlayer()->getGuildEmblem(owner) != EMBLEM_NONE;
+#endif
 
 	return false;
 }
 
 void MagicField::onStepInField(Creature* creature, bool purposeful/* = true*/)
 {
-	if(isUnstepable() || isBlocking(creature))
+	if(id == ITEM_MAGICWALL_SAFE || id == ITEM_WILDGROWTH_SAFE || isBlocking(creature))
 	{
 		if(!creature->isGhost())
 			g_game.internalRemoveItem(creature, this, 1);
@@ -1400,7 +1404,7 @@ void MagicField::onStepInField(Creature* creature, bool purposeful/* = true*/)
 		return;
 	}
 
-	if(!purposeful || !creature->isAttackable())
+	if(!purposeful)
 		return;
 
 	const ItemType& it = items[id];
@@ -1408,23 +1412,18 @@ void MagicField::onStepInField(Creature* creature, bool purposeful/* = true*/)
 		return;
 
 	uint32_t ownerId = getOwner();
-	Tile* tile = getTile();
-
 	Condition* condition = it.condition->clone();
-	if(ownerId && !tile->hasFlag(TILESTATE_HARDCOREZONE))
+	if(ownerId && !getTile()->hasFlag(TILESTATE_HARDCOREZONE))
 	{
 		if(Creature* owner = g_game.getCreatureByID(ownerId))
 		{
-			Player* ownerPlayer = owner->getPlayer();
-			if(!ownerPlayer && owner->isPlayerSummon())
-				ownerPlayer = owner->getPlayerMaster();
-
 			bool harmful = true;
-			if((g_game.getWorldType() == WORLDTYPE_OPTIONAL || tile->hasFlag(TILESTATE_OPTIONALZONE)) && ownerPlayer)
+			if((g_game.getWorldType() == WORLDTYPE_OPTIONAL || getTile()->hasFlag(TILESTATE_OPTIONALZONE))
+				&& (owner->getPlayer() || owner->isPlayerSummon()))
 				harmful = false;
-			else if(Player* player = creature->getPlayer())
+			else if(Player* targetPlayer = creature->getPlayer())
 			{
-				if(ownerPlayer && Combat::isProtected(ownerPlayer, player))
+				if(owner->getPlayer() && Combat::isProtected(owner->getPlayer(), targetPlayer))
 					harmful = false;
 			}
 

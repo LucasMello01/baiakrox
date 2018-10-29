@@ -117,6 +117,7 @@ class QTreeNode
 		friend class Map;
 };
 
+
 class QTreeLeafNode : public QTreeNode
 {
 	public:
@@ -146,9 +147,9 @@ class QTreeLeafNode : public QTreeNode
 };
 
 /**
-* Map class.
-* Holds all the actual map-data
-*/
+  * Map class.
+  * Holds all the actual map-data
+  */
 
 class Map
 {

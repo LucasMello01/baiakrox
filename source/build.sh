@@ -1,5 +1,5 @@
 #!/bin/bash
-# CCache + multicore compilation script
+# CCache + multicore compilation script by Stian
 # For "The Forgotten Server"
 
 # Example:
@@ -23,11 +23,10 @@
 # 1/7 of the original compile time!
 # When more you do it, more ccache will cache, default is limited to use 1GB storage
 
-echo "TheForgottenServer build script - "
-
+echo "TheForgottenServer build script- seems to speed things up ALOT."
 # Enable CCache
 if test -x `which ccache`; then
-	echo "Using ccache"
+	echo "CCache: OK"
 	if [ -f /usr/lib/ccache/bin ]; then
 		export PATH=/usr/lib/ccache/bin/:$PATH
 		echo "CCache binaries located in /usr/lib/ccache/bin"
@@ -36,7 +35,7 @@ if test -x `which ccache`; then
 		echo "CCache binaries located in /usr/lib/ccache"
 	fi
 else
-	echo "Warning: NOT using ccache, increase build time"
+	echo "CCache: Not installed"
 fi
 
 # Get number cores
@@ -44,7 +43,5 @@ CORES=`grep processor /proc/cpuinfo | wc -l`
 # Set make processes - 1 + number of cores
 MAKEOPT=$(($CORES + 1))
 
-echo ""
-echo "Start building on $CORES cores, using $MAKEOPT processes"
-echo ""
-make V=0 -j $MAKEOPT
+echo "Building on $CORES cores, using $MAKEOPT processes"
+make -j $MAKEOPT

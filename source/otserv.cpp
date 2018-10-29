@@ -122,12 +122,12 @@ bool argumentsHandler(StringVec args)
 			return false;
 		}
 
-		/* EDITANDO CRÉDITOS */
 		if((*it) == "--version")
 		{
-			std::clog << SOFTWARE_NAME << ", version " << SOFTWARE_VERSION << " (rev 3777)\n"
-			"Compilada por luanluciano93 em " << __DATE__ << " - vs 1.0.6 \n"
-			"\n";
+			std::clog << SOFTWARE_NAME << ", version " << SOFTWARE_VERSION << " (" << SOFTWARE_CODENAME << ")\n"
+			"Compiled with " << BOOST_COMPILER << " at " << __DATE__ << ", " << __TIME__ << ".\n"
+			"A server developed by Elf, Stian, Slawkens and KaczooH, .\n"
+			"Visit our forum for updates, support and resources: http://vapus.net/forum.\n";
 			return false;
 		}
 
@@ -329,10 +329,11 @@ void otserv(StringVec, ServiceManager* services)
 			startupErrorMessage("Aborted.");
 	}
 #endif
-	/* EDITANDO CRÉDITOS */
-	std::clog << SOFTWARE_NAME << ", version " << SOFTWARE_VERSION << " (rev 3777)\n"
-	"Compilada por luanluciano93 em " << __DATE__ << " - version 1.0.6 \n"
-	"\n";
+
+	std::clog << SOFTWARE_NAME << ", version " << SOFTWARE_VERSION << " (" << SOFTWARE_CODENAME << ")\n"
+		"Compiled with " << BOOST_COMPILER << " at " << __DATE__ << ", " << __TIME__ << ".\n"
+		"A server developed by Elf, Stian, Slawkens and KaczooH, .\n"
+		"Visit our forum for updates, support and resources: http://vapus.net/forum.\n\n";
 	std::stringstream ss;
 #ifdef __DEBUG__
 	ss << " GLOBAL";

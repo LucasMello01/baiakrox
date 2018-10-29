@@ -137,7 +137,6 @@ typedef std::map<int32_t, float> StageList;
 #define EVENT_DECAYINTERVAL 1000
 #define EVENT_DECAYBUCKETS 16
 #define STATE_DELAY 1000
-#define EVENT_WARSINTERVAL 900000
 
 /**
   * Main Game class.
@@ -354,8 +353,6 @@ class Game
 			uint32_t flags = 0, bool test = false);
 		ReturnValue internalAddItem(Creature* actor, Cylinder* toCylinder, Item* item, int32_t index,
 			uint32_t flags, bool test, uint32_t& remainderCount);
-		ReturnValue internalAddItem(Creature* actor, Cylinder* toCylinder, Item* item, int32_t index,
-			uint32_t flags, bool test, uint32_t& remainderCount, Item** stackItem);
 		ReturnValue internalRemoveItem(Creature* actor, Item* item, int32_t count = -1,  bool test = false, uint32_t flags = 0);
 
 		ReturnValue internalPlayerAddItem(Creature* actor, Player* player, Item* item,
@@ -460,10 +457,10 @@ class Game
 		bool playerMoveItem(uint32_t playerId, const Position& fromPos,
 			uint16_t spriteId, int16_t fromStackpos, const Position& toPos, uint8_t count);
 		bool playerMove(uint32_t playerId, Direction dir);
-		bool playerCreatePrivateChannel(uint32_t playerId, ProtocolGame* pg); //CA
+		bool playerCreatePrivateChannel(uint32_t playerId);
 		bool playerChannelInvite(uint32_t playerId, const std::string& name);
 		bool playerChannelExclude(uint32_t playerId, const std::string& name);
-		bool playerRequestChannels(uint32_t playerId, ProtocolGame* pg); //CA
+		bool playerRequestChannels(uint32_t playerId);
 		bool playerOpenChannel(uint32_t playerId, uint16_t channelId);
 		bool playerCloseChannel(uint32_t playerId, uint16_t channelId);
 		bool playerOpenPrivateChannel(uint32_t playerId, std::string& receiver);
@@ -508,8 +505,8 @@ class Game
 		bool playerRequestRemoveVip(uint32_t playerId, uint32_t guid);
 		bool playerTurn(uint32_t playerId, Direction dir);
 		bool playerRequestOutfit(uint32_t playerId);
-        bool playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type,
-            const std::string& receiver, const std::string& text, ProtocolGame* pg = NULL); //CA
+		bool playerSay(uint32_t playerId, uint16_t channelId, SpeakClasses type,
+			const std::string& receiver, const std::string& text);
 		bool playerChangeOutfit(uint32_t playerId, Outfit_t outfit);
 		bool playerInviteToParty(uint32_t playerId, uint32_t invitedId);
 		bool playerJoinParty(uint32_t playerId, uint32_t leaderId);
@@ -581,10 +578,9 @@ class Game
 		void checkCreatureAttack(uint32_t creatureId);
 		void checkCreatures();
 		void checkLight();
-		void checkWars();
 
 		bool combatBlockHit(CombatType_t combatType, Creature* attacker, Creature* target,
-			int32_t& healthChange, bool checkDefense, bool checkArmor, bool field = false);
+			int32_t& healthChange, bool checkDefense, bool checkArmor);
 
 		bool combatChangeHealth(CombatType_t combatType, Creature* attacker, Creature* target, int32_t healthChange,
 			MagicEffect_t hitEffect = MAGIC_EFFECT_UNKNOWN, Color_t hitColor = COLOR_UNKNOWN, bool force = false);
@@ -626,8 +622,8 @@ class Game
 	protected:
 		bool playerWhisper(Player* player, const std::string& text);
 		bool playerYell(Player* player, const std::string& text);
-		bool playerSpeakTo(Player* player, SpeakClasses type, const std::string& receiver, const std::string& text);	
-        bool playerTalkToChannel(Player* player, SpeakClasses type, const std::string& text, uint16_t channelId, ProtocolGame* pg = NULL); //CA
+		bool playerSpeakTo(Player* player, SpeakClasses type, const std::string& receiver, const std::string& text);
+		bool playerTalkToChannel(Player* player, SpeakClasses type, const std::string& text, uint16_t channelId);
 		bool playerSpeakToNpc(Player* player, const std::string& text);
 		bool playerReportRuleViolation(Player* player, const std::string& text);
 		bool playerContinueReport(Player* player, const std::string& text);
@@ -673,7 +669,6 @@ class Game
 		int32_t lastMotdId;
 		uint32_t playersRecord;
 		uint32_t checkLightEvent, checkCreatureEvent, checkDecayEvent, saveEvent;
-		uint32_t checkWarsEvent;
 		bool globalSaveMessage[2];
 
 		RefreshTiles refreshTiles;

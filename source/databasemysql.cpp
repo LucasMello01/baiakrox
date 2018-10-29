@@ -23,7 +23,6 @@
 
 #include "scheduler.h"
 #include "configmanager.h"
-#include "tools.h"
 
 extern ConfigManager g_config;
 
@@ -66,7 +65,7 @@ DatabaseMySQL::DatabaseMySQL() :
 		m_timeoutTask = Scheduler::getInstance().addEvent(createSchedulerTask(timeout,
 			boost::bind(&DatabaseMySQL::keepAlive, this)));
 
-	if(asLowerCaseString(g_config.getString(ConfigManager::HOUSE_STORAGE)) == "relational")
+	if(!g_config.getBool(ConfigManager::HOUSE_STORAGE))
 		return;
 
 	//we cannot lock mutex here :)
@@ -86,32 +85,6 @@ DatabaseMySQL::~DatabaseMySQL()
 	mysql_close(&m_handle);
 	if(m_timeoutTask != 0)
 		Scheduler::getInstance().stopEvent(m_timeoutTask);
-}
-
-bool DatabaseMySQL::connect(bool _reconnect)
-{
-	if(_reconnect)
-	{
-		std::clog << "WARNING: MYSQL Lost connection, attempting to reconnect..." << std::endl;
-
-		uint32_t maxAttempts = g_config.getNumber(ConfigManager::MYSQL_RECONNECTION_ATTEMPTS);
-		if(maxAttempts && ++m_attempts > maxAttempts)	
-		{
-			std::clog << "Failed connection to database - maximum reconnect attempts passed." << std::endl;
-			return false;
-		}
-	}
-
-	if(mysql_real_connect(&m_handle, g_config.getString(ConfigManager::SQL_HOST).c_str(), g_config.getString(
-		ConfigManager::SQL_USER).c_str(), g_config.getString(ConfigManager::SQL_PASS).c_str(), g_config.getString(
-		ConfigManager::SQL_DB).c_str(), g_config.getNumber(ConfigManager::SQL_PORT), NULL, 0))
-	{
-		m_attempts = 0;
-		return true;
-	}
-
-	std::clog << "Failed connecting to database - MYSQL ERROR: " << mysql_error(&m_handle) << " (" << mysql_errno(&m_handle) << ")" << std::endl;
-	return false;
 }
 
 bool DatabaseMySQL::getParam(DBParam_t param)

@@ -42,7 +42,7 @@ extern ConfigManager g_config;
 extern MoveEvents* g_moveEvents;
 
 Items Item::items;
-Item* Item::CreateItem(const uint16_t type, uint16_t amount/* = 1*/)
+Item* Item::CreateItem(const uint16_t type, uint16_t amount/* = 0*/)
 {
 	const ItemType& it = Item::items[type];
 	if(it.group == ITEM_GROUP_DEPRECATED)
@@ -177,21 +177,22 @@ bool Item::loadContainer(xmlNodePtr parentNode, Container* parent)
 Item::Item(const uint16_t type, uint16_t amount/* = 0*/):
 	ItemAttributes(), id(type)
 {
-	count = 1;
 	raid = NULL;
 	loadedFromMap = false;
 
-	const ItemType& it = items[id];
-	if(it.charges)
-		setCharges(it.charges);
-
+	setItemCount(1);
 	setDefaultDuration();
+
+	const ItemType& it = items[id];
 	if(it.isFluidContainer() || it.isSplash())
 		setFluidType(amount);
-	else if(it.stackable && amount)
-		count = amount;
-	else if(it.charges && amount)
-		setCharges(amount);
+	else if(it.stackable)
+	{
+		if(amount || it.charges)
+			setItemCount(amount ? amount : it.charges);
+	}
+	else if(it.charges)
+		setCharges(amount ? amount : it.charges);
 }
 
 Item* Item::clone() const
@@ -756,21 +757,6 @@ bool Item::hasProperty(enum ITEMPROPERTY prop) const
 
 			break;
 
-		case FLOORCHANGEDOWN:
-			if(it.floorChange[CHANGE_DOWN])
-				return true;
-
-			break;
-
-		case FLOORCHANGEUP:
-			for(uint16_t i = CHANGE_FIRST; i <= CHANGE_PRE_LAST; i++)
-			{
-				if(it.floorChange[i])
-					return true;
-			}
-
-			break;
-
 		default:
 			break;
 	}
@@ -797,11 +783,9 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 	bool dot = true;
 	if(it.isRune())
 	{
-		s << "(";
 		if(!it.runeSpellName.empty())
-			s << "\"" << it.runeSpellName << "\", ";
+			s << "(\"" << it.runeSpellName << "\")";
 
-		s << "Charges:" << subType << ")";
 		if(it.runeLevel > 0 || it.runeMagLevel > 0 || (it.vocationString != "" && it.wieldInfo == 0))
 		{
 			s << "." << std::endl << "It can only be used";
@@ -958,47 +942,6 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 				s << ", ";
 
 			s << "protection all " << std::showpos << show << std::noshowpos << "%";
-		}
-
-		show = it.abilities.fieldAbsorb[COMBAT_FIRST];
-		if(!show)
-		{
-			bool tmp = true;
-			for(uint32_t i = (COMBAT_FIRST + 1); i <= COMBAT_LAST; i <<= 1)
-			{
-				if(!it.abilities.fieldAbsorb[i])
-					continue;
-
-				if(tmp)
-				{
-					tmp = false;
-					if(begin)
-					{
-						begin = false;
-						s << " (";
-					}
-					else
-						s << ", ";
-
-					s << "protection ";
-				}
-				else
-					s << ", ";
-
-				s << getCombatName((CombatType_t)i) << " field " << std::showpos << it.abilities.absorb[i] << std::noshowpos << "%";
-			}
-		}
-		else
-		{
-			if(begin)
-			{
-				begin = false;
-				s << " (";
-			}
-			else
-				s << ", ";
-
-			s << "protection all fields " << std::showpos << show << std::noshowpos << "%";
 		}
 
 		// TODO: same case as absorbs...
@@ -1492,33 +1435,14 @@ std::string Item::getDescription(const ItemType& it, int32_t lookDistance, const
 		if(item && item->hasIntegerAttribute("duration"))
 		{
 			int32_t duration = item->getDuration() / 1000;
-			s << " that will expire in ";
-			if(duration >= 86400)
-			{
-				uint16_t days = duration / 86400;
-				uint16_t hours = (duration % 86400) / 3600;
-				s << days << " day" << (days > 1 ? "s" : "");
-				if(hours > 0)
-					s << " and " << hours << " hour" << (hours > 1 ? "s" : "");
-			}
-			else if(duration >= 3600)
-			{
-				uint16_t hours = duration / 3600;
-				uint16_t minutes = (duration % 3600) / 60;
-				s << hours << " hour" << (hours > 1 ? "s" : "");
-				if(hours > 0)
-					s << " and " << minutes << " minute" << (minutes > 1 ? "s" : "");
-			}
-			else if(duration >= 60)
-			{
-				uint16_t minutes = duration / 60;
-				uint16_t seconds = duration % 60;
-				s << minutes << " minute" << (minutes > 1 ? "s" : "");
-				if(seconds > 0)
-					s << " and " << seconds << " second" << (seconds > 1 ? "s" : "");
-			}
+			s << " that has energy for ";
+
+			if(duration >= 120)
+				s << duration / 60 << " minutes left";
+			else if(duration > 60)
+				s << "1 minute left";
 			else
-				s << duration << " second" << (duration > 1 ? "s" : "");
+				s << " less than a minute left";
 		}
 		else
 			s << " that is brand-new";

@@ -109,10 +109,11 @@ class Container : public Item, public Cylinder
 		virtual Creature* getCreature() {return NULL;}
 		virtual const Creature* getCreature() const {return NULL;}
 
-		virtual ReturnValue __queryAdd(int32_t index, const Thing* thing, uint32_t count, uint32_t flags, Creature* actor = NULL) const;
+		virtual ReturnValue __queryAdd(int32_t index, const Thing* thing, uint32_t count,
+			uint32_t flags) const;
 		virtual ReturnValue __queryMaxCount(int32_t index, const Thing* thing, uint32_t count, uint32_t& maxQueryCount,
 			uint32_t flags) const;
-		virtual ReturnValue __queryRemove(const Thing* thing, uint32_t count, uint32_t flags, Creature* actor = NULL) const;
+		virtual ReturnValue __queryRemove(const Thing* thing, uint32_t count, uint32_t flags) const;
 		virtual Cylinder* __queryDestination(int32_t& index, const Thing* thing, Item** destItem,
 			uint32_t& flags);
 
@@ -130,8 +131,8 @@ class Container : public Item, public Cylinder
 		virtual int32_t __getFirstIndex() const;
 		virtual int32_t __getLastIndex() const;
 
-		virtual uint32_t __getItemTypeCount(uint16_t itemId, int32_t subType = -1, bool itemCount = true) const;
-		virtual std::map<uint32_t, uint32_t>& __getAllItemTypeCount(std::map<uint32_t, uint32_t>& countMap, bool itemCount = true) const;
+		virtual uint32_t __getItemTypeCount(uint16_t itemId, int32_t subType = -1) const;
+		virtual std::map<uint32_t, uint32_t>& __getAllItemTypeCount(std::map<uint32_t, uint32_t>& countMap) const;
 
 		virtual void postAddNotification(Creature* actor, Thing* thing, const Cylinder* oldParent,
 			int32_t index, cylinderlink_t link = LINK_OWNER);

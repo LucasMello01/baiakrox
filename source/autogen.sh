@@ -1,1 +1,1 @@
-autoreconf -vfi -- warnings=none
+autoreconf -vfi

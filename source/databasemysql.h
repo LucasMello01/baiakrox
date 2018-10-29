@@ -36,7 +36,6 @@ class DatabaseMySQL : public _Database
 		DATABASE_VIRTUAL ~DatabaseMySQL();
 
 		DATABASE_VIRTUAL bool getParam(DBParam_t param);
-		DATABASE_VIRTUAL bool connect(bool _reconnect);
 
 		DATABASE_VIRTUAL bool beginTransaction() {return query("BEGIN");}
 		DATABASE_VIRTUAL bool rollback();
@@ -55,7 +54,6 @@ class DatabaseMySQL : public _Database
 		DATABASE_VIRTUAL void keepAlive();
 
 		MYSQL m_handle;
-		uint16_t m_attempts;
 		uint32_t m_timeoutTask;
 };
 

@@ -324,19 +324,6 @@ class LuaInterface
 		virtual void registerFunctions();
 
 		//lua functions
-		static int32_t luaGetCastsOnline(lua_State* L); //CA
-		static int32_t luaDoPlayerSetCastPassword(lua_State* L); //CA
-		static int32_t luaDoPlayerSetCastDescription(lua_State* L); //CA
-		static int32_t luaDoPlayerSetCastState(lua_State* L); //CA
-		static int32_t luaGetPlayerCast(lua_State* L); //CA
-		static int32_t luaDoPlayerAddCastBan(lua_State* L); //CA
-		static int32_t luaDoPlayerRemoveCastBan(lua_State* L); //CA
-		static int32_t luaGetPlayerCastBans(lua_State* L); //CA
-		static int32_t luaGetPlayerCastViewers(lua_State* L); //CA
-		static int32_t luaDoPlayerAddCastMute(lua_State* L); //CA
-		static int32_t luaDoPlayerRemoveCastMute(lua_State* L); //CA
-		static int32_t luaGetPlayerCastMutes(lua_State* L); //CA
-
 		static int32_t luaDoRemoveItem(lua_State* L);
 		static int32_t luaDoPlayerFeed(lua_State* L);
 		static int32_t luaDoPlayerSendCancel(lua_State* L);
@@ -553,8 +540,10 @@ class LuaInterface
 		static int32_t luaDoCreatureSetStorage(lua_State* L);
 		static int32_t luaDoPlayerAddBlessing(lua_State* L);
 		static int32_t luaGetPlayerBlessing(lua_State* L);
+#ifdef __WAR_SYSTEM__
 		static int32_t luaDoGuildAddEnemy(lua_State* L);
 		static int32_t luaDoGuildRemoveEnemy(lua_State* L);
+#endif
 		static int32_t luaGetStorage(lua_State* L);
 		static int32_t luaDoSetStorage(lua_State* L);
 		static int32_t luaDoPlayerAddOutfit(lua_State* L);

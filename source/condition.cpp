@@ -219,7 +219,6 @@ Condition* Condition::createCondition(ConditionId_t _id, ConditionType_t _type, 
 		case CONDITION_HUNTING:
 		case CONDITION_INFIGHT:
 		case CONDITION_MUTED:
-		case CONDITION_HOUSESAY:
 		case CONDITION_EXHAUST:
 		case CONDITION_DRUNK:
 		case CONDITION_PACIFIED:
@@ -916,10 +915,6 @@ bool ConditionDamage::setParam(ConditionParam_t param, int32_t value)
 			periodDamage = value;
 			break;
 
-		case CONDITIONPARAM_FIELD:
-			field = (value != 0);
-			break;
-
 		default:
 			break;
 	}
@@ -1157,9 +1152,9 @@ bool ConditionDamage::doDamage(Creature* creature, int32_t damage)
 	if(creature->isSuppress(getType()))
 		return true;
 
-	Creature* attacker = g_game.getCreatureByID(owner);
 	CombatType_t combatType = Combat::ConditionToDamageType(conditionType);
-	if(g_game.combatBlockHit(combatType, attacker, creature, damage, false, false, field))
+	Creature* attacker = g_game.getCreatureByID(owner);
+	if(g_game.combatBlockHit(combatType, attacker, creature, damage, false, false))
 		return false;
 
 	return g_game.combatChangeHealth(combatType, attacker, creature, damage);

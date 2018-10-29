@@ -44,32 +44,6 @@ class Party;
 class SchedulerTask;
 class Quest;
 
-struct CastBan
-{
-	std::string name;
-	uint32_t ip;
-
-	CastBan(std::string n, uint32_t _ip) {
-		name = n;
-		ip = _ip;
-	}
-};
-
-struct PlayerCast //CA
-{
-	uint16_t curId;
-	bool isCasting;
-	std::string password;
-	std::string description;
-
-	std::list<CastBan> muted;
-	std::list<CastBan> bans;
-
-    PlayerCast() {
-		isCasting = false;
-		curId = 1;
-	}
-};
 enum skillsid_t
 {
 	SKILL_LEVEL = 0,
@@ -153,7 +127,9 @@ typedef std::map<uint32_t, uint32_t> MuteCountMap;
 typedef std::list<std::string> LearnedInstantSpellList;
 typedef std::list<uint32_t> InvitedToGuildsList;
 typedef std::list<Party*> PartyList;
+#ifdef __WAR_SYSTEM__
 typedef std::map<uint32_t, War_t> WarMap;
+#endif
 
 #define SPEED_MAX 1500
 #define SPEED_MIN 10
@@ -173,113 +149,7 @@ class Player : public Creature, public Cylinder
 		virtual const Player* getPlayer() const {return this;}
 
 		static MuteCountMap muteCountMap;
-		
-		bool getCastingState() const {return cast.isCasting;};
-		virtual const std::string& getCastingPassword() const {return cast.password;};
-		
-        PlayerCast getCast() {return cast;} //CA
 
-		void const setCasting(bool c);
-		void const setCastPassword(std::string p) {cast.password = p;};
-
-		void const setCastDescription(std::string desc) {
-			cast.description = desc;
-		}
-
-		virtual const std::string& getCastDescription() const {
-			return cast.description;
-		}
-
-		void const addCastViewer(ProtocolGame* pg) {
-			cSpectators[nextSpectator] = pg;
-			nextSpectator++;
-
-			std::stringstream ss;
-			ss << "Viewer" << cast.curId;
-			pg->viewerName = ss.str().c_str();
-			cast.curId++;
-		}
-		void const removeCastViewer(uint32_t id) {
-			cSpectators.erase(id);
-		}
-
-		uint32_t getCastIpByName(std::string n) {
-			for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) 
-				if(it->second->getViewerName() == n && it->second->getPlayer() == this)
-					return it->second->getIP();
-
-			return NULL;
-		}
-
-		uint32_t getCastViewerCount() {
-			uint32_t count = 0;
-			for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) 
-					if(it->second->getPlayer() == this)
-						count++;
-
-			return count;
-		}
-
-		void const kickCastViewers() {
-			for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) {
-				if(it->second->getPlayer() == this) {
-					it->second->disconnect();
-					it->second->unRef();
-					removeCastViewer(it->first);
-					//it = cSpectators.begin();
-				}
-			}
-			cast = PlayerCast::PlayerCast();
-		}
-
-		void const kickCastViewerByName(std::string n) {
-			for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-				if(it->second->getViewerName() == n && it->second->getPlayer() == this) {
-					it->second->disconnect();
-					it->second->unRef();
-					removeCastViewer(it->first);
-				}
-		}
-
-		bool const addCastBan(std::string n) {
-			uint32_t ip = getCastIpByName(n);
-			if(!ip)
-				return false;
-
-			cast.bans.push_back(CastBan::CastBan(n, ip));
-			kickCastViewerByName(n);
-			return true;
-		}
-
-		bool const removeCastBan(std::string n) {
-			for(std::list<CastBan>::iterator it = cast.bans.begin(); it != cast.bans.end(); ++it)
-				if(it->name == n) {
-					cast.bans.erase(it);
-					return true;
-				}
-				
-			return false;
-		}
-
-
-		bool const addCastMute(std::string n) {
-			uint32_t ip = getCastIpByName(n);
-			if(!ip)
-				return false;
-
-			cast.muted.push_back(CastBan::CastBan(n, ip));
-			return true;
-		}
-
-		bool const removeCastMute(std::string n) {
-			for(std::list<CastBan>::iterator it = cast.muted.begin(); it != cast.muted.end(); ++it)
-				if(it->name == n) {
-					cast.muted.erase(it);
-					return true;
-				}
-				
-			return false;
-		}
 		virtual const std::string& getName() const {return name;}
 		virtual const std::string& getNameDescription() const {return nameDescription;}
 		virtual std::string getDescription(int32_t lookDistance) const;
@@ -295,11 +165,6 @@ class Player : public Creature, public Cylinder
 		uint32_t getGUID() const {return guid;}
 
 		static AutoList<Player> autoList;
-		
-		static AutoList<Player> castAutoList; //CA
-		static AutoList<ProtocolGame> cSpectators;
-		static uint32_t nextSpectator;
-		
 		virtual uint32_t rangeId() {return 0x10000000;}
 
 		void addList();
@@ -367,11 +232,7 @@ class Player : public Creature, public Cylinder
 
 		bool hasClient() const {return client;}
 		bool isVirtual() const {return (getID() == 0);}
-		void disconnect() {if(client) {client->disconnect(); //CA
-			for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-				it->second->disconnect();
-			}
-		}
+		void disconnect() {if(client) client->disconnect();}
 		uint32_t getIP() const;
 		bool canOpenCorpse(uint32_t ownerId);
 
@@ -417,6 +278,7 @@ class Player : public Creature, public Cylinder
 
 		bool isPremium() const;
 		int32_t getPremiumDays() const {return premiumDays;}
+#ifdef __WAR_SYSTEM__
 
 		bool hasEnemy() const {return !warMap.empty();}
 		bool getEnemy(const Player* player, War_t& data) const;
@@ -427,6 +289,8 @@ class Player : public Creature, public Cylinder
 		void addEnemy(uint32_t guild, War_t war)
 			{warMap[guild] = war;}
 		void removeEnemy(uint32_t guild) {warMap.erase(guild);}
+#endif
+
 		uint32_t getVocationId() const {return vocationId;}
 		void setVocation(uint32_t id);
 		uint16_t getSex(bool full) const {return full ? sex : sex % 2;}
@@ -552,7 +416,7 @@ class Player : public Creature, public Cylinder
 
 		void stopWalk() {cancelNextWalk = true;}
 		void openShopWindow();
-		void closeShopWindow(bool send = true);
+		void closeShopWindow(bool send = true, Npc* npc = NULL, int32_t onBuy = -1, int32_t onSell = -1);
 		bool canShopItem(uint16_t itemId, uint8_t subType, ShopEvent_t event);
 
 		chaseMode_t getChaseMode() const {return chaseMode;}
@@ -577,8 +441,7 @@ class Player : public Creature, public Cylinder
 		void setPzLocked(bool v) {pzLocked = v;}
 
 		virtual BlockType_t blockHit(Creature* attacker, CombatType_t combatType, int32_t& damage,
-			bool checkDefense = false, bool checkArmor = false, bool reflect = true, bool field = false);
-
+			bool checkDefense = false, bool checkArmor = false, bool reflect = true);
 		virtual void doAttacking(uint32_t interval);
 		virtual bool hasExtraSwing() {return lastAttack > 0 && ((OTSYS_TIME() - lastAttack) >= getAttackSpeed());}
 		int32_t getShootRange() const {return shootRange;}
@@ -639,7 +502,9 @@ class Player : public Creature, public Cylinder
 
 		Skulls_t getSkullType(const Creature* creature) const;
 		PartyShields_t getPartyShield(const Creature* creature) const;
+#ifdef __WAR_SYSTEM__
 		GuildEmblems_t getGuildEmblem(const Creature* creature) const;
+#endif
 
 		bool hasAttacked(const Player* attacked) const;
 		void addAttacked(const Player* attacked);
@@ -656,108 +521,43 @@ class Player : public Creature, public Cylinder
 		//tile
 		//send methods
 		void sendAddTileItem(const Tile* tile, const Position& pos, const Item* item)
-			{if(client) {client->sendAddTileItem(tile, pos, tile->getClientIndexOfThing(this, item), item);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendAddTileItem(tile, pos, tile->getClientIndexOfThing(this, item), item);
-			}
-		}
-
+			{if(client) client->sendAddTileItem(tile, pos, tile->getClientIndexOfThing(this, item), item);}
 		void sendUpdateTileItem(const Tile* tile, const Position& pos, const Item* oldItem, const Item* newItem)
-			{if(client) {client->sendUpdateTileItem(tile, pos, tile->getClientIndexOfThing(this, oldItem), newItem);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendUpdateTileItem(tile, pos, tile->getClientIndexOfThing(this, oldItem), newItem);
-			}
-		}
+			{if(client) client->sendUpdateTileItem(tile, pos, tile->getClientIndexOfThing(this, oldItem), newItem);}
 		void sendRemoveTileItem(const Tile* tile, const Position& pos, uint32_t stackpos, const Item*)
-			{if(client) {client->sendRemoveTileItem(tile, pos, stackpos);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendRemoveTileItem(tile, pos, stackpos);
-			}
-		}
+			{if(client) client->sendRemoveTileItem(tile, pos, stackpos);}
 		void sendUpdateTile(const Tile* tile, const Position& pos)
-			{if(client) {client->sendUpdateTile(tile, pos);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendUpdateTile(tile, pos);
-			}	
-		}
+			{if(client) client->sendUpdateTile(tile, pos);}
 
 		void sendChannelMessage(std::string author, std::string text, SpeakClasses type, uint8_t channel)
-			{if(client) {client->sendChannelMessage(author, text, type, channel);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendChannelMessage(author, text, type, channel);
-			}
-		}
-
+			{if(client) client->sendChannelMessage(author, text, type, channel);}
 		void sendCreatureAppear(const Creature* creature)
-			{if(client) {client->sendAddCreature(creature, creature->getPosition(), creature->getTile()->getClientIndexOfThing(this, creature));
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendAddCreature(creature, creature->getPosition(), creature->getTile()->getClientIndexOfThing(this, creature));
-			}
-		}
+			{if(client) client->sendAddCreature(creature, creature->getPosition(), creature->getTile()->getClientIndexOfThing(
+				this, creature));}
 		void sendCreatureDisappear(const Creature* creature, uint32_t stackpos)
-			{if(client) {client->sendRemoveCreature(creature, creature->getPosition(), stackpos);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendRemoveCreature(creature, creature->getPosition(), stackpos); 
-			}
-		}
+			{if(client) client->sendRemoveCreature(creature, creature->getPosition(), stackpos);}
 		void sendCreatureMove(const Creature* creature, const Tile* newTile, const Position& newPos,
 			const Tile* oldTile, const Position& oldPos, uint32_t oldStackpos, bool teleport)
-			{if(client) {client->sendMoveCreature(creature, newTile, newPos, newTile->getClientIndexOfThing(this, creature), oldTile, oldPos, oldStackpos, teleport);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendMoveCreature(creature, newTile, newPos, newTile->getClientIndexOfThing(this, creature), oldTile, oldPos, oldStackpos, teleport);
-			}
-		}
+			{if(client) client->sendMoveCreature(creature, newTile, newPos, newTile->getClientIndexOfThing(
+				this, creature), oldTile, oldPos, oldStackpos, teleport);}
 
 		void sendCreatureTurn(const Creature* creature)
-			{if(client) {client->sendCreatureTurn(creature, creature->getTile()->getClientIndexOfThing(this, creature));
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatureTurn(creature, creature->getTile()->getClientIndexOfThing(this, creature));
-			}
-		}
+			{if(client) client->sendCreatureTurn(creature, creature->getTile()->getClientIndexOfThing(this, creature));}
 		void sendCreatureSay(const Creature* creature, SpeakClasses type, const std::string& text, Position* pos = NULL)
-			{if(client) {client->sendCreatureSay(creature, type, text, pos);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatureSay(creature, type, text, pos);
-			}
-		}
-
+			{if(client) client->sendCreatureSay(creature, type, text, pos);}
 		void sendCreatureSquare(const Creature* creature, uint8_t color)
-			{if(client) {client->sendCreatureSquare(creature, color);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatureSquare(creature, color);
-			}
-		}
+			{if(client) client->sendCreatureSquare(creature, color);}
 		void sendCreatureChangeOutfit(const Creature* creature, const Outfit_t& outfit)
-			{if(client) {client->sendCreatureOutfit(creature, outfit);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatureOutfit(creature, outfit);
-			}
-		}
+			{if(client) client->sendCreatureOutfit(creature, outfit);}
 		void sendCreatureChangeVisible(const Creature* creature, Visible_t visible);
 		void sendCreatureLight(const Creature* creature)
-			{if(client) {client->sendCreatureLight(creature);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatureLight(creature);
-			}
-		}
+			{if(client) client->sendCreatureLight(creature);}
 		void sendCreatureShield(const Creature* creature)
-			{if(client) {client->sendCreatureShield(creature);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatureShield(creature);
-			}
-		}
+			{if(client) client->sendCreatureShield(creature);}
 		void sendCreatureEmblem(const Creature* creature)
-			{if(client) {client->sendCreatureEmblem(creature);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatureEmblem(creature);
-			}
-		}
-        void sendCreatureImpassable(const Creature* creature)
-            {if(client) {client->sendCreatureImpassable(creature);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatureEmblem(creature);
-           }
-        }
+			{if(client) client->sendCreatureEmblem(creature);}
+		void sendCreatureImpassable(const Creature* creature)
+			{if(client) client->sendCreatureImpassable(creature);}
 
 		//container
 		void sendAddContainerItem(const Container* container, const Item* item);
@@ -768,23 +568,11 @@ class Player : public Creature, public Cylinder
 
 		//inventory
 		void sendAddInventoryItem(slots_t slot, const Item* item)
-			{if(client) {client->sendAddInventoryItem(slot, item);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendAddInventoryItem(slot, item);
-			}
-		}
+			{if(client) client->sendAddInventoryItem(slot, item);}
 		void sendUpdateInventoryItem(slots_t slot, const Item*, const Item* newItem)
-			{if(client) {client->sendUpdateInventoryItem(slot, newItem);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendUpdateInventoryItem(slot, newItem);
-			}
-		}
+			{if(client) client->sendUpdateInventoryItem(slot, newItem);}
 		void sendRemoveInventoryItem(slots_t slot, const Item*)
-			{if(client) {client->sendRemoveInventoryItem(slot);
-				for(AutoList<ProtocolGame>::iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendRemoveInventoryItem(slot);
-			}
-		}
+			{if(client) client->sendRemoveInventoryItem(slot);}
 
 		//event methods
 		virtual void onUpdateTileItem(const Tile* tile, const Position& pos, const Item* oldItem,
@@ -829,111 +617,49 @@ class Player : public Creature, public Cylinder
 		void onRemoveInventoryItem(slots_t slot, Item* item);
 
 		void sendAnimatedText(const Position& pos, uint8_t color, std::string text) const
-			{if(client) {client->sendAnimatedText(pos,color,text);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendAnimatedText(pos,color,text);
-			}
-        }
+			{if(client) client->sendAnimatedText(pos,color,text);}
 		void sendCancel(const std::string& msg) const
-			{if(client) {client->sendCancel(msg);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCancel(msg);
-			}
-		}
+			{if(client) client->sendCancel(msg);}
 		void sendCancelMessage(ReturnValue message) const;
 		void sendCancelTarget() const
-			{if(client) {client->sendCancelTarget();
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCancelTarget();
-			}
-		}
+			{if(client) client->sendCancelTarget();}
 		void sendCancelWalk() const
-			{if(client) {client->sendCancelWalk();
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCancelWalk();
-			}
-		}
+			{if(client) client->sendCancelWalk();}
 		void sendChangeSpeed(const Creature* creature, uint32_t newSpeed) const
-			{if(client) {client->sendChangeSpeed(creature, newSpeed);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendChangeSpeed(creature, newSpeed);
-			}
-		}
+			{if(client) client->sendChangeSpeed(creature, newSpeed);}
 		void sendCreatureHealth(const Creature* creature) const
-			{if(client) {client->sendCreatureHealth(creature);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatureHealth(creature);
-			}
-		}
+			{if(client) client->sendCreatureHealth(creature);}
 		void sendDistanceShoot(const Position& from, const Position& to, uint8_t type) const
-			{if(client) {client->sendDistanceShoot(from, to, type);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendDistanceShoot(from, to, type); 
-			}
-		}
-		
+			{if(client) client->sendDistanceShoot(from, to, type);}
 		void sendHouseWindow(House* house, uint32_t listId) const;
 		void sendOutfitWindow() const {if(client) client->sendOutfitWindow();}
 		void sendQuests() const {if(client) client->sendQuests();}
 		void sendQuestInfo(Quest* quest) const {if(client) client->sendQuestInfo(quest);}
 		void sendCreatureSkull(const Creature* creature) const
-			{if(client) {client->sendCreatureSkull(creature);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatureSkull(creature);
-			}
-		}
+			{if(client) client->sendCreatureSkull(creature);}
 		void sendFYIBox(std::string message)
 			{if(client) client->sendFYIBox(message);}
 		void sendCreatePrivateChannel(uint16_t channelId, const std::string& channelName)
-			{if(client) {client->sendCreatePrivateChannel(channelId, channelName);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCreatePrivateChannel(channelId, channelName);
-			}
-		}
+			{if(client) client->sendCreatePrivateChannel(channelId, channelName);}
 		void sendClosePrivate(uint16_t channelId) const
-			{if(client) {client->sendClosePrivate(channelId);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendClosePrivate(channelId);
-			}
-		}
+			{if(client) client->sendClosePrivate(channelId);}
 		void sendIcons() const;
 		void sendMagicEffect(const Position& pos, uint8_t type) const
-			{if(client) {client->sendMagicEffect(pos, type);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendMagicEffect(pos, type);
-			}
-		}
+			{if(client) client->sendMagicEffect(pos, type);}
 		void sendStats() const
-			{if(client) {client->sendStats();
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendStats();
-			}
-		}
+			{if(client) client->sendStats();}
 		void sendSkills() const
-			{if(client) {client->sendSkills();
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendSkills();
-			}
-		}
+			{if(client) client->sendSkills();}
 		void sendTextMessage(MessageClasses type, const std::string& message) const
-			{if(client) {client->sendTextMessage(type, message);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendTextMessage(type, message);
-			}
-		}
-
+			{if(client) client->sendTextMessage(type, message);}
 		void sendReLoginWindow() const
 			{if(client) client->sendReLoginWindow();}
 		void sendTextWindow(Item* item, uint16_t maxLen, bool canWrite) const
 			{if(client) client->sendTextWindow(windowTextId, item, maxLen, canWrite);}
 		void sendTextWindow(uint32_t itemId, const std::string& text) const
 			{if(client) client->sendTextWindow(windowTextId, itemId, text);}
-		void sendToChannel(Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t time = 0, ProtocolGame* pg = NULL) const //CA
-			{if(client) {client->sendToChannel(creature, type, text, channelId, time, pg);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendToChannel(creature, type, text, channelId, time, pg);
-			}
-        }
+		void sendToChannel(Creature* creature, SpeakClasses type, const std::string& text, uint16_t channelId, uint32_t time = 0) const
+			{if(client) client->sendToChannel(creature, type, text, channelId, time);}
 		void sendShop() const
 			{if(client) client->sendShop(shopOffer);}
 		void sendGoods() const
@@ -945,11 +671,7 @@ class Player : public Creature, public Cylinder
 		void sendTradeClose() const
 			{if(client) client->sendCloseTrade();}
 		void sendWorldLight(LightInfo& lightInfo)
-			{if(client) {client->sendWorldLight(lightInfo);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendWorldLight(lightInfo);
-			}
-		}
+			{if(client) client->sendWorldLight(lightInfo);}
 		void sendChannelsDialog()
 			{if(client) client->sendChannelsDialog();}
 		void sendOpenPrivateChannel(const std::string& receiver)
@@ -957,17 +679,9 @@ class Player : public Creature, public Cylinder
 		void sendOutfitWindow()
 			{if(client) client->sendOutfitWindow();}
 		void sendCloseContainer(uint32_t cid)
-			{if(client) {client->sendCloseContainer(cid);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendCloseContainer(cid);
-			}
-		}
+			{if(client) client->sendCloseContainer(cid);}
 		void sendChannel(uint16_t channelId, const std::string& channelName)
-			{if(client) {client->sendChannel(channelId, channelName);
-				for(AutoList<ProtocolGame>::const_iterator it = cSpectators.begin(); it != cSpectators.end(); ++it) if(it->second->getPlayer() == this)
-					it->second->sendChannel(channelId, channelName);
-			}
-		}
+			{if(client) client->sendChannel(channelId, channelName);}
 		void sendRuleViolationsChannel(uint16_t channelId)
 			{if(client) client->sendRuleViolationsChannel(channelId);}
 		void sendRemoveReport(const std::string& name)
@@ -986,10 +700,6 @@ class Player : public Creature, public Cylinder
 		void receivePing() {lastPong = OTSYS_TIME();}
 		virtual void onThink(uint32_t interval);
 		uint32_t getAttackSpeed() const;
-
-		void setLastMail(uint64_t v) {lastMail = v;}
-		uint16_t getMailAttempts() const {return mailAttempts;}
-		void addMailAttempt() {++mailAttempts;}
 
 		virtual void postAddNotification(Creature* actor, Thing* thing, const Cylinder* oldParent,
 			int32_t index, cylinderlink_t link = LINK_OWNER);
@@ -1022,7 +732,6 @@ class Player : public Creature, public Cylinder
 		Container transferContainer;
 
 	protected:
-		PlayerCast cast; //CA
 		void checkTradeState(const Item* item);
 
 		bool gainExperience(double& gainExp, bool fromMonster);
@@ -1052,10 +761,10 @@ class Player : public Creature, public Cylinder
 
 		//cylinder implementations
 		virtual ReturnValue __queryAdd(int32_t index, const Thing* thing, uint32_t count,
-			uint32_t flags, Creature* actor = NULL) const;
+			uint32_t flags) const;
 		virtual ReturnValue __queryMaxCount(int32_t index, const Thing* thing, uint32_t count, uint32_t& maxQueryCount,
 			uint32_t flags) const;
-		virtual ReturnValue __queryRemove(const Thing* thing, uint32_t count, uint32_t flags, Creature* actor = NULL) const;
+		virtual ReturnValue __queryRemove(const Thing* thing, uint32_t count, uint32_t flags) const;
 		virtual Cylinder* __queryDestination(int32_t& index, const Thing* thing, Item** destItem,
 			uint32_t& flags);
 
@@ -1071,8 +780,8 @@ class Player : public Creature, public Cylinder
 		virtual int32_t __getIndexOfThing(const Thing* thing) const;
 		virtual int32_t __getFirstIndex() const;
 		virtual int32_t __getLastIndex() const;
-		virtual uint32_t __getItemTypeCount(uint16_t itemId, int32_t subType = -1, bool itemCount = true) const;
-		virtual std::map<uint32_t, uint32_t>& __getAllItemTypeCount(std::map<uint32_t, uint32_t>& countMap, bool itemCount = true) const;
+		virtual uint32_t __getItemTypeCount(uint16_t itemId, int32_t subType = -1) const;
+		virtual std::map<uint32_t, uint32_t>& __getAllItemTypeCount(std::map<uint32_t, uint32_t>& countMap) const;
 
 		virtual void __internalAddThing(Thing* thing);
 		virtual void __internalAddThing(uint32_t index, Thing* thing);
@@ -1125,8 +834,6 @@ class Player : public Creature, public Cylinder
 		int16_t blessings;
 		uint16_t maxWriteLen;
 		uint16_t sex;
-
-		uint16_t mailAttempts;
 
 		int32_t premiumDays;
 		int32_t soul;
@@ -1181,8 +888,6 @@ class Player : public Creature, public Cylinder
 		uint64_t manaSpent;
 		uint64_t lastAttack;
 
-		uint64_t lastMail;
-
 		double inventoryWeight;
 		double capacity;
 		char managerChar[100];
@@ -1207,7 +912,6 @@ class Player : public Creature, public Cylinder
 		House* editHouse;
 		Npc* shopOwner;
 		Item* weapon;
-
 
 		typedef std::set<uint32_t> AttackedSet;
 		AttackedSet attackedSet;

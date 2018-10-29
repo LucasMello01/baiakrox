@@ -99,7 +99,6 @@ bool ConfigManager::load()
 		m_confNumber[SQL_KEEPALIVE] = getGlobalNumber("sqlKeepAlive", 0);
 		m_confNumber[MYSQL_READ_TIMEOUT] = getGlobalNumber("mysqlReadTimeout", 10);
 		m_confNumber[MYSQL_WRITE_TIMEOUT] = getGlobalNumber("mysqlWriteTimeout", 10);
-		m_confNumber[MYSQL_RECONNECTION_ATTEMPTS] = getGlobalNumber("mysqlReconnectionAttempts", 3);
 		m_confBool[OPTIMIZE_DATABASE] = getGlobalBool("startupDatabaseOptimization", true);
 		m_confString[MAP_NAME] = getGlobalString("mapName", "forgotten.otbm.gz");
 		m_confBool[GLOBALSAVE_ENABLED] = getGlobalBool("globalSaveEnabled", true);
@@ -190,7 +189,6 @@ bool ConfigManager::load()
 	m_confBool[HOUSE_NEED_PREMIUM] = getGlobalBool("houseNeedPremium", true);
 	m_confBool[HOUSE_RENTASPRICE] = getGlobalBool("houseRentAsPrice", false);
 	m_confBool[HOUSE_PRICEASRENT] = getGlobalBool("housePriceAsRent", false);
-	m_confString[HOUSE_STORAGE] = getGlobalString("houseDataStorage", "binary-tilebased");
 	m_confNumber[RED_SKULL_LENGTH] = getGlobalNumber("redSkullLength", 30 * 24 * 60 * 60);
 	m_confNumber[BLACK_SKULL_LENGTH] = getGlobalNumber("blackSkullLength", 45 * 24 * 60 * 60);
 	m_confNumber[MAX_VIOLATIONCOMMENT_SIZE] = getGlobalNumber("maxViolationCommentSize", 60);
@@ -225,6 +223,7 @@ bool ConfigManager::load()
 	m_confNumber[EXTRA_PARTY_PERCENT] = getGlobalNumber("extraPartyExperiencePercent", 5);
 	m_confNumber[EXTRA_PARTY_LIMIT] = getGlobalNumber("extraPartyExperienceLimit", 20);
 	m_confBool[DISABLE_OUTFITS_PRIVILEGED] = getGlobalBool("disableOutfitsForPrivilegedPlayers", false);
+	m_confBool[HOUSE_STORAGE] = getGlobalBool("useHouseDataStorage", false);
 	m_confBool[TRACER_BOX] = getGlobalBool("promptExceptionTracerErrorBox", true);
 	m_confNumber[LOGIN_PROTECTION] = getGlobalNumber("loginProtectionPeriod", 10 * 1000);
 	m_confBool[STORE_DIRECTION] = getGlobalBool("storePlayerDirection", false);
@@ -253,8 +252,7 @@ bool ConfigManager::load()
 	m_confNumber[NICE_LEVEL] = getGlobalNumber("niceLevel", 5);
 	m_confNumber[EXPERIENCE_COLOR] = getGlobalNumber("gainExperienceColor", COLOR_WHITE);
 	m_confBool[SHOW_HEALING_DAMAGE_MONSTER] = getGlobalBool("showHealingDamageForMonsters", false);
-	m_confNumber[HEALTH_HEALING_COLOR] = getGlobalNumber("healthHealingColor", COLOR_GREEN); /* modificando cor do heal pelo config.lua */
-	m_confBool[CHECK_CORPSE_OWNER] = getGlobalBool("checkCorpseOwner", true);
+	m_confBool[CHECK_CORPSE_OWNER] = getGlobalBool("checkCorpseOwner ", true);
 	m_confBool[BUFFER_SPELL_FAILURE] = getGlobalBool("bufferMutedOnSpellFailure", false);
 	m_confBool[CONFIRM_OUTDATED_VERSION] = getGlobalBool("confirmOutdatedVersion", true);
 	m_confNumber[GUILD_PREMIUM_DAYS] = getGlobalNumber("premiumDaysToFormGuild", 0);
@@ -308,20 +306,13 @@ bool ConfigManager::load()
 	m_confString[ADMIN_ENCRYPTION] = getGlobalString("adminEncryption", "");
 	m_confString[ADMIN_ENCRYPTION_DATA] = getGlobalString("adminEncryptionData", "");
 	m_confBool[ADDONS_PREMIUM] = getGlobalBool("addonsOnlyPremium", true);
+#ifdef __WAR_SYSTEM__
 	m_confBool[OPTIONAL_WAR_ATTACK_ALLY] = getGlobalBool("optionalWarAttackableAlly", false);
+#endif
 	m_confNumber[VIPLIST_DEFAULT_LIMIT] = getGlobalNumber("vipListDefaultLimit", 20);
 	m_confNumber[VIPLIST_DEFAULT_PREMIUM_LIMIT] = getGlobalNumber("vipListDefaultPremiumLimit", 100);
 	m_confNumber[STAMINA_DESTROY_LOOT] = getGlobalNumber("staminaLootLimit", 14 * 60);
 	m_confNumber[FIST_BASE_ATTACK] = getGlobalNumber("fistBaseAttack", 7);
-	m_confNumber[TRADE_LIMIT] = getGlobalNumber("tradeLimit", 100);
-	m_confBool[SKIP_ITEMS_VERSION] = getGlobalBool("skipItemsVersionCheck", true);
-	m_confNumber[MAIL_ATTEMPTS] = getGlobalNumber("mailMaxAttempts", 2);
-	m_confNumber[MAIL_BLOCK] = getGlobalNumber("mailBlockPeriod", 1800000);
-	m_confNumber[MAIL_ATTEMPTS_FADE] = getGlobalNumber("mailAttemptsFadeTime", 1800000);
-	m_confNumber[ALLOWED_MAX_PACKETS] = getGlobalNumber("allowedMaxSizedPackets", 3);
-	m_confNumber[DEFAULT_DEPOT_SIZE_PREMIUM] = getGlobalNumber("defaultDepotSizePremium", 1000);
-	m_confNumber[DEFAULT_DEPOT_SIZE] = getGlobalNumber("defaultDepotSizefree", 500);
-	m_confBool[ENABLE_CAST] = getGlobalBool("enableCast", false); //CA
 
 	m_loaded = true;
 	return true;

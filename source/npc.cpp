@@ -17,23 +17,23 @@
 #include "otpch.h"
 #include <libxml/xmlmemory.h>
 #include <libxml/parser.h>
- 
+
 #include <functional>
 #include <iostream>
 #include <fstream>
- 
+
 #include "npc.h"
 #include "tools.h"
 
 #include "luascript.h"
 #include "position.h"
- 
+
 #include "spells.h"
 #include "vocation.h"
- 
+
 #include "configmanager.h"
 #include "game.h"
- 
+
 extern ConfigManager g_config;
 extern Game g_game;
 extern Spells* g_spells;
@@ -48,26 +48,26 @@ void Npcs::reload()
 {
 	for(AutoList<Npc>::iterator it = Npc::autoList.begin(); it != Npc::autoList.end(); ++it)
 		it->second->closeAllShopWindows();
- 
+
 	delete Npc::m_interface;
 	Npc::m_interface = NULL;
 	for(AutoList<Npc>::iterator it = Npc::autoList.begin(); it != Npc::autoList.end(); ++it)
 		it->second->reload();
 }
- 
+
 Npc* Npc::createNpc(const std::string& name)
 {
 	Npc* npc = new Npc(name);
 	if(!npc)
 		return NULL;
- 
+
 	if(npc->load())
 		return npc;
- 
+
 	delete npc;
 	return NULL;
 }
- 
+
 Npc::Npc(const std::string& _name):
 	Creature()
 {
@@ -100,7 +100,6 @@ bool Npc::load()
 	if(isLoaded())
 		return true;
 
-
 	reset();
 	if(!m_interface)
 	{
@@ -108,11 +107,11 @@ bool Npc::load()
 		m_interface->loadFile(getFilePath(FILE_TYPE_OTHER, "npc/lib/npc.lua"));
 		m_interface->loadFile(getFilePath(FILE_TYPE_OTHER, "npc/lib/npcsystem/main.lua"));
 	}
- 
+
 	loaded = loadFromXml(m_filename);
 	return isLoaded();
 }
- 
+
 void Npc::reset()
 {
 	loaded = false;
@@ -136,7 +135,7 @@ void Npc::reset()
 
 	for(StateList::iterator it = stateList.begin(); it != stateList.end(); ++it)
 		delete *it;
- 
+
 	responseList.clear();
 	stateList.clear();
 	queueList.clear();
@@ -146,7 +145,7 @@ void Npc::reset()
 	shopPlayerList.clear();
 	voiceList.clear();
 }
- 
+
 void Npc::reload()
 {
 	reset();
@@ -154,7 +153,7 @@ void Npc::reload()
 	//Simulate that the creature is placed on the map again.
 	if(m_npcEventHandler)
 		m_npcEventHandler->onCreatureAppear(this);
- 
+
 	if(walkTicks > 0)
 		addEventWalk();
 }
@@ -176,12 +175,12 @@ bool Npc::loadFromXml(const std::string& filename)
 		xmlFreeDoc(doc);
 		return false;
 	}
- 
+
 	int32_t intValue;
 	std::string strValue, scriptfile;
 	if(readXMLString(root, "script", strValue))
 		scriptfile = strValue;
- 
+
 	if(readXMLString(root, "name", strValue))
 		name = strValue;
 
@@ -191,7 +190,7 @@ bool Npc::loadFromXml(const std::string& filename)
 
 	if(readXMLString(root, "hidename", strValue) || readXMLString(root, "hideName", strValue))
 		hideName = booleanString(strValue);
- 
+
 	if(readXMLString(root, "hidehealth", strValue) || readXMLString(root, "hideHealth", strValue))
 		hideHealth = booleanString(strValue);
 
@@ -1815,10 +1814,6 @@ void Npc::onPlayerTrade(Player* player, ShopEvent_t type, int32_t callback, uint
 	{
 		if(NpcState* npcState = getState(player, true))
 		{
-			if(amount <= 0)
-			{
-				amount = 1;
-			}
 			npcState->amount = amount;
 			npcState->subType = count;
 			npcState->itemId = itemId;
@@ -2813,7 +2808,11 @@ int32_t NpcScript::luaCloseShopWindow(lua_State* L)
 		return 1;
 	}
 
-	player->closeShopWindow();
+	int32_t onBuy, onSell;
+	Npc* merchant = player->getShopOwner(onBuy, onSell);
+	if(merchant == npc)
+		player->closeShopWindow(true, npc, onBuy, onSell);
+
 	lua_pushboolean(L, true);
 	return 1;
 }

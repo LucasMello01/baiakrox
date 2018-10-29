@@ -177,7 +177,7 @@ int32_t Items::loadFromOtb(std::string file)
 		std::clog << "[Error - Items::loadFromOtb] New version detected, an older version of items.otb is required." << std::endl;
 		return ERROR_INVALID_FORMAT;
 	}
-	else if(!g_config.getBool(ConfigManager::SKIP_ITEMS_VERSION) && Items::dwMinorVersion != CLIENT_VERSION_860)
+	else if(Items::dwMinorVersion != CLIENT_VERSION_860)
 	{
 		std::clog << "[Error - Items::loadFromOtb] Another (client) version of items.otb is required." << std::endl;
 		return ERROR_INVALID_FORMAT;
@@ -1092,21 +1092,6 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 				if(readXMLInteger(itemAttributesNode, "value", intValue))
 					it.abilities.increment[HEALING_PERCENT] = intValue;
 			}
-			else if(tmpStrValue == "fieldabsorbpercentenergy")
-			{
-				if(readXMLInteger(itemAttributesNode, "value", intValue))
-					it.abilities.fieldAbsorb[COMBAT_ENERGYDAMAGE] += intValue;
-			}
-			else if(tmpStrValue == "fieldabsorbpercentfire")
-			{
-				if(readXMLInteger(itemAttributesNode, "value", intValue))
-					it.abilities.fieldAbsorb[COMBAT_FIREDAMAGE] += intValue;
-			}
-			else if(tmpStrValue == "fieldabsorbpercentpoison" || tmpStrValue == "fieldabsorbpercentearth")
-			{
-				if(readXMLInteger(itemAttributesNode, "value", intValue))
-					it.abilities.fieldAbsorb[COMBAT_EARTHDAMAGE] += intValue;
-			}
 			else if(tmpStrValue == "absorbpercentall")
 			{
 				if(readXMLInteger(itemAttributesNode, "value", intValue))
@@ -1491,8 +1476,8 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 			{
 				it.group = ITEM_GROUP_MAGICFIELD;
 				it.type = ITEM_TYPE_MAGICFIELD;
-
 				CombatType_t combatType = COMBAT_NONE;
+
 				ConditionDamage* conditionDamage = NULL;
 				if(readXMLString(itemAttributesNode, "value", strValue))
 				{
@@ -1544,56 +1529,59 @@ void Items::parseItemNode(xmlNodePtr itemNode, uint32_t id)
 					{
 						it.combatType = combatType;
 						it.condition = conditionDamage;
-
 						uint32_t ticks = 0;
 						int32_t damage = 0, start = 0, count = 1;
-						for(xmlNodePtr fieldAttributesNode = itemAttributesNode->children; fieldAttributesNode; fieldAttributesNode = fieldAttributesNode->next)
+
+						xmlNodePtr fieldAttributesNode = itemAttributesNode->children;
+						while(fieldAttributesNode)
 						{
-							if(!readXMLString(fieldAttributesNode, "key", strValue))
-								continue;
-
-							tmpStrValue = asLowerCaseString(strValue);
-							if(tmpStrValue == "ticks")
+							if(readXMLString(fieldAttributesNode, "key", strValue))
 							{
-								if(readXMLInteger(fieldAttributesNode, "value", intValue))
-									ticks = std::max(0, intValue);
-							}
-
-							if(tmpStrValue == "count")
-							{
-								if(readXMLInteger(fieldAttributesNode, "value", intValue))
-									count = std::max(1, intValue);
-							}
-
-							if(tmpStrValue == "start")
-							{
-								if(readXMLInteger(fieldAttributesNode, "value", intValue))
-									start = std::max(0, intValue);
-							}
-
-							if(tmpStrValue == "damage")
-							{
-								if(readXMLInteger(fieldAttributesNode, "value", intValue))
+								tmpStrValue = asLowerCaseString(strValue);
+								if(tmpStrValue == "ticks")
 								{
-									damage = -intValue;
-									if(start > 0)
-									{
-										std::list<int32_t> damageList;
-										ConditionDamage::generateDamageList(damage, start, damageList);
-										for(std::list<int32_t>::iterator it = damageList.begin(); it != damageList.end(); ++it)
-											conditionDamage->addDamage(1, ticks, -*it);
+									if(readXMLInteger(fieldAttributesNode, "value", intValue))
+										ticks = std::max(0, intValue);
+								}
 
-										start = 0;
+								if(tmpStrValue == "count")
+								{
+									if(readXMLInteger(fieldAttributesNode, "value", intValue))
+										count = std::max(1, intValue);
+								}
+
+								if(tmpStrValue == "start")
+								{
+									if(readXMLInteger(fieldAttributesNode, "value", intValue))
+										start = std::max(0, intValue);
+								}
+
+								if(tmpStrValue == "damage")
+								{
+									if(readXMLInteger(fieldAttributesNode, "value", intValue))
+									{
+										damage = -intValue;
+										if(start > 0)
+										{
+											std::list<int32_t> damageList;
+											ConditionDamage::generateDamageList(damage, start, damageList);
+
+											for(std::list<int32_t>::iterator it = damageList.begin(); it != damageList.end(); ++it)
+												conditionDamage->addDamage(1, ticks, -*it);
+
+											start = 0;
+										}
+										else
+											conditionDamage->addDamage(count, ticks, damage);
 									}
-									else
-										conditionDamage->addDamage(count, ticks, damage);
 								}
 							}
+
+							fieldAttributesNode = fieldAttributesNode->next;
 						}
 
-						conditionDamage->setParam(CONDITIONPARAM_FIELD, true);
 						if(conditionDamage->getTotalDamage() > 0)
-							conditionDamage->setParam(CONDITIONPARAM_FORCEUPDATE, true);
+							it.condition->setParam(CONDITIONPARAM_FORCEUPDATE, true);
 					}
 				}
 			}

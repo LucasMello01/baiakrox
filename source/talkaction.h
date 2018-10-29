@@ -43,8 +43,8 @@ class TalkActions : public BaseEvents
 		TalkActions();
 		virtual ~TalkActions();
 
-		bool onPlayerSay(Creature* creature, uint16_t channelId, const std::string& words, bool ignoreAccess, ProtocolGame* pg = NULL); //CA
-		
+		bool onPlayerSay(Creature* creature, uint16_t channelId, const std::string& words, bool ignoreAccess);
+
 		inline TalkActionsMap::const_iterator getFirstTalk() const {return talksMap.begin();}
 		inline TalkActionsMap::const_iterator getLastTalk() const {return talksMap.end();}
 

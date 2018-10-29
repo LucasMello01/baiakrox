@@ -1396,43 +1396,7 @@ void LuaInterface::registerFunctions()
 {
 	//example(...)
 	//lua_register(L, "name", C_function);
-	
-	//getPlayersOnline()
-	lua_register(m_luaState, "getCastsOnline", LuaInterface::luaGetCastsOnline);
-		
-	//doPlayerSetCastDescription(cid, desc)
-	lua_register(m_luaState, "doPlayerSetCastDescription", LuaInterface::luaDoPlayerSetCastDescription);
 
-	//doPlayerAddCastMute(cid, ip)
-	lua_register(m_luaState, "doPlayerAddCastMute", LuaInterface::luaDoPlayerAddCastMute);
-
-	//doPlayerRemoveCastMute(cidl, ip)
-	lua_register(m_luaState, "doPlayerRemoveCastMute", LuaInterface::luaDoPlayerRemoveCastMute);
-
-	//doPlayerGetCastMutes(cid)
-	lua_register(m_luaState, "getCastMutes", LuaInterface::luaGetPlayerCastMutes);
-
-	//doPlayerAddCastBan(cid, ip)
-	lua_register(m_luaState, "doPlayerAddCastBan", LuaInterface::luaDoPlayerAddCastBan);
-
-	//doPlayerRemoveCastBan(cidl, ip)
-	lua_register(m_luaState, "doPlayerRemoveCastBan", LuaInterface::luaDoPlayerRemoveCastBan);
-
-	//doPlayerGetCastBan(cid)
-	lua_register(m_luaState, "getCastBans", LuaInterface::luaGetPlayerCastBans);
-
-	//doPlayerAddCastBan(cid, ip)
-	lua_register(m_luaState, "getCastViewers", LuaInterface::luaGetPlayerCastViewers);
-
-	//doPlayerSetCastPassword(cid, password)
-	lua_register(m_luaState, "doPlayerSetCastPassword", LuaInterface::luaDoPlayerSetCastPassword);
-
-	//getPlayerCast(cid)
-	lua_register(m_luaState, "doPlayerSetCastState", LuaInterface::luaDoPlayerSetCastState);
-
-	//getPlayerCast(cid)
-	lua_register(m_luaState, "getPlayerCast", LuaInterface::luaGetPlayerCast);
-	
 	//getCreatureHealth(cid)
 	lua_register(m_luaState, "getCreatureHealth", LuaInterface::luaGetCreatureHealth);
 
@@ -2424,12 +2388,14 @@ void LuaInterface::registerFunctions()
 
 	//doRefreshMap()
 	lua_register(m_luaState, "doRefreshMap", LuaInterface::luaDoRefreshMap);
+#ifdef __WAR_SYSTEM__
 
 	//doGuildAddEnemy(guild, enemy, war, type)
 	lua_register(m_luaState, "doGuildAddEnemy", LuaInterface::luaDoGuildAddEnemy);
 
 	//doGuildRemoveEnemy(guild, enemy)
 	lua_register(m_luaState, "doGuildRemoveEnemy", LuaInterface::luaDoGuildRemoveEnemy);
+#endif
 
 	//doUpdateHouseAuctions()
 	lua_register(m_luaState, "doUpdateHouseAuctions", LuaInterface::luaDoUpdateHouseAuctions);
@@ -3283,264 +3249,6 @@ int32_t LuaInterface::luaDoPlayerFeed(lua_State* L)
 	{
 		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
 		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-
-int32_t LuaInterface::luaGetPlayerCastBans(lua_State* L)
-{
-	//getPlayerCastBan(cid)
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		PlayerCast pc = player->getCast();
-		lua_newtable(L);
-		for(std::list<CastBan>::iterator it = pc.bans.begin(); it != pc.bans.end(); ++it)
-		{
-			createTable(L, it->ip);
-			setField(L, "name", it->name);
-			pushTable(L);
-		}
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-
-int32_t LuaInterface::luaGetPlayerCastMutes(lua_State* L)
-{
-	//getPlayerCastMutes(cid)
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		PlayerCast pc = player->getCast();
-		lua_newtable(L); 
-		for(std::list<CastBan>::iterator it = pc.muted.begin(); it != pc.muted.end(); ++it)
-		{
-			createTable(L, it->ip);
-			setField(L, "name", it->name);
-			pushTable(L);
-		}
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-int32_t LuaInterface::luaDoPlayerRemoveCastMute(lua_State* L)
-{
-	//doPlayerRemoveCastMute(cid, ip)
-	std::string name = popString(L);
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		if(player->removeCastMute(name)) 
-			lua_pushboolean(L, true);
-		else
-			lua_pushboolean(L, false);
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-int32_t LuaInterface::luaDoPlayerAddCastMute(lua_State* L)
-{
-	//doPlayerAddCastMute(cid, ip)
-	std::string name = popString(L);
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		if(player->addCastMute(name))
-			lua_pushboolean(L, true);
-		else
-			lua_pushboolean(L, false);
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-int32_t LuaInterface::luaGetPlayerCastViewers(lua_State* L)
-{
-	//getPlayerCastBan(cid)
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		PlayerCast pc = player->getCast();
-		lua_newtable(L);
-		for(AutoList<ProtocolGame>::iterator it = Player::cSpectators.begin(); it != Player::cSpectators.end(); ++it)
-		{
-			if(it->second->getPlayer() != player)
-				continue;
-
-			createTable(L, it->first);
-			setField(L, "name", it->second->getViewerName());
-			setField(L, "ip", it->second->getIP());
-			pushTable(L);
-		}
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-
-int32_t LuaInterface::luaDoPlayerRemoveCastBan(lua_State* L)
-{
-	//doPlayerRemoveCastBan(cid, ip)
-	std::string name = popString(L);
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		if(player->removeCastBan(name)) 
-			lua_pushboolean(L, true);
-		else
-			lua_pushboolean(L, false);
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-int32_t LuaInterface::luaDoPlayerAddCastBan(lua_State* L)
-{
-	//doPlayerAddCastBan(cid, ip)
-	std::string name = popString(L);
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		if(player->addCastBan(name))
-			lua_pushboolean(L, true);
-		else
-			lua_pushboolean(L, false);
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-
-int32_t LuaInterface::luaDoPlayerSetCastPassword(lua_State* L)
-{
-	//doPlayerSetCastPassword(cid, password)
-	std::string str = popString(L);
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		player->setCastPassword(str);
-		lua_pushboolean(L, true);
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-int32_t LuaInterface::luaDoPlayerSetCastDescription(lua_State* L)
-{
-	//doPlayerSetCastPassword(cid, password)
-	std::string str = popString(L);
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		player->setCastDescription(str);
-		lua_pushboolean(L, true);
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-int32_t LuaInterface::luaDoPlayerSetCastState(lua_State* L)
-{
-	//doPlayerSetCastState(cid, bool)
-	bool state = popNumber(L);
-	ScriptEnviroment* env = getEnv();
-	if(Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		player->setCasting(state);
-		lua_pushboolean(L, true);
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-int32_t LuaInterface::luaGetPlayerCast(lua_State* L)
-{
-	//getPlayerCast(cid)
-	ScriptEnviroment* env = getEnv();
-	if(const Player* player = env->getPlayerByUID(popNumber(L)))
-	{
-		lua_newtable(L);
-		setFieldBool(L, "status", player->getCastingState());
-		setField(L, "password", player->getCastingPassword());
-		setField(L, "description", player->getCastDescription());
-	}
-	else
-	{
-		errorEx(getError(LUA_ERROR_PLAYER_NOT_FOUND));
-		lua_pushboolean(L, false);
-	}
-
-	return 1;
-}
-
-int32_t LuaInterface::luaGetCastsOnline(lua_State* L)
-{
-	//
-	ScriptEnviroment* env = getEnv();
-	AutoList<Player>::iterator it = Player::castAutoList.begin();
-
-	lua_newtable(L);
-	for(int32_t i = 1; it != Player::castAutoList.end(); ++it, ++i)
-	{
-		lua_pushnumber(L, i);
-		lua_pushnumber(L, env->addThing(it->second));
-		pushTable(L);
 	}
 
 	return 1;
@@ -10492,6 +10200,7 @@ int32_t LuaInterface::luaGetConfigFile(lua_State* L)
 	lua_pushstring(L, g_config.getString(ConfigManager::CONFIG_FILE).c_str());
 	return 1;
 }
+#ifdef __WAR_SYSTEM__
 
 int32_t LuaInterface::luaDoGuildAddEnemy(lua_State* L)
 {
@@ -10532,6 +10241,7 @@ int32_t LuaInterface::luaDoGuildRemoveEnemy(lua_State* L)
 	lua_pushnumber(L, count);
 	return 1;
 }
+#endif
 
 int32_t LuaInterface::luaGetConfigValue(lua_State* L)
 {

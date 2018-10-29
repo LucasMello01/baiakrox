@@ -252,7 +252,7 @@ bool Actions::registerEvent(Event* event, xmlNodePtr p, bool override)
 				"\", to unique: \"" << endValue << "\")" << std::endl;
 	}
 
-	if(readXMLString(p, "actionid", strValue) || readXMLString(p, "aid", strValue))
+	if(readXMLString(p, "actionid", strValue))
 	{
 		IntegerVec intVector;
 		if(!parseIntegerVec(strValue, intVector))
@@ -342,13 +342,6 @@ ReturnValue Actions::canUse(const Player* player, const Position& pos)
 	if(!Position::areInRange<1,1,0>(playerPos, pos))
 		return RET_TOOFARAWAY;
 
-	Tile* tile = g_game.getTile(pos);
-	if(tile)
-	{
-		HouseTile* houseTile = tile->getHouseTile();
-		if(houseTile && houseTile->getHouse() && !houseTile->getHouse()->isInvited(player))
-			return RET_PLAYERISNOTINVITED;
-	}
 	return RET_NOERROR;
 }
 
@@ -394,7 +387,7 @@ ReturnValue Actions::canUseFar(const Creature* creature, const Position& toPos, 
 	return RET_NOERROR;
 }
 
-Action* Actions::getAction(const Item* item, ActionType_t type) const
+Action* Actions::getAction(const Item* item, ActionType_t type/* = ACTION_ANY*/) const
 {
 	if(item->getUniqueId() && (type == ACTION_ANY || type == ACTION_UNIQUEID))
 	{
