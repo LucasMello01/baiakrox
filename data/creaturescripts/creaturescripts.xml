@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creaturescripts>
+	<event type="login" name="PlayerLogin" event="script" value="login.lua"/> 
+        <event type="login" name="tkexp" script="tkexp.lua"/>
+        <event type="login" name="castleexp" script="castleexp.lua"/>
+        <event type="login" name="Antimagebomb" event="script" value="Antimagebomb.lua"/>
+        <event type="death" name="DeathSystem" event="script" value="DeathSystem.lua"/>
+        <event type="kill" name="pvpsystem" event="script" value="pvpsystem.lua"/>
+        <event type="advance" name="UpAbsolute" event="script" value="uplevelabsolute.lua"/>
+        <event type="death" name="DeathC" event="script" value="deathbroadcast.lua"/>
+	<event type="joinchannel" name="GuildMotd" event="script" value="guildmotd.lua"/>
+	<event type="receivemail" name="Mail" event="script" value="mail.lua"/>
+        <event type="think" name="TiraBattle" event="script" value="tirabattle.lua"/>
+        <event type="statschange" name="critical" event="script" value="critical.lua"/>
+        <event type="preparedeath" name="CityWar" event="script" value="citywarCreature.lua"/>
+	<event type="reportbug" name="SaveReportBug" script="reportbug.lua"/>
+        <event type="kill" name="DoubleExp" event="script" value="doubleexp.lua"/>
+        <event type="login" name="BattleLogin" event="script" value="BattleCreatureScript.lua"/>
+        <event type="PrepareDeath" name="BattleDeath" event="script" value="BattleCreatureScript.lua"/>
+        <event type="combat" name="BattleTeam" event="script" value="BattleCreatureScript.lua"/>
+        <event type="login" name="FragsGuildLogin" script="GuildFragsLogin.lua"/>
+	<event type="kill" name="FragsGuildKill" script="GuildFragsKill.lua"/>
+        <event type="login" name="fraglook_register" event="script" value="fraglook.lua"/>
+	<event type="look" name="fraglook" event="script" value="fraglook.lua"/>
+        <event type="login" name="AntiMc" event="script" value="antimc.lua"/>
+        <event type="login" name="AntiMageBomb" event="script" value="antiacc.lua"/>
+        <event type="statschange" name="HeadshotCritical" event="script" value="headshot.lua"/>
+        <event type="login" name="SurvivalOfTheFittestLogin" script="fittest.lua"/>
+        <event type="death" name="SurvivalOfTheFittest" script="fittest.lua"/>
+        <event type="preparedeath" name="forever amulet" event="script" value="aol.lua"/>
+        <event type="death" name="tp" event="script" value="tp.lua"/>
+        <event type="logout" name="CTFLogout" event="script" value="CTFMax.lua"/>
+        <event type="combat" name="CTFCombat" event="script" value="CTFMax.lua"/>
+        <event type="attack" name="CTFAttack" event="script" value="CTFMax.lua"/>
+        <event type="statschange" name="CTFDeath" event="script" value="CTFMax.lua"/>
+        <event type="kill" name="inquisitionPortals" script="Inquisition.lua"/>
+        <event type="death" name="teleportmonster" script="tpmonster.lua"/>
+        <event type="death" name="guardablood" event="script" value="BloodCreatureGuarda.lua"/>
+        <event type="death" name="arcanjoblood" event="script" value="BloodCreatureAnjo.lua"/>
+        <event type="death" name="morrerblood" event="script" value="BloodCreature.lua"/>
+        <event type="death" name="loginblood" event="script" value="BloodCreature.lua"/>
+        <event type="statschange" name="CombatDodge" event="script" value="dodgecombat.lua"/>
+	<event type="think" name="Idle" event="script" value="idle.lua"/>
+	<event type="think" name="SkullCheck" event="script" value="skullcheck.lua"/>
+	<event type="death" name="PlayerDeath" event="script" value="playerdeath.lua"/>
+	<event type="login" name="FirstItems" event="script" value="firstitems.lua"/>
+	<event type="PrepareDeath" name="pvparena" script="pvparena.lua"/>
+	<event type="attack" name="attackguild" script="attackguild.lua"/>
+	<event type="death" name="incendio" script="incendioMonster.lua"/>
+        </creaturescripts>

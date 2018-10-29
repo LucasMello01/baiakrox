@@ -1,0 +1,9 @@
+/cast {on/off} - Create or close your own cast
+/cast password |password| - Sets a password for the cast
+/cast desc |description| - Set a description for the cast
+/cast status - Information about your cast (viewer amount, description, password)
+/cast viewers - Displays the name of all viewers
+/cast {ban/unban} "name" - Bans a viewer from joining your cast/Removes the ban
+/cast {mute/unmute} "name" - Mutes a viewer on your cast/Removes the mute
+/cast bans - Displays a list of banned viewers
+/cast mutes - Displays a list of muted viewers

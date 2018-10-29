@@ -1,0 +1,24 @@
+[24 September 2014 09:25:21 ] >> [Anti-Dupe] 0 duplicated items have been deleted from the database.
+[!] -> No duplicated item was found in the database
+
+[25 September 2014 10:44:46 ] >> [Anti-Dupe] 0 duplicated items have been deleted from the database.
+[!] -> No duplicated item was found in the database
+
+[26 September 2014 09:57:47 ] >> [Anti-Dupe] 0 duplicated items have been deleted from the database.
+[!] -> No duplicated item was found in the database
+
+[26 September 2014 22:49:46 ] >> [Anti-Dupe] 0 duplicated items have been deleted from the database.
+[!] -> No duplicated item was found in the database
+
+[16 October 2014 10:47:22 ] >> [Anti-Dupe] 0 duplicated items have been deleted from the database.
+[!] -> No duplicated item was found in the database
+
+[29 October 2018 10:03:21 ] >> [Anti-Dupe] 0 duplicated items have been deleted from the database.
+[!] -> No duplicated item was found in the database
+
+[29 October 2018 10:22:50 ] >> [Anti-Dupe] 0 duplicated items have been deleted from the database.
+[!] -> No duplicated item was found in the database
+
+[29 October 2018 12:44:41 ] >> [Anti-Dupe] 0 duplicated items have been deleted from the database.
+[!] -> No duplicated item was found in the database
+
