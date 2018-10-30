@@ -12,7 +12,7 @@ if(doPlayerRemoveMoney(cid, cost) == TRUE) then
 for i = 1, table.maxn(bless) do
 doPlayerAddBlessing(cid, bless[i])
 end
-doCreatureSay(cid, "You are now blessed by the [GOD] Bryaan!" ,19)
+doCreatureSay(cid, "You are now blessed!" ,19)
 doSendMagicEffect(getPlayerPosition(cid), 49)
 else
 doPlayerSendCancel(cid, "Voce precisa de 80k para a bless.")

@@ -24,7 +24,7 @@
 			<attribute key="shootEffect" value="fire"/>
 			<attribute key="areaEffect" value="firearea"/>
 		</attack>
-		<attack name="firefield" interval="1000" chance="15" range="7" radius="1" target="1">
+		<attack name="fire" interval="1000" chance="15" range="7" radius="1" target="1">
 			<attribute key="shootEffect" value="fire"/>
 		</attack>
 		<attack name="energy" interval="3000" chance="30" length="8" spread="0" min="-220" max="-460">
@@ -80,8 +80,7 @@
 		<item id="1987" chance="100000"><!-- bag -->
 			<inside>
 				<item id="2214" chance="500"/><!-- ring of healing -->
-				<item id="2396" chance="600"/><!-- ice rapier -->
-				<item id="2179" chance="1100"/><!-- gold ring -->
+				<item id="2396" chance="600"/><!-- ice rapier -->				
 				<item id="2795" countmax="6" chance="20000"/><!-- fire mushroom -->
 				<item id="2678" countmax="3" chance="10000"/><!-- coconut -->
 				<item id="2148" countmax="100" chance="100000"/><!-- gold coin -->

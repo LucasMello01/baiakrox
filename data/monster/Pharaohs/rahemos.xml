@@ -79,6 +79,7 @@
         <item id="2148" countmax="70" chance1="100000" chancemax="0"/> -- Gold 
         <item id="2150" countmax="3" chance1="5000" chancemax="0"/> --Small Amethyst
         <item id="2214" chance="2300"/> -- Ring of Healing
+        <item id="2447" chance="1011"/> -- Twin Axe
         <item id="2184" chance="1300"/> -- Crystal Wand
       </inside>
     </item>

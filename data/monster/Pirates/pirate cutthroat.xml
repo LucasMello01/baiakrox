@@ -38,7 +38,6 @@
   <loot>
     <item id="2148" countmax="53" chance1="50000" chancemax="0"/>
     <item id="2483" chance="10000"/>
-    <item id="5918" chance="6666"/>
     <item id="5710" chance="2500"/>
     <item id="5553" chance="2500"/>
     <item id="5927" chance="100000">

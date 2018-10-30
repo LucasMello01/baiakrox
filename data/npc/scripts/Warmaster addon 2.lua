@@ -1,110 +1,48 @@
-local focus = 0
-local talk_start = 0
+local keywordHandler = KeywordHandler:new()
+local npcHandler = NpcHandler:new(keywordHandler)
+NpcSystem.parseParameters(npcHandler)
+local talkState = {}
 
-function onThingMove(creature, thing, oldpos, oldstackpos)
+function onCreatureAppear(cid)				npcHandler:onCreatureAppear(cid)			end
+function onCreatureDisappear(cid)			npcHandler:onCreatureDisappear(cid)			end
+function onCreatureSay(cid, type, msg)			npcHandler:onCreatureSay(cid, type, msg)		end
+function onThink()					npcHandler:onThink()					end
 
+function creatureSayCallback(cid, type, msg)
+	if(not npcHandler:isFocused(cid)) then
+		return false
+	end
+
+	local talkUser = NPCHANDLER_CONVBEHAVIOR == CONVERSATION_DEFAULT and 0 or cid
+	selfSay('Olá ' .. getCreatureName(cid) .. ', fale {addon 2} para mais informações!',cid)
+
+	if(msgcontains(msg, 'addon 2') or msgcontains(msg, 'seccond addon') or msgcontains(msg, 'addon')) then
+		selfSay('Para conseguir o addon 2 do Warmaster eu preciso que você me traga uma {Baiak Sword}, você trouxe uma?', cid)
+		talkState[talkUser] = 1
+	elseif(msgcontains(msg, 'yes') and talkState[talkUser] == 1) then
+		if(getPlayerItemCount(cid, 8931) >= 1) then
+			if(doPlayerRemoveItem(cid, 8931,1) == TRUE) then				
+				if getPlayerSex(cid) == 0 then
+				doPlayerAddOutfit(cid, 335, 2)
+				else
+				doPlayerAddOutfit(cid, 336, 2)
+				talk_start = 0
+				end 
+				selfSay('Parabéns! Agora você possui o segundo Addon Warmaster.', cid)
+			else
+				selfSay('Desculpe, volte quando tiver uma {Baiak Sword}.', cid)
+			end
+		else
+			selfSay('Desculpe, você não tem uma {Baiak Sword}.', cid)
+		end
+		talkState[talkUser] = 0
+	elseif(msgcontains(msg, 'no') and isInArray({1}, talkState[talkUser]) == TRUE) then
+		talkState[talkUser] = 0
+		selfSay('Ok then.', cid)
+	end
+
+	return true
 end
 
-
-function onCreatureAppear(creature)
-
-end
-
-
-function onCreatureDisappear(cid, pos)
-if focus == cid then
-selfSay('Good bye then.')
-focus = 0
-talk_start = 0
-end
-end
-
-
-function onCreatureTurn(creature)
-
-end
-
-
-function msgcontains(txt, str)
-return (string.find(txt, str) and not string.find(txt, '(%w+)' .. str) and not string.find(txt, str .. '(%w+)'))
-end
-
-
-function onCreatureSay(cid, type, msg)
-msg = string.lower(msg)
-
-if (msgcontains(msg, 'hi') and (focus == 0)) and getDistanceToCreature(cid) < 4 then
-selfSay('Hiho ' .. getCreatureName(cid) .. ' Eu posso lhe conceder o Warmaster addon 2, para mais infos. diga help...')
-focus = cid
-talk_start = os.clock()
-
-elseif msgcontains(msg, 'hi') and (focus ~= cid) and getDistanceToCreature(cid) < 4 then
-selfSay('Sorry, ' .. getCreatureName(cid) .. '! I talk to you in a minute.')
-
-elseif focus == cid then
-talk_start = os.clock()
-
-if msgcontains(msg, 'help') then
-selfSay('Para saber o que eh preciso para obter o Warmaster addon 2 diga: addon 2')
-
-
-elseif msgcontains(msg, 'addon 2') then
-if getPlayerStorageValue(cid,999998) >= 2 then
-selfSay('Voce ja tem esse addon.')
-
-else if getPlayerStorageValue(cid,999998) == 1 then
-selfSay('Preciso de Uma Baiak Sword e 100k , Você Trouxe Para Mim ?')
-addon_state = 2
-else
-setPlayerStorageValue(cid,999998,1)
-selfSay('Preciso de Uma Baiak Sword e 100k , Você Trouxe Para Mim ?')
-end
-end
-elseif msgcontains(msg, 'yes') and addon_state == 2 then
-if doPlayerRemoveItem(cid,2160, 10) == 0 or doPlayerRemoveItem(cid,8931, 1) == 0 then
-selfSay('Desculpe mas voce naum tem os 100k...')
-else
-selfSay('Obrigado, agora voce tem o novo addon da terra dos Warmasters!.')
-if getPlayerSex(cid) == 0 then
-doPlayerAddOutfit(cid, 335, 2)
-setPlayerStorageValue(cid,999998,2)
-else
-doPlayerAddOutfit(cid, 336, 2)
-setPlayerStorageValue(cid,999998,2)
-talk_state = 1
-end
-end
-
-
-elseif msgcontains(msg, 'bye') and getDistanceToCreature(cid) < 4 then
-selfSay('Adeus ' .. creatureGetName(cid) .. ', Volte Sempre.')
-focus = 0
-talk_start = 0
-
-elseif msg ~= "" then
-selfSay('Como? Eu não entendi!')
-talk_state = 0
-end
-end
-end
-
-function onCreatureChangeOutfit(creature)
-end
-
-function onThink()
-doNpcSetCreatureFocus(focus)
-if (os.clock() - talk_start) > 30 then
-if focus > 0 then
-selfSay('Proximo!!...')
-end
-focus = 0
-talk_start = 0
-end
-if focus ~= 0 then
-if getDistanceToCreature(focus) > 5 then
-selfSay('Good Bye')
-focus = 0
-talk_start = 0
-end
-end
-end
+npcHandler:setCallback(CALLBACK_MESSAGE_DEFAULT, creatureSayCallback)
+npcHandler:addModule(FocusModule:new())

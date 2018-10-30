@@ -27,9 +27,9 @@ end
 end
 if getGlobalStorageValue(_Lib_Battle_Info.storage_count) == 0 then
 removeBattleTp()
-doBroadcastMessage("Battlefield will start in 2 minutes, please create your strategy!")
-addEvent(doBroadcastMessage, 2*60*1000-500, "BattleField will begin now!")
-addEvent(OpenWallBattle, 2*60*1000)
+doBroadcastMessage("Battlefield will start in 1 minute, please create your strategy!", MESSAGE_EVENT_ADVANCE)
+addEvent(doBroadcastMessage, 1*60*1000-500, "BattleField will begin now!", MESSAGE_EVENT_ADVANCE)
+addEvent(OpenWallBattle, 1*60*1000)
 end
 return true
 end

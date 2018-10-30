@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="lizard templar" nameDescription="a lizard templar" race="blood" experience="115" speed="220" manacost="0">
-  <health now="410" max="410"/>
+<monster name="lizard templar" nameDescription="a lizard templar" race="blood" experience="1650" speed="220" manacost="0">
+  <health now="1410" max="1410"/>
   <look type="113" head="20" body="30" legs="40" feet="50" corpse="4251"/>
   <targetchange interval="5000" chance="8"/>
   <strategy attack="100" defense="0"/>

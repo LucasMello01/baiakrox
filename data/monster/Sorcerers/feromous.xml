@@ -78,7 +78,6 @@
 				<item id="2462" chance="12400"/> --devil helmet
 				<item id="2149" countmax="3" chance1="1428" chancemax="0"/>
 				<item id="7403" chance="2600"/> --Berserker
-				<item id="8930" chance="1300"/> --Emerald Sword
 			</inside>
 		</item>
 	</loot>

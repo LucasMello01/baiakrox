@@ -1,22 +1,22 @@
+-- Anti Mage Bomb System por Killua
 local config = {
-        max = 3,        
-        group_id = 1  -- it will only kick player whit that id (1=Players, 2=tutor, 3=seniortutors, 4=Gm's, 5=Cm's and 6=God's
+max = 3, -- Quantos acc manager o mesmo ip pode logar de uma vez
+acc_name = "Account Manager", -- Nome do account manager
+ip_banishment = "false", -- Se logar mais acc manager do que o permitido, leva ban? "true" ou "false"
+banishment_length = 20 -- Quantos dias o ip fica banido?
 }
-
-local accepted_ip_list = ""  -- here put the Ip you whant to be allowed to use Mc/Magebomb..
-
-local function antiMC(p)
-        if #getPlayersByIp(getPlayerIp(p.pid)) >= p.max then
-                doRemoveCreature(p.pid)
-        end
-        return TRUE
-end
-
+local accepted_ip_list = {""} -- lista dos ips permitidos a logar varios acc manager, exemplo: {"200.85.3.60", "201.36.5.222"}
 function onLogin(cid)
-        if getPlayerGroupId(cid) <= config.group_id then
-                if isInArray(accepted_ip_list,getPlayerIp(cid)) == FALSE then
-                        addEvent(antiMC, 1000, {pid = cid, max = config.max+1})
-                end
-        end
-        return TRUE
+if getPlayerName(cid) == config.acc_name then
+if isInArray(accepted_ip_list, doConvertIntegerToIp(getPlayerIp(cid))) then
+return true
+end
+if #getPlayersByIp(getPlayerIp(cid)) >= config.max then
+if config.ip_banishment == "true" then
+doAddIpBanishment(doConvertIntegerToIp(getPlayerIp(cid)), banishment_length * 24 * 60 * 60)
+end
+return false
+end
+end
+return true
 end

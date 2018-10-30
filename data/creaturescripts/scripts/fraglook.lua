@@ -32,10 +32,10 @@ end
 
 function onLook(cid, thing, position, lookDistance)
 	if isPlayer(thing.uid) and thing.uid ~= cid then
-		doPlayerSetSpecialDescription(thing.uid,'[Frags: '..getPlayerFrags(thing.uid)..']')
+		doPlayerSetSpecialDescription(thing.uid,' [Frags: '..getPlayerFrags(thing.uid)..']')
 		return true
 	elseif thing.uid == cid then
-		doPlayerSetSpecialDescription(cid,'[Frags: '..getPlayerFrags(cid)..']')
+		doPlayerSetSpecialDescription(cid,' [Frags: '..getPlayerFrags(cid)..']')
 		local string = 'You see yourself.'
 		if getPlayerFlagValue(cid, PLAYERFLAG_SHOWGROUPINSTEADOFVOCATION) then
 			string = string..' You are '.. getPlayerGroupName(cid) ..'.'
@@ -44,12 +44,8 @@ function onLook(cid, thing, position, lookDistance)
 		else
 			string = string..' You have no vocation.'
 		end
-		string = string..getPlayerSpecialDescription(cid)..''
-
-		if getPlayerNameByGUID(getPlayerPartner(cid), false, false) ~= nil then
-			string = string..' You are '.. (getPlayerSex(cid) == 0 and 'wife' or 'husband') ..' of '.. getPlayerNameByGUID(getPlayerPartner(cid)) ..'.'
-		end
-
+		
+		
 		if getPlayerGuildId(cid) > 0 then
 			string = string..' You are ' .. (getPlayerGuildRank(cid) == '' and 'a member' or getPlayerGuildRank(cid)) ..' of the '.. getPlayerGuildName(cid)
 			string = getPlayerGuildNick(cid) ~= '' and string..' ('.. getPlayerGuildNick(cid) ..').' or string..'.'
@@ -63,6 +59,9 @@ function onLook(cid, thing, position, lookDistance)
 		if getPlayerFlagValue(cid, PLAYERCUSTOMFLAG_CANSEEPOSITION) then
 			string = string..'nPosition: [X:'.. position.x..'] [Y:'.. position.y..'] [Z:'.. position.z..'].'
 		end
+		
+		string = string..getPlayerSpecialDescription(cid)..''
+		
 		doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, string)  
 		return false
 	end

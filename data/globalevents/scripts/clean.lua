@@ -1,11 +1,11 @@
 function executeClean()
 	doCleanMap()
-	doBroadcastMessage("[AUTO]Mapa Limpo")
+	doBroadcastMessage("O mapa foi limpo.")
 	return true
 end
 
 function onThink(interval, lastExecution, thinkInterval)
-	doBroadcastMessage("[AUTO]Clean")
+	doBroadcastMessage("[Warning] O Mapa vai ser limpo, guarde seus itens.")
 	addEvent(executeClean, 50000)
 	return true
 end

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="lizard sentinel" nameDescription="a lizard sentinel" race="blood" experience="110" speed="240" manacost="0">
-  <health now="265" max="265"/>
+<monster name="lizard sentinel" nameDescription="a lizard sentinel" race="blood" experience="1100" speed="240" manacost="0">
+  <health now="1265" max="1265"/>
   <look type="114" head="20" body="30" legs="40" feet="50" corpse="6040"/>
   <targetchange interval="5000" chance="8"/>
   <strategy attack="100" defense="0"/>

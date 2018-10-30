@@ -5,7 +5,7 @@
   <targetchange interval="5000" chance="8"/>
   <strategy attack="100" defense="0"/>
   <flags>
-    <flag summonable="1"/>
+    <flag summonable="0"/>
     <flag attackable="1"/>
     <flag hostile="1"/>
     <flag illusionable="1"/>
@@ -37,7 +37,6 @@
     <loot>
    <item id="2148" countmax="100" chance1="100000" chancemax="0"/> --Gold Coin
    <item id="2147" countmax="3" chance1="3200" chancemax="0"/> -- Small Ruby
-   <item id="8299" chance="1100"/> --Glimmering Soil
    <item id="8921" chance="1800"/> -- Wand of DRaconia
    </loot>
 </monster>

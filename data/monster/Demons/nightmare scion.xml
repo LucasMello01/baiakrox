@@ -55,7 +55,6 @@
 		<item id="2148" countmax="70" chance="100000"/><!-- gold coin -->
 		<item id="2152" countmax="3" chance="25000"/><!-- platinum coin -->
 		<item id="2666" countmax="4" chance="20000"/><!-- meat -->
-		<item id="6300" chance="7300"/><!-- death ring -->
 		<item id="2671" countmax="2" chance="40000"/><!-- ham -->
 		<item id="2230" chance="37500"/><!-- bone -->
 		<item id="6574" chance="1300"/><!-- bar of chocolate -->

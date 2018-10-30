@@ -69,7 +69,7 @@
 	<item id="2189" chance="1333" /> -- wand of cosmic energy
 	<item id="6500" chance="2857" countmax="1" /> -- demonic essence
 	<item id="5944" chance="1429" countmax="1" /> -- soul orb
-	<item id="6300" chance="1000" /> -- death ring
+	
 	<item id="2136" chance="909" /> -- demonbone amulet
 </inside>
 </item>

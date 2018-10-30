@@ -1,9 +1,9 @@
---By [ADM] Cartoon
+--By MatheusVidaLoka
 function onUse(cid, item, frompos, item2, topos)
 if item.itemid == 2160 and item.type == 100 then
 doRemoveItem(item.uid,item.type)
 doPlayerAddItem(cid,2157,1)
-doPlayerSendTextMessage(cid,22,"Você trocou 100 crystal coin por 1 Gold Nuggets")
+doPlayerSendTextMessage(cid,22,"Voce trocou 100 crystal por 1 Nugget Coin")
 elseif item.itemid == 2152 and item.type < 100 then
 doRemoveItem(item.uid,1)
 doPlayerAddItem(cid,2152,100)

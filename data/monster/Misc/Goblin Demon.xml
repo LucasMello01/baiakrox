@@ -42,8 +42,7 @@
 		<voice sentence="Your soul will be mine!"/>
 	</voices>
 	<loot capacity="400">
-		<item id="2230" countmax="1" chance="12000"/>
-		<item id="2449" countmax="1" chance="5000"/>
+		<item id="2230" countmax="1" chance="12000"/>		
 		<item id="2379" countmax="1" chance="18000"/>
 		<item id="2667" countmax="1" chance="13000"/>
 		<item id="2148" countmax="9" chance="50000"/>

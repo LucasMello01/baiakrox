@@ -1,78 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="War Golem" nameDescription="a war golem" race="undead" experience="2550" speed="270" manacost="0">
-	<health now="4300" max="4300"/>
-	<look type="326" corpse="10005"/>
-	<targetchange interval="5000" chance="8"/>
-	<strategy attack="100" defense="0"/>
-	<flags>
-		<flag summonable="0"/>
-		<flag attackable="1"/>
-		<flag hostile="1"/>
-		<flag illusionable="0"/>
-		<flag convinceable="0"/>
-		<flag pushable="0"/>
-		<flag canpushitems="1"/>
-		<flag canpushcreatures="1"/>
-		<flag targetdistance="1"/>
-		<flag staticattack="90"/>
-		<flag runonhealth="0"/>
-	</flags>
-	<attacks>
-		<attack name="melee" interval="2000" skill="70" attack="80"/>
-		<attack name="energy" interval="1000" chance="7" range="7" min="-0" max="-220">
-			<attribute key="shootEffect" value="energy"/>
-		</attack>
-		<attack name="energy" interval="2000" chance="25" length="8" spread="0" min="-0" max="-280">
-			<attribute key="areaEffect" value="energy"/>
-		</attack>
-		<attack name="outfit" interval="1000" chance="9" range="7" monster="skeleton" duration="5000">
-			<attribute key="areaeffect" value="blueshimmer"/>
-		</attack>		
-	</attacks>
-	<defenses armor="40" defense="45">
-		<defense name="speed" interval="1000" chance="9" speedchange="290" duration="4000">
-			<attribute key="areaEffect" value="redshimmer"/>
-		</defense>
-		<defense name="healing" interval="1000" chance="20" min="150" max="230">
-			<attribute key="areaEffect" value="blueshimmer"/>
-		</defense>
-	</defenses>
+<monster name="Demon" nameDescription="a Demon" race="fire" experience="4500" speed="280" manacost="10000">
+  <health now="8000" max="8000"/>
+  <look type="35" corpse="5995"/>
+  <targetchange interval="5000" chance="8"/>
+  <strategy attack="90" defense="10"/>
+  <flags>
+    <flag summonable="0"/>
+    <flag attackable="1"/>
+    <flag hostile="1"/>
+    <flag illusionable="0"/>
+    <flag convinceable="0"/>
+    <flag pushable="0"/>
+    <flag canpushitems="1"/>
+    <flag canpushcreatures="1"/>
+    <flag targetdistance="1"/>
+    <flag staticattack="90"/>
+    <flag runonhealth="0"/>
+  </flags>
+  <attacks>
+    <attack name="melee" interval="2000" skill="100" attack="110"/>
+    <attack name="manadrain" interval="2000" chance="13" range="7" min="0" max="-120"/>
+    <attack name="fire" interval="2000" chance="30" range="7" radius="7" target="1" min="-150" max="-250">
+		<attribute key="shootEffect" value="fire"/>
+		<attribute key="areaEffect" value="firearea"/>
+	</attack>
+    <attack name="fire" interval="2000" chance="12" range="7" radius="1" target="1">
+		<attribute key="shootEffect" value="fire"/>
+	</attack>
+    <attack name="lifedrain" interval="1000" chance="12" length="8" spread="0" min="-300" max="-467">
+		<attribute key="areaEffect" value="purpleenergy"/>
+	</attack>
+	<attack name="speed" interval="2000" chance="15" target="1" speedchange="-750" duration="30000">
+		<attribute key="shootEffect" value="suddendeath"/>
+	</attack>
+	<attack name="energy" interval="3000" chance="10" range="1" target="1" min="-210" max="-300">
+		<attribute key="areaEffect" value="purpleenergy"/>
+	</attack>
+  </attacks>
+  <defenses armor="55" defense="55">
+    <defense name="healing" interval="2000" chance="15" min="130" max="240">
+      <attribute key="areaEffect" value="blueshimmer"/>
+    </defense>
+	<defense name="speed" interval="1000" chance="8" speedchange="290" duration="5000">
+      <attribute key="areaEffect" value="redshimmer"/>
+    </defense>
+  </defenses>
 	<elements>
-		<element earthPercent="50"/>
-		<element holyPercent="30"/>
-		<element firePercent="45"/>
-		<element energyPercent="25"/>
-		<element physicalPercent="40"/>
-		<element icePercent="25"/>
-		<element deathPercent="30"/>
+		<element physicalPercent="30"/>
+		<element energyPercent="50"/>
+		<element earthPercent="20"/>
+		<element icePercent="-15"/>
+		<element holyPercent="-15"/>
+		<element deathPercent="20"/>
 	</elements>
-	<immunities>
-		<immunity invisible="1"/>
-		<immunity paralyze="1"/>
-	</immunities>
-	<voices interval="2500" chance="10">
-		<voice sentence="Azerus barada nikto!"/>
-		<voice sentence="Klonk klonk klonk"/>
-		<voice sentence="Engaging Enemy!"/>
-		<voice sentence="Threat level processed."/>
-		<voice sentence="Charging weapon systems!"/>
-		<voice sentence="Auto repair in progress."/>
-		<voice sentence="The battle is joined!"/>
-		<voice sentence="Termination initialized!"/>
-		<voice sentence="Rrrtttarrrttarrrtta"/>		
-	</voices>
-	<loot>
-		<item id="8309" countmax="5" chance1="50000" chancemax="0"/> <!-- nails -->
-		<item id="2148" countmax="170" chance1="100000" chancemax="0"/> <!-- gps -->
-		<item id="1987" chance="100000">
-			<inside>
-				<item id="7893" chance="1200"/> <!-- lightning boots -->
-				<item id="9980" chance="800"/> <!-- crystal of power -->
-				<item id="2645" chance="700"/> <!-- steel boots -->
-				<item id="5880" chance="15000"/> <!-- iron ore -->
-				<item id="7403" chance="2350"/> <!-- berserker -->
-				<item id="7422" chance="1111"/> <!-- jade hammer -->
-			</inside>
-		</item>
-	</loot>
+  <immunities>
+    <immunity fire="1"/>
+    <immunity drown="1"/>
+    <immunity paralyze="1"/>
+    <immunity invisible="1"/>
+  </immunities>
+  <summons maxSummons="1">
+    <summon name="fire elemental" interval="1000" chance="12"/>
+  </summons>
+  <voices interval="5000" chance="10">
+    <voice sentence="MUHAHAHAHA!" yell="1"/>
+    <voice sentence="I SMELL FEEEEEAAAR!" yell="1"/>
+    <voice sentence="CHAMEK ATH UTHUL ARAK!" yell="1"/>
+    <voice sentence="Your resistance is futile!"/>
+    <voice sentence="Your soul will be mine!" yell="0"/>
+  </voices>
+  <loot>
+ 	<item id="2148" countmax="100" chance1="100000" chancemax="0"/> -- gold coins
+ 	<item id="2148" countmax="100" chance1="100000" chancemax="0"/> -- gold coins
+	<item id="2152" countmax="3" chance1="33333" chancemax="2000"/> --Plat
+ 	<item id="2514" chance="4900"/> --mastermind shield
+ 	<item id="2472" chance="2000"/> --magic plate armor
+	<item id="2795" countmax="6" chance1="7500"/> --Fire Mushroom
+ 	<item id="5906" countmax="1" chance="2000"/> -- demon dust
+	<item id="5954" countmax="1" chance="2345"/> -- demon horn
+    <item id="2164" chance="2100"/> --might ring
+    <item id="2176" chance="3500"/> --orb
+	<item id="1982" chance="1300"/> --purpel tome
+    <item id="2165" chance="2300"/> --stealth ring
+	<item id="7591" chance="4500"/> -- GHP
+ 	<item id="1987" chance="100000">
+		<inside>
+		 	<item id="2393" chance="4800"/> --giantsword
+		 	<item id="2432" chance="4800"/> --fire axe
+			<item id="2214" chance="2222"/> --ring of healing
+			<item id="2396" chance="4600"/> --ice rapier			
+			<item id="2795" countmax="6" chance1="13000"/> --fire mushroom
+			<item id="2678" countmax="3" chance1="10000" chancemax="0"/> --coconut
+			<item id="2148" countmax="100" chance1="100000" chancemax="0"/> -- gold coin
+			<item id="2151" countmax="4" chance1="5500" chancemax="0"/>
+			<item id="2462" chance="3200"/> --devil helmet
+			<item id="2149" countmax="3" chance1="11000" chancemax="0"/>
+			<item id="2171" chance="2200"/> --platinum amulet
+			<item id="2387" chance="32000"/> --double axe
+			<item id="2470" chance="2350"/> --golden legs
+			<item id="7382" chance="300"/> -- Demonrage Sword
+			<item id="7393" chance="1700"/> -- Demon Trophy
+			<item id="2520" chance="4100"/> --demon shield
+			<item id="2418" chance="1500"/> --golden sickle
+			<item id="2112" chance="4100"/> --addon doll
+		</inside>
+ 	</item>
+</loot>
 </monster>

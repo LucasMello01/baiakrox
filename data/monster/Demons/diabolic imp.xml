@@ -35,7 +35,7 @@
     <defense name="speed" interval="2000" chance="18" speedchange="520" duration="4000">
       <attribute key="areaEffect" value="redshimmer"/>
     </defense>
-    <defense name="invisible" interval="3000" chance="18" duration="4000"> --each 4 sec invi duration 4 sec
+    <defense name="invisible" interval="3000" chance="18" duration="4000"> 
       <attribute key="areaEffect" value="redshimmer"/>
     </defense>
   </defenses>
@@ -63,7 +63,6 @@
    <item id="6558" chance="11000"/> --Concentrated Demonic Blood
    <item id="6558" chance="13000"/> --^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ 
    <item id="2260" chance="18000"/> --Blank Rune
-   <item id="6300" chance="9700"/> --Death Ring
    <item id="2465" chance="6577"/> --Brass Armor
    <item id="1987" chance="100000"> --Bag
          <inside>
@@ -73,9 +72,7 @@
          <item id="2465" chance="6577"/> --Brass Armor
          <item id="2185" chance="3500" /> -- volcanic rod
          <item id="2464" chance="7887"/> --Chain Armor
-         <item id="5944" chance="5666"/> --Soul Orb
-         <item id="7899" chance="1500"/> --Magma coat
-         <item id="7900" chance="3900"/> --Magma Monocle
+         <item id="5944" chance="5666"/> --Soul Orb                  
          <item id="6500" countmax="1" chance1="7777" chancemax="0"/> --Demonic Essence
          <item id="2150" countmax="3" chance1="9999" chancemax="0"/> --Small Amethyst
          <item id="2165" chance="4555"/> --Stealth Ring

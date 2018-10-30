@@ -53,8 +53,7 @@
 	    <item id="2545" countmax="13" chance1="8000" chancemax="3000"/> --Poison arrows
         <item id="2148" countmax="50" chance1="100000" chancemax="0"/> --Gold
         <item id="2457" chance="5000"/>
-        <item id="2476" chance="2500"/> --Knight Armor
-        <item id="2477" chance="1500"/> --Knight legs
+        <item id="2476" chance="2500"/> --Knight Armor        
         <item id="2478" chance="10000"/> --Brass Legs
         <item id="2169" chance="2900"/> --Time ring
       </inside>

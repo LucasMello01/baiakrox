@@ -66,7 +66,6 @@
       <inside>
         <item id="2148" countmax="70" chance1="100000" chancemax="0"/> --Gold
         <item id="2195" chance="1400"/> -- Boh
-        <item id="2444" chance="1000"/> -- Hammer of Wrath
 		<item id="7365" countmax="2" chance1="8000" chancemax="0"/> -- Onyx Arrows
 		<item id="2547" countmax="3" chance1="7000" chancemax="0"/> -- Power Bolt
 		<item id="2145" countmax="3" chance1="4000" chancemax="0"/> -- Small Diamond

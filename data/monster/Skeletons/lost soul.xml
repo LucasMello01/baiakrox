@@ -65,7 +65,7 @@
 		<item id="2483" chance="10000" /> -- scale armor
 		<item id="7413" chance="900" /> -- titan axe
 		<item id="6526" chance="2300" /> -- skeleton decoration
-		<item id="5801" chance="2738" /> -- key ring
+		
 		<item id="2197" chance="2500" countmax="5" /> -- ssa
       </inside>
 	</item>

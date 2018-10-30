@@ -48,7 +48,6 @@
 		<item id="2456" chance="6000"/><!-- bow -->
 		<item id="1987" chance="100000"><!-- bag -->
 		<inside>
-		<item id="2455" chance="5000"/><!-- crossbow -->
 		<item id="2425" chance="4500"/><!-- obsidian lance -->
 		<item id="11318" chance="9500"/><!-- shaggy tail -->
 		<item id="11109" chance="5000"/><!-- orc tooth -->

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <monster name="Massive Earth Elemental" nameDescription="a Massive earth elemental" race="undead" experience="850" species="earth" speed="290" manacost="0">
-    <health now="1330" max="1330"/>
+  <monster name="Massive Earth Elemental" nameDescription="a Massive earth elemental" race="undead" experience="500850" species="earth" speed="1290" manacost="0">
+    <health now="1000100" max="1000100"/>
     <look type="285" corpse="8933"/>
     <targetchange interval="20000" chance="50"/>
     <strategy attack="100" defense="0"/>
@@ -19,14 +19,14 @@
       <flag runonhealth="1"/>
     </flags>
     <attacks>
-         	<attack name="melee" interval="2000" skill="100" attack="95"/>
-	<attack name="earth" interval="2000" chance="15" range="7" min="-25" max="-140">
+         	<attack name="melee" interval="1000" skill="250" attack="255"/>
+	<attack name="earth" interval="2000" chance="15" range="7" min="-3025" max="-3140">
 		<attribute key="shootEffect" value="earth"/>
 			</attack>
-	<attack name="earth" interval="1000" chance="10" length="6" spread="0" min="0" max="-260">
+	<attack name="earth" interval="1000" chance="10" length="6" spread="0" min="3000" max="-3260">
 		<attribute key="areaEffect" value="smallplants"/>
 			</attack>
-	<attack name="physical" interval="1000" chance="9" target="0" radius="4" min="0" max="-240">
+	<attack name="physical" interval="1000" chance="9" target="0" radius="4" min="3000" max="-3240">
       		<attribute key="areaEffect" value="poff"/>
   		 	</attack>
     </attacks>
@@ -49,4 +49,7 @@
       <item id="1294" countmax="9" chance1="9000" chancemax="0"/> -- Small Stones
       <item id="2436" chance="3000"/> -- Plate Armor
     </loot>
+	<script>
+		<event name="teleportmonster24"/>
+	</script>
   </monster>

@@ -62,9 +62,7 @@
 	<item id="2490" chance="2500" /> -- dark helmet
 	<item id="2377" chance="1818" /> -- two-handed sword
 	<item id="2434" chance="833" /> -- dragon hammer
-	<item id="2497" chance="667" /> -- crusader helmet
-	<item id="2179" chance="556" /> -- gold ring
-	<item id="2499" chance="333" /> -- amazon helmet
+	<item id="2497" chance="667" /> -- crusader helmet	
 	<item id="2500" chance="250" /> -- amazon armor
 	<item id="2537" chance="200" /> -- amazon shield
 </inside>

@@ -19,5 +19,5 @@ function onSay(cid, words, param)
 		doPlayerSendCancel(cid, "Sorry, you're not in a guild.");
 	end
 	doPlayerSendTextMessage(cid, 25, words)
-	return FALSE
+	return true
 end

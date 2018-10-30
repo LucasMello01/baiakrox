@@ -1,5 +1,5 @@
-local look = {lookType = 134, lookHead = 100, lookBody = 100, lookLegs = 100, lookFeet = 100, lookTypeEx = 0, lookAddons = 3}
+local look = {lookType = 128, lookHead = 59, lookBody = 81, lookLegs = 81, lookFeet = 81, lookTypeEx = 0, lookAddons = 0}
 
 function onStepIn(cid, item, pos)
-doCreatureChangeOutfit(cid, look)
+doSetCreatureOutfit(cid, look, -1)
 end

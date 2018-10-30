@@ -63,7 +63,6 @@
       <inside>
         <item id="2148" countmax="70" chance1="100000" chancemax="0"/> --Gold
         <item id="2430" chance="2000"/> -- Knight Axe
-        <item id="2443" chance="1000"/> -- Ravager Axe
         <item id="2645" chance="1500"/> -- Steel Boots
         <item id="7591" chance="3000"/> -- GHP
         <item id="7368" countmax="4" chance1="4000" chancemax="0"/> --Assassin star

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Abominator" nameDescription="Abominator" race="undead" experience="30000" speed="500" manacost="0">
-	<health now="150000" max="150000"/>
+<monster name="Abominator" nameDescription="Abominator" race="undead" experience="50000" speed="500" manacost="0">
+	<health now="40000" max="40000"/>
 	<look type="12" head="0" body="94" legs="79" feet="79" corpse="6068"/>
 	<targetchange interval="10000" chance="20"/>
 	<strategy attack="100" defense="0"/>
@@ -18,15 +18,15 @@
 		<flag runonhealth="0"/>
 	</flags>
 	<attacks>
-		<attack name="melee" interval="2000" min="-1500" max="-2000"/>
-		<attack name="fire" interval="3000" chance="35" range="7" radius="7" target="1" min="-900" max="-1500">
+		<attack name="melee" interval="2000" min="-700" max="-1000"/>
+		<attack name="fire" interval="3000" chance="35" range="7" radius="7" target="1" min="-500" max="-600">
 			<attribute key="shootEffect" value="fire"/>
 			<attribute key="areaEffect" value="firearea"/>
 		</attack>
-		<attack name="melee" interval="1800" chance="40" range="7" radius="5" target="0" min="-450" max="-800">
+		<attack name="melee" interval="1800" chance="40" range="7" radius="5" target="0" min="-450" max="-500">
 			<attribute key="areaEffect" value="blackspark"/>
 		</attack>
-		<attack name="energy" interval="3000" chance="30" length="8" spread="0" min="-300" max="-1000">
+		<attack name="energy" interval="3000" chance="30" length="8" spread="0" min="-300" max="-600">
 			<attribute key="areaEffect" value="energy"/>
 		</attack>
 		<attack name="physical" interval="2500" chance="20" range="7" radius="5" target="0" min="-300" max="-500">
@@ -72,23 +72,49 @@
 		<voice sentence="ZATHROTH! LOOK AT THE DESTRUCTION I AM CAUSING IN YOUR NAME!" yell="1"/>
 	</voices>
 	<loot>
-		<item id="2160" countmax="20" chance="100000"/><!-- gold coin -->
-		<item id="2148" countmax="90" chance="50000"/><!-- gold coin -->
-		<item id="2143" countmax="5" chance="10000"/><!-- white pearl -->
-		<item id="2396" chance="19429"/><!-- ice rapier -->
-		<item id="2462" chance="20000"/><!-- devil helmet -->
-		<item id="2214" chance="16000"/><!-- ring of healing -->
-		<item id="2003" chance="100000"><!-- grey backpack -->
-			<inside>
-				<item id="2495" chance="6000"/><!-- demon legs -->
-				<item id="2387" chance="20000"/><!-- double axe -->
-				<item id="2393" chance="60000"/><!-- giant sword -->
-				<item id="2195" chance="16033"/><!-- boots of haste -->
-				<item id="2421" chance="7000"/><!-- thunder hammer -->
-				<item id="2522" chance="5600"/><!-- great shield -->
-				<item id="2192" chance="24000"/><!-- crystal ball -->
-                       	<item id="2112" chance="4100"/> --addon doll
-			</inside>
-		</item>
-	</loot>
+<item id="2148" countmax="100" chance1="80000" chancemax="8"/>
+<item id="2148" countmax="100" chance1="20000" chancemax="10"/>
+<item id="2150" countmax="16" chance1="4000" chancemax="10"/> small amethyst
+<item id="2148" countmax="83" chance1="40000" chancemax="0"/>
+<item id="7388" chance="1200" /> --vile axe
+<item id="2208" chance="3200" /> --axe ring
+<item id="8871" chance="3100" /> --focus cape
+<item id="2158" chance="1500" /> --blue gem
+<item id="2155" chance="1500" /> --green gem
+<item id="2210" chance="3200" /> --sword ring
+<item id="2208" chance="3200" /> --axe ring
+<item id="9970" countmax="13" chance1="6000" chancemax="0"/> small topaz
+<item id="6500" countmax="2" chance1="6000" chancemax="0"/> demonic ess
+<item id="2143" countmax="7" chance1="5000" chancemax="0"/> --White pearl
+<item id="2470" chance="2000" /> --golden legs
+<item id="7368" countmax="25" chance="8000"/> --stars
+<item id="2144" countmax="12" chance1="4000" chancemax="0"/> --black pearl
+<item id="2145" countmax="5" chance1="3000" chancemax="0"/> --small diamond
+<item id="2514" chance="5650"/> --mastermind shield
+<item id="2466" chance="8100"/> --golden armor
+<item id="7590" chance="7000"/> --great mana potion
+<item id="8904" chance="5000"/> --spellbook of prophercies
+<item id="7591" chance="8000"/> --great health potion
+<item id="1987" chance="100000">
+<inside>
+<item id="2148" countmax="100" chance1="80000" chancemax="0"/>
+<item id="2148" countmax="100" chance1="20000" chancemax="0"/>
+<item id="8901" chance="4400"/> --spellbook of warding
+<item id="2415" chance="600"/> --great axe
+<item id="2208" chance="3200" /> --axe ring
+<item id="2645" chance="3500"/> --steel boots
+<item id="6500" countmax="2" chance1="6000" chancemax="0"/> demonic ess
+<item id="8902" chance="4500"/> spellbook of mind control
+<item id="2136" chance1="3000"/> demonbone amulet
+<item id="2488" chance1="4000"/> crown legs
+<item id="2143" countmax="7" chance1="7000" chancemax="0"/> --White pearl
+<item id="7590" chance="5000"/> --great mana potion
+<item id="8879" chance="3400"/> --voltage armor
+<item id="2146" countmax="18" chance1="9000" chancemax="0"/> --small sapphire
+<item id="2195" chance="5000"/> --boh
+<item id="8918" chance="1000"/> --spellbook of dark mysteries
+<item id="7591" chance="7000"/> --great health potion
+</inside>
+	</item>
+</loot>
 </monster>

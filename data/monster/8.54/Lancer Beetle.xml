@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Lancer Beetle" nameDescription="a lancer beetle" race="venom" experience="250" speed="220" manacost="0">
-<health now="400" max="400"/>
-<look type="348" corpse="11369"/>
+<monster name="Lancer Beetle" nameDescription="a lancer beetle" race="venom" experience="250" speed="420" manacost="0">
+<health now="31400" max="31400"/>
+<look type="348" corpse="6068"/>
 <targetchange interval="5000" chance="12"/>
 <strategy attack="100" defense="0"/>
 <flags>
@@ -18,13 +18,13 @@
 <flag runonhealth="80"/>
 </flags>
 <attacks>
-<attack name="melee" interval="2000" skill="40" attack="60"/>
-<attack name="poison" interval="2000" chance="20" length="8" spread="3" min="-0" max="-0">
+<attack name="melee" interval="1000" skill="110" attack="116"/>
+<attack name="poison" interval="1000" chance="20" length="8" spread="3" min="-300" max="-400">
 <attribute key="areaEffect" value="poison"/>
 </attack>
 </attacks>
 	<defenses armor="25" defense="25">
-<defense name="invisible" interval="1000" chance="10" duration="3000">
+<defense name="invisible" interval="1500" chance="10" duration="3000">
 <attribute key="areaEffect" value="redshimmer"/>
 		</defense>
 	</defenses>

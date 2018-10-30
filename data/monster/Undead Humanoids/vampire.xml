@@ -61,12 +61,12 @@
     <item id="2148" countmax="9" chance1="100000" chancemax="0"/>
     <item id="2649" chance="8000"/> 
     <item id="2383" chance="1666"/>
-    <item id="5905" countmax="1" chance1="2000" chancemax="0"/>
+    <item id="5905" chance="3000" coountmax="3"/> -- vampire dust
     <item id="2172" chance="200"/> --bronze amulet
     <item id="2127" countmax="1" chance="200"/> --emerald blange
     <item id="1987" chance="100000">
       <inside>
-        <item id="2148" countmax="4" chance1="2500" chancemax="0"/>
+        <item id="5911" countmax="2" chance1="2500" chancemax="0"/>
         <item id="2032" chance="10000"/>
         <item id="2229" countmax="3" chance1="10000" chancemax="0"/>
         <item id="2412" chance="15000"/>

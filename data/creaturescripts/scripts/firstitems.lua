@@ -1,72 +1,95 @@
-local firstItems = {}
-firstItems[0] =
-{
-2173,
-2525,
-2428,
-2124,
-2460,
-2478,
-2643
-}
-firstItems[1] =
-{
-2173,
-8901,
-2190,
-2124,
-2457,
-2495,
-2643
-}
-firstItems[2] =
-{
-2173,
-8901,
-2182,
-2124,
-2457,
-2495,
-2643
-}
-firstItems[3] =
-{
-2173,
-2525,
-7368,
-2124,
-2460,
-2478,
-2643
-}
-firstItems[4] =
-{
-2173,
-2525,
-2428,
-2124,
-2460,
-2478,
-2643
-}
-
 function onLogin(cid)
-if getPlayerStorageValue(cid, 30001) == -1 then
-for i = 1, table.maxn(firstItems[getPlayerVocation(cid)]) do
-doPlayerAddItem(cid, firstItems[getPlayerVocation(cid)][i], 1)
-end
-if getPlayerSex(cid) == 0 then
-doPlayerAddItem(cid, 2465, 1)
-else
-doPlayerAddItem(cid, 2465, 1)
-end
-local bag = doPlayerAddItem(cid, 10518, 1)
-doAddContainerItem(bag, 2160, 100)
-doAddContainerItem(bag, 2554, 1)
-doAddContainerItem(bag, 2120, 1)
-doAddContainerItem(bag, 7618, 1)
-doAddContainerItem(bag, 2383, 1)
-setPlayerStorageValue(cid, 30001, 1)
-end
-return TRUE
+	if getPlayerGroupId(cid) == 1 and getPlayerStorageValue(cid, 30001) == -1 then
+		if isSorcerer(cid) then
+			local bag = doPlayerAddItem(cid, 2002, 1)
+	
+			doAddContainerItem(bag, 2120, 1)
+			doAddContainerItem(bag, 5710, 1)
+			doAddContainerItem(bag, 2160, 15)
+			doAddContainerItem(bag, 2789, 50)
+			doAddContainerItem(bag, 7620, 1)
+			doAddContainerItem(bag, 7618, 1)
+			
+		
+			doPlayerAddItem(cid, 2534, 1)
+			doPlayerAddItem(cid, 7426, 1)
+			doPlayerAddItem(cid, 8871, 1)
+			doPlayerAddItem(cid, 2323, 1)
+			doPlayerAddItem(cid, 7896, 1)
+			doPlayerAddItem(cid, 2195, 1)
+			doPlayerAddItem(cid, 2173, 1)
+			doPlayerAddItem(cid, 7590, 1)
+			doPlayerAddItem(cid, 2124, 1)
+			
+
+		setPlayerStorageValue(cid, 30001, 1)
+
+		elseif isDruid(cid) then
+			local bag = doPlayerAddItem(cid, 2002, 1)
+			doAddContainerItem(bag, 2120, 1)
+			doAddContainerItem(bag, 5710, 1)
+			doAddContainerItem(bag, 2160, 15)
+			doAddContainerItem(bag, 2789, 50)
+			doAddContainerItem(bag, 7620, 1)
+			doAddContainerItem(bag, 7618, 1)
+		
+			doPlayerAddItem(cid, 2534, 1)
+			doPlayerAddItem(cid, 7426, 1)
+			doPlayerAddItem(cid, 8871, 1)
+			doPlayerAddItem(cid, 2323, 1)
+			doPlayerAddItem(cid, 7896, 1)
+			doPlayerAddItem(cid, 2195, 1)
+			doPlayerAddItem(cid, 2173, 1)
+			doPlayerAddItem(cid, 7590, 1)
+			doPlayerAddItem(cid, 2124, 1)
+
+			setPlayerStorageValue(cid, 30001, 1)
+
+		elseif isPaladin(cid) then
+			local bag = doPlayerAddItem(cid, 10522, 1)
+			doAddContainerItem(bag, 2120, 1)
+			doAddContainerItem(bag, 5710, 1)
+			doAddContainerItem(bag, 2160, 15)
+			doAddContainerItem(bag, 2789, 50)
+			doAddContainerItem(bag, 7620, 1)
+			doAddContainerItem(bag, 7618, 1)
+		
+			doPlayerAddItem(cid, 7366, 1)
+			doPlayerAddItem(cid, 2519, 1)
+			doPlayerAddItem(cid, 7368, 1)
+			doPlayerAddItem(cid, 2195, 1)
+			doPlayerAddItem(cid, 2488, 1)
+            doPlayerAddItem(cid, 2487, 1)
+			doPlayerAddItem(cid, 2491, 1)
+			doPlayerAddItem(cid, 2173, 1)
+			doPlayerAddItem(cid, 8472, 1)
+			doPlayerAddItem(cid, 2124, 1)
+			
+			setPlayerStorageValue(cid, 30001, 1)
+
+		elseif isKnight(cid) then
+			local bag = doPlayerAddItem(cid, 10522, 1)
+			doAddContainerItem(bag, 2120, 1)
+			doAddContainerItem(bag, 5710, 1)
+			doAddContainerItem(bag, 2160, 15)
+			doAddContainerItem(bag, 2789, 50)
+			doAddContainerItem(bag, 7620, 1)
+			doAddContainerItem(bag, 7618, 1)
+			doAddContainerItem(bag, 12610, 1)
+			doAddContainerItem(bag, 7428, 1)
+			
+		    doPlayerAddItem(cid, 8924, 1)
+	        doPlayerAddItem(cid, 2519, 1)
+			doPlayerAddItem(cid, 2195, 1)
+			doPlayerAddItem(cid, 2488, 1)
+            doPlayerAddItem(cid, 2487, 1)
+			doPlayerAddItem(cid, 2491, 1)
+			doPlayerAddItem(cid, 2173, 1)
+			doPlayerAddItem(cid, 8473, 1)
+			doPlayerAddItem(cid, 2124, 1)
+
+			setPlayerStorageValue(cid, 30001, 1)
+		end
+	end
+ 	return TRUE
 end

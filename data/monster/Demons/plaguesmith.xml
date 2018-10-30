@@ -71,9 +71,7 @@
 		<inside>
 			<item id="2492" chance="1333" /> -- DSM
 			<item id="7365" chance1="6666" ciuntmax="3"/> --Onyx Arrow
-			<item id="9808" chance="9500" /> -- Rusty Armor
-			<item id="2477" chance="5800" /> --Knight Legs
-			<item id="2444" chance="999" /> -- hammer of wrath
+			<item id="9808" chance="9500" /> -- Rusty Armor			
 			<item id="2417" chance="12600" /> -- battle hammer
 			<item id="2509" chance="11111" /> -- steel shield
 			<item id="5944" chance="7600" countmax="1" /> -- soul orb

@@ -61,11 +61,9 @@
     <item id="2148" countmax="82" chance1="47831" chancemax="1032"/>
     <item id="2654" chance="5000"/>
     <item id="2187" chance="1111" /> -- wand of Inferno
-    <item id="5801" chance="909"/>
     <item id="2167" chance="1000"/>
     <item id="2171" chance="909"/>
     <item id="7426" chance="1009"/>
-    <item id="2656" chance="400"/>
     <item id="1987" chance="100000">
       <inside>
         <item id="2114" chance="1333"/>

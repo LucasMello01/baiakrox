@@ -43,7 +43,8 @@
     <item id="2134" chance="6666"/>
     <item id="2411" chance="2857"/>
     <item id="2529" chance="2557"/>
-    <item id="5914" countmax="1" chance1="5000" chancemax="0"/>
+    <item id="5914" chance="10000" coountmax="3"/> -- white poc
+    <item id="5909" chance="10000" coountmax="3"/> -- yellow poc
     <item id="1987" chance="100000">
       <inside>
         <item id="2529" chance="1428"/>

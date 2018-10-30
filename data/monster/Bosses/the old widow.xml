@@ -64,8 +64,7 @@
 			<inside>
 				<item id="2457" countmax="1" chance="10000"/><!-- steel helmet -->
 				<item id="2148" countmax="40" chance="100000"/><!-- gold coin -->
-				<item id="2476" chance="1000"/><!-- knight armor -->
-				<item id="2477" chance="500"/><!-- knight legs -->
+				<item id="2476" chance="1000"/><!-- knight armor -->				
 				<item id="2478" chance="10000"/><!-- brass legs -->
 				<item id="2169" chance="800"/><!-- time ring -->
 			</inside>

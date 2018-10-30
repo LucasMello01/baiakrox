@@ -1,7 +1,8 @@
-<npc name="Especialista of Sotf" script="data/npc/scripts/soft.lua" access="5" lookdir="1">
-<health now="1000" max="1000"/>
-<look type="133" head="95" body="86" legs="86" feet="38" addons="3"/>
-	<parameters>
-		<parameter key="message_greet" value="Hello |PLAYERNAME|.I've been working hard these days in this project, I can now repair your dear friend {boots}." />
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Sotf Lover" script="data/npc/scripts/soft.lua" walkinterval="2000" floorchange="0">
+	<health now="100" max="100"/>
+	<look type="134" head="78" body="88" legs="0" feet="88" addons="3"/>
+<parameters>
+		<parameter key="message_greet" value="Ola |PLAYERNAME|. Se voce quiser eu posso reparar a sua soft {boots}." />
 	</parameters>
 </npc>

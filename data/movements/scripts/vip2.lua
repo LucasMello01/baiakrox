@@ -3,7 +3,7 @@ function onStepIn(cid, item, pos)
 
 
 -- teleports config
-teleport1 ={x=155, y=45, z=7}
+teleport1 ={x=154, y=44, z=7}
 
 
 
@@ -13,7 +13,7 @@ if item.actionid == 13539 then
 
 vip = getPlayerStorageValue(cid,13540)
 if vip == -1 then
-doPlayerSendCancel(cid,"Você não é vip 2 fale !buyvip2")
+doPlayerSendCancel(cid,"Esta área é exclusiva para players Vips2.Para Adquirir vip2 faça a Quest Vip")
 
 
 doTeleportThing(cid,teleport1)

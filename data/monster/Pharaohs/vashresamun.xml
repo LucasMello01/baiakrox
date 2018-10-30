@@ -57,7 +57,7 @@
     <item id="2148" countmax="100" chance1="100000" chancemax="0"/> --Gold
     <item id="7590" chance="2000"/> --GMP
     <item id="2646" chance="4000"/> --Blue Robe
-	<item id="2349" chance="2349"/> --Blue Note
+
     <item id="1987" chance="100000">
       <inside>
         <item id="2148" countmax="100" chance1="100000" chancemax="0"/> --Gold

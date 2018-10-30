@@ -8,7 +8,7 @@ addOutfitCondition(wolfCondition, {lookType = 4, lookHead = 0, lookBody = 0, loo
 ----- config -------
 --------------------
 local t =   {
-        [11191] = {article='a' ,name='wolf', text='Mount, wolf!', dtext='Demount, wolf!', s=100, condition=wolfCondition},
+        [2167] = {article='a' ,name='wolf', text='Mount, wolf!', dtext='Demount, wolf!', s=100, condition=wolfCondition},
 }      
 
 ------------------------------------

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <monster name="Ferumbras" nameDescription="Ferumbras" race="blood" experience="50000" speed="320" manacost="0">
-	<health now="250000" max="250000"/>
+	<health now="15000" max="15000"/>
 	<look type="229" corpse="6078"/>
 	<targetchange interval="5000" chance="8"/>
 	<strategy attack="100" defense="0"/>
@@ -61,8 +61,9 @@
 	</elements>
 	<immunities>
 		<immunity lifedrain="1"/>
+		<immunity physical="0"/>
 		<immunity paralyze="1"/>
-		<immunity outfit="1"/>
+		<immunity outfit="0"/>
 		<immunity drunk="1"/>
 		<immunity invisible="1"/>
 	</immunities>

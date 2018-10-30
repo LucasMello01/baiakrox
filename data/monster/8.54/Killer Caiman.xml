@@ -41,8 +41,7 @@
 		<item id="2148" countmax="60" chance="17500"/><!-- gold coin -->
 		<item id="2148" countmax="60" chance="17500"/><!-- gold coin -->
 		<item id="2671" countmax="2" chance="15000"/><!-- ham -->
-		<item id="11190" chance="7000"/><!-- piece of crocodile leather -->
-		<item id="3982" chance="800"/><!-- crocodile boots -->
+		<item id="11190" chance="7000"/><!-- piece of crocodile leather -->		
 		<item id="2149" chance="400"/><!-- small emerald -->
 		<item id="11239" countmax="2" chance="1000"/><!-- bunch of ripe rice -->
 	</loot>

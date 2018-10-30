@@ -18,18 +18,18 @@
     <flag runonhealth="0"/>
   </flags>
 <attacks>
-    <attack name="melee" interval="2000" skill="220" attack="210"/>
-    <attack name="fire" interval="1000" chance="13" range="7" radius="8" target="1" min="0" max="-1200">
+    <attack name="melee" interval="2000" skill="160" attack="160"/>
+    <attack name="fire" interval="1000" chance="13" range="7" radius="8" target="1" min="0" max="-700">
 		<attribute key="shootEffect" value="fire"/>
 		<attribute key="areaEffect" value="firearea"/>
 	</attack>
-    <attack name="lifedrain" interval="3000" chance="18" radius="8" target="0" min="-120" max="-800">
+    <attack name="lifedrain" interval="3000" chance="18" radius="8" target="0" min="-120" max="-400">
 		<attribute key="areaEffect" value="rednote"/>
 	</attack>
-    <attack name="death" interval="3000" chance="15" radius="8" target="0" min="-500" max="-800">
+    <attack name="death" interval="3000" chance="15" radius="8" target="0" min="-300" max="-500">
 		<attribute key="areaEffect" value="mortarea"/>
 	</attack>
-	<attack name="death" interval="2000" chance="16" length="8" spread="0" min="-600" max="-1400">
+	<attack name="death" interval="2000" chance="16" length="8" spread="0" min="-300" max="-600">
 		<attribute key="areaEffect" value="mortarea"/>
 	</attack>
     <attack name="speed" interval="3000" chance="25" target="1" speedchange="-800" duration="4000">
@@ -75,8 +75,7 @@
 		<item id="2214" chance="4000" /> -- ring of healing
 		<item id="1987" chance="100000" > -- bag
 			<inside>
-				<item id="2387" chance="10000" /> -- double axe
-				<item id="7431" chance="7900" /> -- Demonbone
+				<item id="2387" chance="10000" /> -- double axe				
 				<item if="2514" chance="9000" /> -- Mastermind Shield
 				<item id="5943" chance="3400"/> -- Morgaroth Hearth
 				<item id="2393" chance="12000" /> -- giant sword

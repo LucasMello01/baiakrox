@@ -85,10 +85,8 @@
     <item id="2146" countmax="3" chance1="13800"/> --Small sapphire 
 	<item id="1980" chance="100000">
 		<inside>
-			<item id="2656" chance="36000"/> --Blue Robe
 			<item id="2466" chance="18877"/> --Golden Armor
-			<item id="2436" chance="26400"/> --Skull staff
-			<item id="2123" chance="12000"/> --ring of the sky
+			<item id="2436" chance="26400"/> --Skull staff			
 		</inside>
 	</item>
   </loot>

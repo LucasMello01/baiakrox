@@ -46,13 +46,11 @@
 <item id="5895" chance="2200" countmax="1" /> -- fish fin
 <item id="2148" chance="100000" countmax="100" /> -- gold coin
 <item id="2377" chance="2118" /> -- two-handed sword
-<item id="7892" chance="1800" /> -- Glacier Shoes
 <item id="1987" chance="100000" > -- bag
 <inside>
 	<item id="5895" chance="3333" countmax="1" /> -- fish fin
 	<item id="2229" chance="4000" countmax="1" /> -- skull
         <item id="2165" chance="1250" /> -- stealth ring
-        <item id="2656" chance="500" /> -- blue robe
 </inside>
 </item>
 </loot>

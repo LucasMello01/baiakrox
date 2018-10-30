@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Free Seller" script="data/npc/scripts/Freeseller.lua" walkinterval="0" floorchange="0">
+<health now="100" max="100"/>
+<look type="136" head="66" body="84" legs="3" feet="2" addons="3"/>
+<parameters>
+<parameter key="module_shop" value="1" />
+		<parameter key="shop_buyable" value="free staff,7424,10000000;free vip sword,7417,10000000;free vip club,7450,10000000;free bow,8854,10000000;free vip axe,7420,10000000;" />
+        <parameter key="message_greet" value="Welcome, |PLAYERNAME|. What can I do for you?"/>
+        <parameter key="message_farewell" value="Good bye."/>
+		<parameter key="message_walkaway" value="Good bye." />
+		<parameter key="message_sendtrade" value="Of course, just browse through my wares." />
+</parameters>
+</npc>

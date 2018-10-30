@@ -80,7 +80,6 @@
 		<item id="6500" countmax="4" chance1="12500"/>	-- demonic essence'
 		<item id="8852" chance="10500"/>			-- Devileye
 		<item id="8865" chance="8500"/> --Dark lord cape
-		<item id="8927" chance="50000"/> --Dark trinity mace
 		<item id="2148" countmax="90" chance1="100000"/>	-- gold coin
 		<item id="2148" countmax="90" chance1="80000"/>	-- gold coin
 		<item id="2152" countmax="40" chance1="45000"/>	-- Platinum Coin
@@ -90,7 +89,6 @@
 				<item id="8903" chance="16500"/> --Spellbook of lost souls
 				<item id="8889" chance="6000"/>	-- skullcracker armor
 				<item id="8885" chance="7777"/> --Divine Plate
-				<item id="8932" chance="50000"/> -- The calamity
 				<item id="8910" chance="8500"/>	--underworld rod
 				<item id="8473" chance="12000"/> -- ultimate health potion
 				<item id="7590" chance="12000"/> -- GMP

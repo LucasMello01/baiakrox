@@ -16,7 +16,7 @@ function onSay(cid, words, param)
     return true
     end
 
-    local days = 10*24*60*60
+    local days = 5*24*60*60
     local own = getHouseOwner(getHouseFromPos(positions))
     local qry = db.getResult("SELECT `lastlogin` FROM `players` WHERE `id` = "..own)
     

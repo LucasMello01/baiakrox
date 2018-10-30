@@ -19,7 +19,7 @@
   </flags>
   <attacks>
 		<attack name="melee" interval="2000" skill="86" attack="96" fire="200"/>
-		<attack name="firefield" interval="2000" chance="15" range="7" radius="4" target="1">
+		<attack name="fire" interval="2000" chance="15" range="7" radius="4" target="1">
 			<attribute key="shootEffect" value="fire"/>
 		</attack>
 		<attack name="fire" interval="1000" chance="13" length="1" min="-700" max="-1700">
@@ -64,9 +64,7 @@
 		<item id="1987" chance="100000"> --Bag
 			<inside>
 				<item id="2260" chance="13500"/> --Blank Rune
-				<item id="2432" chance="1333"/> --Fire Axe
-				<item id="7899" chance="1200"/> --Magma Coat
-				<item id="7894" chance="1500"/> --Magma Legs
+				<item id="2432" chance="1333"/> --Fire Axe				
 				<item id="2145" countmax="1" chance1="15000" chancemax="0"/> --Small Diamond
 				<item id="2376" chance="12500"/> --Sword
 				<item id="2392" chance="3550"/> --Fire Sword

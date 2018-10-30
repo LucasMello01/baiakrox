@@ -49,7 +49,6 @@
 	<loot capacity="800">
 		<item id="2413" countmax="1" chance="2000"/>
 		<item id="2546" countmax="10" chance="8000"/>
-		<item id="2455" countmax="1" chance="10000"/>
 		<item id="2387" countmax="1" chance="1000"/>
 		<item id="2672" countmax="3" chance="45000"/>
 		<item id="2434" countmax="1" chance="500"/>

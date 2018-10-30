@@ -47,7 +47,8 @@
 	</voices>  
 	<loot>
 		<item id="2787" countmax="2" chance1="25000" chancemax="0"/> <!-- white mushroom -->
-		<item id="2250" countmax="1" chance1="65000" chancemax="0"/> <!-- wooden trash -->	
+		<item id="2250" countmax="1" chance1="65000" chancemax="0"/> <!-- wooden trash -->
+		<item id="7443" chance="500"/> <!-- bullseye potion -->		
 		<item id="2790" countmax="1" chance1="23000" chancemax="0"/> <!-- orange mushroom -->
 		<item id="2148" countmax="92" chance1="100000" chancemax="0"/> <!-- gps -->
 		<item id="1987" chance="100000">

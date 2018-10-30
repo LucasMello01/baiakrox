@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="demon skeleton" nameDescription="a demon skeleton" race="undead" experience="240" speed="230" manacost="620">
-  <health now="400" max="400"/>
+<monster name="demon skeleton" nameDescription="a demon skeleton" race="undead" experience="500" speed="230" manacost="620">
+  <health now="300" max="300"/>
   <look type="37" head="20" body="30" legs="40" feet="50" corpse="5963"/>
   <targetchange interval="5000" chance="8"/>
   <strategy attack="100" defense="0"/>
@@ -18,10 +18,10 @@
     <flag runonhealth="0"/>
   </flags>
   <attacks>
-    <attack name="melee" interval="2000" min="-0" max="-185"/>
-    <attack name="lifedrain" interval="2000" chance="10" range="1" min="-30" max="-50"/>
+    <attack name="melee" interval="2000" min="-0" max="-100"/>
+    <attack name="lifedrain" interval="3000" chance="10" range="1" min="-30" max="-50"/>
   </attacks>
-  <defenses armor="25" defense="25"/>
+  <defenses armor="5" defense="5"/>
   	<elements>
 		<element icePercent="-10"/>
 		<element holyPercent="-25"/>

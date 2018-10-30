@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Random Noob" nameDescription="a random noob" race="blood" experience="480000" speed="390" manacost="390">
-  <health now="1900" max="1950"/>
-<look type="129" head="36" body="83" legs="116" feet="78" corpse="2212"/>
+<monster name="Magebomb" nameDescription="a Magebomber" race="blood" experience="1" speed="370" manacost="390">
+  <health now="1900" max="1900"/>
+  <look type="134" head="95" body="0" legs="113" feet="115" corpse="6080"/>
   <targetchange interval="5000" chance="8"/>
   <strategy attack="100" defense="0"/>
   <flags>
@@ -15,11 +15,19 @@
     <flag canpushcreatures="0"/>
     <flag targetdistance="3"/>
     <flag staticattack="90"/>
-    <flag runonhealth="50"/>
+    <flag runonhealth="18"/>
   </flags>
   <attacks>
+    <attack name="death" interval="2000" chance="50" range="7" min="-220" max="-250">
+      <attribute key="shootEffect" value="suddendeath"/>
+	  <attribute key="areaEffect" value="mortarea"/>
+    </attack>
+	<attack name="ice" interval="2000" chance="50" range="7" min="-190" max="-220">
+		<attribute key="shootEffect" value="smallice"/>
+		<attribute key="areaEffect" value="icetornado"/>
+		</attack>
   </attacks>
-  <defenses armor="90" defense="93"/>
+  <defenses armor="70" defense="73"/>
   <immunities>
     <immunity physical="0"/>
     <immunity energy="0"/>
@@ -31,20 +39,15 @@
     <immunity drunk="0"/>
     <immunity invisible="0"/>
   </immunities>
-  <voices interval="5000" chance="10">
-    <voice sentence="Come here, free itenz!"/>
-    <voice sentence="Come, look! A bug!"/>
-    <voice sentence="I found a bug! Come and look!"/>
+  <voices interval="5000" chance="100">
+    <voice sentence="Noob!"/>
+    <voice sentence="Noob 2x!"/>
   </voices>
   
 
 
-<summons maxSummons="20">
-<summon name="Magebomb" interval="10" chance="100"/>
-<summon name="Magebomb" interval="30" chance="100"/>
-<summon name="Magebomb" interval="50" chance="100"/>
-<summon name="Magebomb" interval="70" chance="100"/>
-<summon name="Magebomb" interval="90" chance="100"/>
+<summons maxSummons="0">
+    <summon name="Magebomb" interval="50000" chance="0"/>
   </summons>
 
 

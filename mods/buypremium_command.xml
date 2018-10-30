@@ -2,8 +2,8 @@
 <mod name="Buy premium command" version="1.0" author="The Forgotten Server" contact="otland.net" enabled="yes">
 	<config name="buypremium_config"><![CDATA[
 		config = {
-			days = 7,
-			cost = 15000,
+			days = 90,
+			cost = 10000,
 			maxDays = 360
 		}
 	]]></config>

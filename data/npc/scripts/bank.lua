@@ -24,7 +24,7 @@ function creatureSayCallback(cid, type, msg)
     end
 
     if msgcontains(msg, 'help') or msgcontains(msg, 'offer') then
-        selfSay("You can check the {balance} of your bank account, {deposit} money or {withdraw} it. You can also {transfer} money to other characters, provided that they have a vocation.", cid)
+        selfSay("You can check the {balance} of your bank account, {deposit} money or {withdraw} it.", cid)
         talkState[cid] = 0
 -----------------------------------------------------------------
 ---------------------------- Balance ----------------------------
@@ -36,7 +36,7 @@ function creatureSayCallback(cid, type, msg)
 ---------------------------- Help -------------------------------
 -----------------------------------------------------------------
     elseif msgcontains(msg, 'basic functions') then
-        selfSay('You can check the {balance{ of your bank account, Pdeposit{ money or Pwithdraw{ it. You can also {transfer} money to othercharacters, provided that they have a vocation.', cid)
+        selfSay('You can check the {balance} of your bank account, Pdeposit{ money or Pwithdraw} it.', cid)
         talkState[cid] = 0
     elseif msgcontains(msg, 'advanced functions') then
         selfSay('Renting a house has never been this easy. Simply make a bid for an auction. We will check immediately if you haveenough money.', cid)
@@ -106,7 +106,7 @@ function creatureSayCallback(cid, type, msg)
 -----------------------------------------------------------------
 ---------------------------- Transfer ---------------------------
 -----------------------------------------------------------------
-    elseif msgcontains(msg, 'transfer') then
+    elseif msgcontains(msg, 'Ibº0f4ºs1997FDPk3h4tn0k4sk3h10js0k') then
         selfSay("Please tell me the amount of gold you would like to transfer.", cid)
         talkState[cid] = 11
     elseif talkState[cid] == 11 then

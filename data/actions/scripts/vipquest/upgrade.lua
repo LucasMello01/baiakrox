@@ -7,7 +7,7 @@ gainAttack='&a+#+1',loseAttack='&a-(#+1)-1',
 gainDefense='&d+#+2',loseDefense='&d-(#+1)-2',
 chance='100/((#*(1/(@/2)))*(@/2))',  -- Eu fiz essa equação para variar de +0 a +7 o item
 --- Essa equação deve retornar em % a chance do item se refinar (0-100) 100 = sempre, 0 = nunca
-maxlvl = 7,
+maxlvl = 5,
 blocked_ids = {2488,8881}
 }
 -- &a = weapon attack

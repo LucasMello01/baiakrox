@@ -71,6 +71,6 @@
 <voice sentence="FLAWLESS VICTORY!"/>
 </voices>
 <loot capacity="5000">
-<item id="2349" countmax="1" chance="1200500"/>
+<item id="2160" countmax="1" chance="1200500"/>
 </loot>
 </monster> 

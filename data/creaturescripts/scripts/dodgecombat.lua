@@ -1,15 +1,17 @@
 local storagedodge = 98798644 -- storage do dodge
-local cor = 35 -- cor do texto
-local effect = 30 -- id do magic effect 
-local msg = "Dodge" -- msg
+local cor = 250 -- cor do texto
+local effect = 31 -- id do magic effect 
+local msg = "Dodge!" -- msg
  
 local dodge = { 
-    {min = 1, max = 2, chance = 2}, -- se o dodge tiver entre 1 e 2 tem 10% de chance de da dodge.
-    {min = 3, max = 4, chance = 10}, -- podem ser configurada portanto que não passe do limite
-    {min = 5, max = 6, chance = 29}, -- vocês pode adicionar mas se quiserem
-    {min = 7, max = 8, chance = 34},
-    {min = 9, max = 10, chance = 36},
-    {min = 11, max = math.huge, chance = 18}
+    {min = 1, max = 10, chance = 6}, -- se o dodge tiver entre 1 e 2 tem 10% de chance de da dodge.
+    {min = 11, max = 20, chance = 9}, -- vocês pode adicionar mas se quiserem
+    {min = 21, max = 40, chance = 12},
+    {min = 41, max = 50, chance = 15},
+    {min = 51, max = 70, chance = 18},
+    {min = 71, max = 90, chance = 21},
+    {min = 91, max = 100, chance = 24},
+    {min = 101, max = math.huge, chance = 28}
 }
  
 function onStatsChange(cid, attacker, type, combat, value)

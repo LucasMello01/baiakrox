@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Finger Killer" nameDescription="a Finger Killer" race="venom" experience="17800" speed="720" manacost="0">
-<health now="8300" max="8300"/>
-<look type="353" corpse="6068"/>
+<monster name="Finger Killer" nameDescription="a Finger Killer" race="venom" experience="400000" speed="720" manacost="0">
+<health now="500600" max="500600"/>
+<look type="130" head="19" body="55" legs="55" feet="0" addons="2" corpse="6080"/>
 <targetchange interval="5000" chance="12"/>
 <strategy attack="100" defense="0"/>
 <flags>
-<flag summonable="1"/>
+<flag summonable="0"/>
 <flag attackable="1"/>
 <flag hostile="1"/>
 <flag illusionable="1"/>
@@ -18,8 +18,8 @@
 <flag runonhealth="0"/>
 </flags>
 <attacks>
-		<attack name="melee" interval="2000" skill="200" attack="250"/>
-		<attack name="manadrain" interval="1000" chance="7" range="7" min="-100" max="-350">
+		<attack name="melee" interval="2000" skill="70" attack="100"/>
+		<attack name="manadrain" interval="1000" chance="7" range="7" min="-100" max="-600">
 			<attribute key="shootEffect" value="energy"/>
 			<attribute key="areaEffect" value="poff"/>
 		</attack>
@@ -31,10 +31,10 @@
 			<attribute key="shootEffect" value="largerock"/>
 			<attribute key="areaEffect" value="energyarea"/>
 		</attack>
-		<attack name="lifedrain" interval="1000" chance="13" radius="8" target="0" min="-100" max="-370">
+		<attack name="lifedrain" interval="1000" chance="13" radius="8" target="0" min="-200" max="-400">
 			<attribute key="areaEffect" value="bluebubble"/>
 		</attack>
-		<attack name="manadrain" interval="1000" chance="10" radius="8" target="0" min="-100" max="-300">
+		<attack name="manadrain" interval="1000" chance="10" radius="8" target="0" min="-200" max="-400">
 			<attribute key="areaEffect" value="greenshimmer"/>
 		</attack>
 		<attack name="speed" interval="1000" chance="12" radius="6" target="0" speedchange="-1900" duration="60000">
@@ -43,17 +43,15 @@
 		<attack name="strength" interval="1000" chance="8" radius="5" target="0">
 			<attribute key="areaEffect" value="blackspark"/>
 		</attack>
-		<attack name="outfit" interval="1000" chance="2" radius="8" target="0" monster="demon" duration="5000">
+		<attack name="outfit" interval="1000" chance="15" radius="8" target="0" monster="merlin" duration="5000">
 			<attribute key="areaEffect" value="bluebubble"/>
 		</attack>
-		<attack name="outfit" interval="1000" chance="2" radius="8" target="0" item="3058" duration="5000">
-			<attribute key="areaEffect" value="bluebubble"/>
-		</attack>
-		<attack name="fire" interval="1000" chance="34" range="7" radius="7" target="1" min="-100" max="-500">
+
+		<attack name="fire" interval="1000" chance="34" range="7" radius="7" target="1" min="-100" max="-900">
 			<attribute key="shootEffect" value="fire"/>
 			<attribute key="areaEffect" value="firearea"/>
 		</attack>
-		<attack name="lifedrain" interval="1000" chance="15" length="8" spread="0" min="-200" max="-550">
+		<attack name="lifedrain" interval="1000" chance="15" length="8" spread="0" min="-500" max="-850">
 			<attribute key="areaEffect" value="redshimmer"/>
 		</attack>
 	</attacks>
@@ -74,13 +72,7 @@
 <voice sentence="Zrp zrp!"/>
 </voices>
 <loot>
-<item id="2160" countmax="50" chance="36500"/><!-- crystal coin -->
-<item id="6132" chance="10"/><!-- soft boots -->
-<item id="9933" chance="15"/><!-- firewalker boots -->
-<item id="3972" chance="20"/><!-- vip helmet -->
-<item id="6574" chance="30"/><!-- bar of chocolate -->
-<item id="2477" chance="30"/><!-- knight legs -->
-<item id="7900" chance="30"/><!-- magma monocle -->
-<item id="8883" chance="30"/><!-- windborn colossus armor -->
+<item id="6527" countmax="25" chance="70000"/><!-- event coins -->
+<item id="9971" countmax="10" chance="50000"/><!-- dinheiro -->
 </loot>
 </monster>

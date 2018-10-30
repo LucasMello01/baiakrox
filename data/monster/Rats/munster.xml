@@ -45,8 +45,7 @@
 		<item id="1987" chance="100000">
 			<inside>
 				<item id="2687" countmax="1" chance1="5000" chancemax="0"/> <!-- Cookie -->
-				<item id="2650" chance="50000"/> <!-- Jacket -->
-				<item id="2449" chance="5000"/> <!-- Bone Club -->
+				<item id="2650" chance="50000"/> <!-- Jacket -->				
 			</inside>
 		</item>
 	</loot>

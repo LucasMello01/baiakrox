@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Wailing Widow" nameDescription="a wailing widow" race="venom" experience="450" speed="280" manacost="0">
-	<health now="850" max="850"/>
+<monster name="Wailing Widow" nameDescription="a wailing widow" race="venom" experience="450" speed="480" manacost="0">
+	<health now="31850" max="31850"/>
 	<look type="347" corpse="11305"/>
 	<targetchange interval="5000" chance="8"/>
 	<strategy attack="100" defense="0"/>
@@ -18,14 +18,14 @@
 		<flag runonhealth="366"/>
 	</flags>
 	<attacks>
-			<attack name="melee" interval="2000" skill="50" attack="40" poison="20"/>
-		<attack name="drunk" interval="2000" chance="10" radius="2" target="1">
+			<attack name="melee" interval="1000" skill="110" attack="120" poison="50"/>
+		<attack name="drunk" interval="1000" chance="10" radius="2" target="1">
 			<attribute key="areaEffect" value="rednote"/>
 		</attack>
-		<attack name="lifedrain" interval="2000" chance="15" radius="3" target="0" min="-40" max="-50">
+		<attack name="lifedrain" interval="1000" chance="15" radius="3" target="0" min="-340" max="-450">
 			<attribute key="areaEffect" value="redshimmer"/>
 		</attack>
-		<attack name="poison" interval="2000" chance="10" range="7" min="-40" max="-60">
+		<attack name="poison" interval="1000" chance="10" range="7" min="-340" max="-460">
 			<attribute key="shootEffect" value="poison"/>
 			<attribute key="areaEffect" value="poison"/>
 	</attack>

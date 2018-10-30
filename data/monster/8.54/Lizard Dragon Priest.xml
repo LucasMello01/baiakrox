@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Lizard Dragon Priest" nameDescription="a lizard dragon priest" race="blood" experience="1200" speed="320" manacost="0">
-<health now="1450" max="1450"/>
+<monster name="Lizard Dragon Priest" nameDescription="a lizard dragon priest" race="blood" experience="3200" speed="320" manacost="0">
+<health now="2950" max="2950"/>
 <look type="339" corpse="11271"/>
 <targetchange interval="5000" chance="8"/>
 <strategy attack="100" defense="0"/>

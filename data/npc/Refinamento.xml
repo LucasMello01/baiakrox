@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<npc name="Refinamento" script="data/npc/scripts/defaul.lua" walkinterval="2000" floorchange="0">
-	<health now="100" max="100"/>
-	<look type="150" head="0" body="114" legs="114" feet="0" addons="3"/>
-    <parameters> 
-        <parameter key="module_shop" value="1"/> 
-        <parameter key="shop_buyable" value="Pedra Refinamento Sem Falha,8305,1500000;Pedra Refinamento Normal,8306,1000000"/> 
-    </parameters> 
-</npc>

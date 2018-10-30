@@ -48,8 +48,7 @@
 		<item id="2230" chance="10000"/><!-- bone -->
 		<item id="1987" chance="100000"><!-- bag -->
 			<inside>
-				<item id="1294" countmax="3" chance="20000"/><!-- small stone -->
-				<item id="2449" chance="10000"/><!-- bone club -->
+				<item id="1294" countmax="3" chance="20000"/><!-- small stone -->				
 				<item id="2406" chance="10000"/><!-- short sword -->
 				<item id="2559" chance="10000"/><!-- small axe -->
 				<item id="2379" chance="10000"/><!-- dagger -->

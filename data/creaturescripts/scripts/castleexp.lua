@@ -1,13 +1,12 @@
 function onLogin(cid)
-
-local rate = 1.1 -- 20%
+storage_guild = getGlobalStorageValue(123123)
+local rate = 1.05 -- 50%
 local config = {
-welvip = "sua guild domina o CASTLE 24Hrsvocê tem "..((rate - 1)*100).."% de exp a mais agora!",
-not_vip = "a guild que domina o CASTLE24HRS ganha "..((rate - 1)*100).."% a mais de experiencia!",
-s = 4538, -- storage vip
+welvip = "Você recebeu "..((rate - 1)*100).."% de exp pois sua guild esta dominando o castelo!",
+not_vip = "A guild que domina o castle 24h ganha "..((rate - 1)*100).."% a mais de experiencia!",
 }
 
-if getPlayerStorageValue(cid, config.s) - os.time() >= 1 then
+if getPlayerGuildId(cid) == storage_guild then
 doPlayerSetExperienceRate(cid, rate)
 doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, config.welvip)
 else

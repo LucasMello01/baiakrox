@@ -31,7 +31,7 @@
     <item id="2148" countmax="10" chance1="100000" chancemax="0"/>
     <item id="2148" countmax="80" chance1="100000" chancemax="0"/>
     <item id="2148" countmax="30" chance1="15000" chancemax="0"/>
-    <item id="5899" countmax="1" chance1="15000" chancemax="0"/>
+    <item id="5899" chance="10000" coountmax="2"/> -- turtle shell
     <item id="5678" countmax="3" chance1="14000" chancemax="0"/>
     <item id="6131" chance="909"/>
     <item id="2671" countmax="2" chance1="20000" chancemax="0"/>

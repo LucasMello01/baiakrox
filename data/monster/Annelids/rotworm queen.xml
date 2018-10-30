@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-  <monster name="Rotworm Queen" nameDescription="a rotworm queen" race="blood" experience="85" speed="200" manacost="0">
+  <monster name="Rotworm Queen" nameDescription="a rotworm queen" race="blood" experience="500" speed="200" manacost="0">
     <health now="105" max="105"/>
     <look type="295" corpse="8947"/>
     <targetchange interval="60000" chance="0"/>
@@ -24,8 +24,8 @@
     <voices interval="2000" chance="5">
       <voice sentence="..."/>
     </voices>
-	  <summons maxSummons="3">
-		<summon name="Rotworm" interval="1000" chance="10"/>
+	  <summons maxSummons="1">
+		<summon name="Rotworm" interval="1000" chance="2"/>
 	</summons>
 	<elements>
 		<element icePercent="-10"/>

@@ -72,7 +72,7 @@
    <item id="6558" chance="2222"/> --Concentrated Demonic Blood
    <item id="2260" chance="18000"/> --Blank Rune
    <item id="6534" chance="100000"/> --The Imperor's Trident
-   <item id="6300" chance="999"/> --Death Ring
+   
    <item id="2465" chance="6577"/> --Brass Armor
    <item id="1987" chance="100000"> --Bag
          <inside>
@@ -81,9 +81,7 @@
          <item id="2465" chance="6577"/> --Brass Armor
          <item id="2185" chance="833" /> -- volcanic rod
          <item id="2464" chance="7887"/> --Chain Armor
-         <item id="5944" chance="5666"/> --Soul Orb
-         <item id="7899" chance="2000"/> --Soul Orb
-         <item id="7900" chance="2000"/> --Soul Orb
+         <item id="5944" chance="5666"/> --Soul Orb                  
          <item id="7891" chance="2000"/> --Soul Orb
          <item id="6500" countmax="1" chance1="7777" chancemax="0"/> --Demonic Essence
          <item id="2150" countmax="1" chance1="8888" chancemax="0"/> --Small Amethyst

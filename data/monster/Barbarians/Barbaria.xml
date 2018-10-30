@@ -66,8 +66,10 @@
       <item id="2401" chance="10000"/>
       <item id="2671" countmax="3" chance1="2500" chancemax="0"/>
       <item id="7343" chance="3333"/>
+      <item id="7463" chance="1033"/>
       <item id="3965" chance="533"/>
       <item id="7457" chance="733"/>
       <item id="7379" chance="633"/>
+      <item id="7464" chance="200"/>
     </loot>
   </monster>

@@ -46,6 +46,7 @@
 	</immunities>
 	<loot>
 		<item id="2148" countmax="100" chance="100000"/><!-- gold coin -->
+		<item id="8303" chance="1500" countmax="2"/><!-- energy soil -->
 		<item id="7439" chance="2100"/><!-- berserk potion -->
 		<item id="2150" countmax="3" chance="4500"/><!-- small amethyst -->
 		<item id="8920" chance="1000"/><!-- wand of starstorm -->

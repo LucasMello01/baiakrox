@@ -27,7 +27,7 @@
 		<attribute key="areaEffect" value="teleport"/>		
 		<attribute key="shootEffect" value="energyball"/>
 	</attack>
-    <attack name="firefield" interval="1000" chance="15" range="7" radius="3" target="1">
+    <attack name="fire" interval="1000" chance="15" range="7" radius="3" target="1">
 		<attribute key="shootEffect" value="fire"/>
     </attack>
     <attack name="fire" interval="2000" chance="15" length="8" spread="0" min="-150" max="-250">
@@ -78,8 +78,7 @@
       <inside>
         <item id="7760" countmax="1" chance1="5000"/> -- Small enchanted ruby
         <item id="9980" chance="1300"/> --Crystal of power
-		<item id="2167" chance="2000"/> --Energy ring      
-		<item id="2436" chance="3000"/> --skull staff		
+		<item id="2167" chance="2000"/> --Energy ring      		
         <item id="2114" chance="100"/> --Piggy bank
         <item id="7410" chance="200"/> --Queens sceptre
 		<item id="8092" chance="800"/> --Spellbook of mind control

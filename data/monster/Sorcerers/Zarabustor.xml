@@ -38,7 +38,7 @@
       <attribute key="shootEffect" value="burstarrow"/>
       <attribute key="areaEffect" value="firearea"/>
     </attack>
-    <attack name="firefield" interval="2000" chance="14" range="7" radius="2" target="1">
+    <attack name="fire" interval="2000" chance="14" range="7" radius="2" target="1">
       <attribute key="shootEffect" value="fire"/>
     </attack>
     <attack name="energy" interval="3000" chance="15" length="8" spread="0" min="-180" max="-350">
@@ -85,10 +85,7 @@
     <item id="2146" countmax="3" chance1="13800"/> --Small sapphire 
 	<item id="1980" chance="100000">
 		<inside>
-			<item id="2656" chance="36000"/> --Blue Robe
-			<item id="2466" chance="18877"/> --Golden Armor
-			<item id="2436" chance="26400"/> --Skull staff
-			<item id="2123" chance="12000"/> --ring of the sky
+			<item id="2466" chance="18877"/> --Golden Armor			
 		</inside>
 	</item>
   </loot>

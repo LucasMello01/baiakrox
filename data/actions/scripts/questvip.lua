@@ -2,8 +2,8 @@ function onUse(cid, item, frompos, item2, topos)
 if item.uid == 1360 then --primeiro bau--
 queststatus = getPlayerStorageValue(cid,1360)
 if queststatus == -1 or queststatus == 0 then
-doPlayerSendTextMessage(cid,22,"Você achou um Spellbook of Shadow")
-item_uid = doPlayerAddItem(cid,8977,1)
+doPlayerSendTextMessage(cid,22,"Você achou um spellbook of lost souls")
+item_uid = doPlayerAddItem(cid,8903,1)
 setPlayerStorageValue(cid,1360,1)
 
 else
@@ -13,8 +13,8 @@ end
 elseif item.uid == 1361 then --segundo bau--
 queststatus = getPlayerStorageValue(cid,1360)
 if queststatus == -1 or queststatus == 0 then
-doPlayerSendTextMessage(cid,22,"Você achou uma Super Soft Boots")
-item_uid = doPlayerAddItem(cid,2641,1)
+doPlayerSendTextMessage(cid,22,"Você achou uma saia vegetal")
+item_uid = doPlayerAddItem(cid,3983,1)
 setPlayerStorageValue(cid,1360,1)
 
 else

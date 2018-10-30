@@ -49,9 +49,8 @@
 		<item id="2671" countmax="5" chance1="33333" chancemax="0"/> --Hams
 		<item id="6558" chance="14555" chancemax="0"/> --Concentrated Demonic Blood
 		<item id="6558" chance="9555" chancemax="0"/> --Concentrated Demonic Blood
-		<item id="6300" chance="3266"/> --Death Ring
+		
 		<item id="2645" chance="1800"/> --Steel boots
-		<item id="9971" chance="4050"/> --Gold ingot
 		<item id="7368" chance1="5500" countmax="2"/> --Assassin star
 		<item id="1987" chance="100000"> --Bag
 			<inside>
@@ -62,9 +61,8 @@
 				<item id="2558" chance="13000"/> --Saw
 				<item id="7388" chance="1150"/> --Vile Axe
 			      <item id="2112" chance="4100"/> --addon doll
-				<item id="2470" chance="1650"/> --Golden Legs
-				<item id="7412" chance="1050"/> -- Butcher's Axe
-				<item id="5801" chance="3100"/> --Key Ring
+				<item id="2470" chance="1650"/> --Golden Legs				
+				
 				<item id="5480" chance="2188"/> --Cat's Paw
 			</inside>
 		</item>

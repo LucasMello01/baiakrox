@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="dragon" nameDescription="a dragon" race="blood" experience="700" speed="180" manacost="0">
+<monster name="dragon" nameDescription="a dragon" race="blood" experience="3000" speed="180" manacost="0">
   <health now="1000" max="1000"/>
   <look type="34" head="20" body="30" legs="40" feet="50" corpse="5973"/>
   <targetchange interval="5000" chance="20"/>
@@ -49,7 +49,6 @@
   <loot>
     <item id="2672" countmax="3" chance1="20000" chancemax="0"/>
     <item id="2148" countmax="100" chance1="100000" chancemax="0"/>
-    <item id="2455" chance="6666"/>
     <item id="2434" chance="1333"/>
     <item id="2509" chance="1818"/>
     <item id="2406" chance="20000"/>

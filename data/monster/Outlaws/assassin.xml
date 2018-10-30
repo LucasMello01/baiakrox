@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <monster name="Assassin" nameDescription="an assassin" race="blood" experience="105" speed="224" manacost="450">
 	<health now="175" max="175"/>
-	<look type="129" head="95" body="95" legs="95" feet="95" corpse="6080"/>
+	<look type="152" head="94" body="95" legs="95" feet="95" addons="3" corpse="6080"/>
 	<targetchange interval="2000" chance="5"/>
 	<strategy attack="70" defense="20"/>
 	<flags>
@@ -56,8 +56,7 @@
 		<item id="3968" countmax="1" chance="500"/><!-- leopard armor -->
 		<item id="2510" countmax="1" chance="2000"/><!-- plate shield -->
 		<item id="2145" countmax="1" chance="200"/><!-- small diamond -->
-		<item id="2457" countmax="1" chance="3000"/><!-- steel helmet -->
-
+		<item id="2457" countmax="1" chance="3000"/><!-- steel helmet -->		
 		<item id="2509" countmax="1" chance="1000"/><!-- steel shield -->
 		<item id="2050" countmax="2" chance="30000"/><!-- torch -->
 	</loot>

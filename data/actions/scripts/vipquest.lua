@@ -57,8 +57,8 @@ end
 elseif item.uid == 1706 then --segundo bau--
 queststatus = getPlayerStorageValue(cid,1701)
 if queststatus == -1 or queststatus == 0 then
-doPlayerSendTextMessage(cid,22,"Você achou uma Vip Star")
-item_uid = doPlayerAddItem(cid,7366,1)
+doPlayerSendTextMessage(cid,22,"Você achou um Vip Bow")
+item_uid = doPlayerAddItem(cid,8857,1)
 setPlayerStorageValue(cid,1701,1)
 
 else

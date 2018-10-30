@@ -28,6 +28,8 @@ local nuevas = {
 {closed=10480, open=10481},
 {closed=10482, open=10483},
 {closed=10484, open=10485},
+{closed=10488, open=10490},
+{closed=10489, open=10491},
 }
 for ia = 1,#nuevas do
 if (item.itemid == nuevas[ia].closed) then

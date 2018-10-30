@@ -1,4 +1,4 @@
--- Vip Amulet Quest By Tech Xtibia!
+-- Vip Amulet Quest By ChukiNowhis Xtibia!
 
 function onUse(cid, item, frompos, item2, topos)
 

@@ -88,8 +88,7 @@
 		 	<item id="2393" chance="3800"/> --giantsword
 		 	<item id="2432" chance="3800"/> --fire axe
 			<item id="2214" chance="2222"/> --ring of healing
-			<item id="2396" chance="2600"/> --ice rapier
-			<item id="2179" chance="1100"/> --golden ring
+			<item id="2396" chance="2600"/> --ice rapier			
 			<item id="2795" countmax="6" chance1="13000"/> --fire mushroom
 			<item id="2678" countmax="3" chance1="10000" chancemax="0"/> --coconut
 			<item id="2148" countmax="100" chance1="100000" chancemax="0"/> -- gold coin

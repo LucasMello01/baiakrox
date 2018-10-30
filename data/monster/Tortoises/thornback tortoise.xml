@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="thornback tortoise" nameDescription="a thornback tortoise" race="blood" experience="150" speed="200" manacost="490">
-  <health now="300" max="300"/>
+<monster name="thornback tortoise" nameDescription="a thornback tortoise" race="blood" experience="150" speed="400" manacost="490">
+  <health now="31300" max="31300"/>
   <look type="198" head="0" body="0" legs="0" feet="0" corpse="6073"/>
   <targetchange interval="5000" chance="8"/>
   <strategy attack="100" defense="0"/>
@@ -18,7 +18,7 @@
     <flag runonhealth="0"/>
   </flags>
 <attacks>
-    <attack name="melee" interval="2000" skill="53" attack="54"/>
+    <attack name="melee" interval="1000" skill="113" attack="114"/>
 </attacks>
   <defenses armor="18" defense="18"/>
   	<elements>

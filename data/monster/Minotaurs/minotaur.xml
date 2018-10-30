@@ -42,7 +42,7 @@
     <item id="2386" chance="10000"/>
     <item id="2649" chance="10000"/>
     <item id="2554" chance="10000"/>
-    <item id="5878" countmax="1" chance1="5000" chancemax="0"/>
+    <item id="5878" chance="10000" coountmax="2"/> -- minotaur leather
     <item id="1987" chance="100000">
       <inside>
         <item id="2458" chance="10000"/>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="Eternal Guardian" nameDescription="a Gnarlhound" race="blood" experience="25" speed="150" manacost="300">
-  <health now="70" max="70"/>
+<monster name="Eternal Guardian" nameDescription="a Gnarlhound" race="blood" experience="2500" speed="150" manacost="300">
+  <health now="2700" max="2700"/>
   <look type="345" head="0" body="0" legs="0" feet="0" corpse="5966"/>
   <targetchange interval="2000" chance="0"/>
   <strategy attack="100" defense="0"/>

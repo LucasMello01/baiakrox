@@ -53,7 +53,7 @@
 		<element firePercent="90"/>
 	</elements>
   <immunities>
-    <immunity physical="1"/>
+    <immunity physical="0"/>
     <immunity energy="1"/>
     <immunity poison="0"/>
     <immunity lifedrain="1"/>

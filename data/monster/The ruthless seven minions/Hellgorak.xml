@@ -17,9 +17,6 @@
 	<flag staticattack="85"/>
 	<flag runonhealth="0"/>
 </flags>
-<script>
-<event name="inquisitionPortals"/>
-</script>
 <attacks>
     <attack name="melee" interval="2000" skill="130" attack="130"/>
     <attack name="energy" interval="1000" chance="11" length="8" spread="0" min="-250" max="-819">
@@ -64,7 +61,6 @@
 <item id="2150" countmax="16" chance1="4000" chancemax="10"/> small amethyst
 <item id="2148" countmax="83" chance1="40000" chancemax="0"/>
 <item id="7388" chance="1200" /> --vile axe
-<item id="2130" chance="1200" /> --golden amulet
 <item id="2208" chance="3200" /> --axe ring
 <item id="8871" chance="3100" /> --focus cape
 <item id="2158" chance="1500" /> --blue gem
@@ -79,10 +75,7 @@
 <item id="2144" countmax="12" chance1="4000" chancemax="0"/> --black pearl
 <item id="2145" countmax="5" chance1="3000" chancemax="0"/> --small diamond
 <item id="2514" chance="5650"/> --mastermind shield
-<item id="8932" chance="900" /> --the calamity
-<item id="8925" chance="600" /> --solar axe
 <item id="2466" chance="8100"/> --golden armor
-<item id="7412" chance="4200" /> --butcher's axe
 <item id="7590" chance="7000"/> --great mana potion
 <item id="8904" chance="5000"/> --spellbook of prophercies
 <item id="7591" chance="8000"/> --great health potion

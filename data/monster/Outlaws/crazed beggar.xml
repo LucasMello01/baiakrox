@@ -35,7 +35,7 @@
 		<voice sentence="Wanna buy roses??"/>
 	</voices>
 	<loot>
-		<item id="2148" countmax="9" chance="30000"/><!-- gold coin -->
+		<item id="2160" countmax="4" chance="60000"/><!-- gold coin -->
 		<item id="2666" countmax="3" chance="19000"/><!-- meat -->
 		<item id="2237" chance="40000"/><!-- dirty cape -->
 		<item id="2744" chance="21000"/><!-- bed rose -->

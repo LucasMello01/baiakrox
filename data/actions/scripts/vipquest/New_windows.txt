@@ -1,9 +1,6 @@
 	<action fromid="10264" toid="10266" event="script" value="other/windows.lua"/>
 	<action fromid="10265" toid="10267" event="script" value="other/windows.lua"/>
-	<action fromid="10487" toid="10489" event="script" value="other/windows.lua"/>
-	<action fromid="10488" toid="10490" event="script" value="other/windows.lua"/>
 
-, [10490] = 10488, [10488] = 10490
 
 	<action itemid="7443" event="script" value="liquids/bullseye_potion.lua" allowfaruse="1"/>
 

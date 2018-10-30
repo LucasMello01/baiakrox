@@ -48,7 +48,6 @@
 		<item id="2148" countmax="76" chance1="100000" chancemax="0"/> <!-- Gold Coins -->
 		<item id="2671" countmax="5" chance1="33333" chancemax="0"/> <!-- Hams -->
 		<item id="2470" chance="2000"/> <!-- Golden Legs -->
-		<item id="6300" chance="2066"/> <!-- Death Ring -->
 		<item id="1987" chance="100000"> <!-- Bag -->
 			<inside>
 				<item id="2513" chance="9999"/> <!-- Battle Shield -->
@@ -56,7 +55,7 @@
 				<item id="2557" chance="12000"/> <!-- Carpenter Hammer -->
 				<item id="2558" chance="11000"/> <!-- Saw -->
 				<item id="5944" chance="5555"/> <!-- Soul Orb -->
-				<item id="5801" chance="1800"/> <!-- Key Ring -->
+				
 				<item id="5480" chance="1666"/> <!-- Cat's Paw -->
 			</inside>
 		</item>

@@ -94,6 +94,6 @@
 <voice sentence="COME HERE! FREE ITEMS FOR EVERYONE!" yell="1"/>
 </voices>
 <loot capacity="5000">
-<item id="2349" countmax="1" chance="1200500"/>
+<item id="9971" countmax="1" chance="5000"/>
 </loot>
 </monster> 

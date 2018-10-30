@@ -101,8 +101,7 @@
         <item id="2560" chance="10000"/> --Mirror
         <item id="1684" chance="10000"/> --Small Pillow
         <item id="4873" chance="10000"/> --Explorer Brooch
-        <item id="2102" chance="10000"/> --Flower Bowl
-        <item id="2159" chance="1000"/> --Scarab Coin
+        <item id="2102" chance="10000"/> --Flower Bowl        
         <item id="1987" chance="100000"> --Bag
           <inside>
         <item id="5900" chance="10000"/> --Dwarven Beard
@@ -114,4 +113,7 @@
      </inside>
     </item>
   </loot>
+  <script>
+<event name="teleportarena3"/>
+</script>
 </monster>

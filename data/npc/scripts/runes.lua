@@ -23,7 +23,6 @@ shopModule:addBuyableItem({'great health'}, 7591, 190, 1, 'great health potion')
 shopModule:addBuyableItem({'great mana'}, 7590, 120, 1, 'great mana potion')
 shopModule:addBuyableItem({'great spirit'}, 8472, 190, 1, 'great spirit potion')
 shopModule:addBuyableItem({'ultimate health'}, 8473, 310, 1, 'ultimate health potion')
-shopModule:addBuyableItem({'antidote potion'}, 8474, 50, 1, 'antidote potion')
 
 shopModule:addSellableItem({'normal potion flask', 'normal flask'}, 7636, 5, 'empty small potion flask')
 shopModule:addSellableItem({'strong potion flask', 'strong flask'}, 7634, 10, 'empty strong potion flask')

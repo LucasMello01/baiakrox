@@ -54,7 +54,6 @@
 	<item id="5895" chance="3333" countmax="1" /> -- fish fin
 	<item id="2229" chance="4000" countmax="1" /> -- skull
         <item id="2165" chance="1250" /> -- stealth ring
-        <item id="2656" chance="500" /> -- blue robe
 </inside>
 </item>
 </loot>

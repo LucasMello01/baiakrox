@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="minotaur guard" nameDescription="a minotaur guard" race="blood" experience="160" speed="190" manacost="550">
-  <health now="185" max="185"/>
+<monster name="minotaur guard" nameDescription="a minotaur guard" race="blood" experience="160" speed="490" manacost="550">
+  <health now="200" max="200"/>
   <look type="29" head="20" body="30" legs="40" feet="50" corpse="5983"/>
   <targetchange interval="5000" chance="8"/>
   <strategy attack="100" defense="0"/>
   <flags>
-    <flag summonable="1"/>
+    <flag summonable="0"/>
     <flag attackable="1"/>
     <flag hostile="1"/>
     <flag illusionable="1"/>
@@ -18,7 +18,7 @@
     <flag runonhealth="0"/>
   </flags>
   <attacks>
-    <attack name="melee" interval="2000" skill="50" attack="35"/>
+    <attack name="melee" interval="1000" skill="30" attack="50"/>
   </attacks>
   <defenses armor="15" defense="25"/>
   <immunities>

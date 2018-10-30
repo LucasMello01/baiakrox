@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="warlock" nameDescription="a warlock" race="blood" experience="4000" speed="265" manacost="0">
+<monster name="warlock" nameDescription="a warlock" race="blood" experience="5400" speed="265" manacost="0">
   <health now="3500" max="3500"/>
   <look type="130" head="19" body="71" legs="128" feet="128" addons="1" corpse="6080"/>
   <targetchange interval="5000" chance="30"/>
   <strategy attack="90" defense="10"/>
-  <flags>
+
+<flags>
     <flag summonable="0"/>
     <flag attackable="1"/>
     <flag hostile="1"/>
@@ -99,12 +100,10 @@
         <item id="2411" chance="5000"/>
         <item id="2792" countmax="5" chance1="6666" chancemax="0"/>
         <item id="2793" countmax="2" chance1="6666" chancemax="0"/>
-        <item id="2656" chance="2000"/>
         <item id="7898" chance="1444"/>
-        <item id="7895" chance="1222"/>
+        
         <item id="2466" chance="1111"/>
-        <item id="2436" chance="1428"/>
-        <item id="2123" chance="1000"/>
+        <item id="2436" chance="1428"/>        
       </inside>
     </item>
   </loot>

@@ -1,32 +1,32 @@
 -- Script SYtem vip 1.0 --
 
 function onSay(cid, words, param)
-if(words == "!buyvip3") then
-local price = 10000000
-if doPlayerRemoveMoney(cid, 10000000) == TRUE then
+if(words == "!buyvip") then
+local price = 3000000
+if doPlayerRemoveMoney(cid, 3000000) == TRUE then
 local days = 30
 local daysvalue = days * 24 * 60 * 60
-local storageplayer = getPlayerStorageValue(cid, 13700)
+local storageplayer = getPlayerStorageValue(cid, 13540)
 local timenow = os.time()
 
-if getPlayerStorageValue(cid, 13700) - os.time() <= 0 then
+if getPlayerStorageValue(cid, 13540) - os.time() <= 0 then
 time = timenow + daysvalue
 else
 time = storageplayer + daysvalue
 end
 
 doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Foram adicionados ".. days .." dias de VIP no seu character.")
-setPlayerStorageValue(cid, 13700, time)
+setPlayerStorageValue(cid, 13540, time)
 
-local quantity = math.floor((getPlayerStorageValue(cid, 13700) - timenow)/(24 * 60 * 60))
+local quantity = math.floor((getPlayerStorageValue(cid, 13540) - timenow)/(24 * 60 * 60))
 doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você tem ".. quantity .." dias de VIP restantes.")
 else
-doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você precisa de "..price.." gp's para colocar vip 3.")
+doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você precisa de "..price.." gp's para colocar vip.")
 end
 
 elseif(words == "!vipdays") then
 local timenow = os.time()
-local quantity = math.floor((getPlayerStorageValue(cid, 13700) - timenow)/(24 * 60 * 60))
+local quantity = math.floor((getPlayerStorageValue(cid, 13540) - timenow)/(24 * 60 * 60))
 doPlayerSendTextMessage(cid, MESSAGE_INFO_DESCR, "Você tem ".. (quantity < 0 and 0 or quantity) .." dias de VIP no seu character.")
 
 elseif(words == "/checkvip") then
@@ -44,7 +44,7 @@ end
 
 local timenow = os.time()
 
-local quantity = math.floor((getPlayerStorageValue(player, 13700) - timenow)/(24 * 60 * 60))
+local quantity = math.floor((getPlayerStorageValue(player, 13540) - timenow)/(24 * 60 * 60))
 doPlayerPopupFYI(cid, "O jogador tem ".. (quantity < 0 and 0 or quantity) .." dias de VIP no character.") 
 return TRUE
 end
@@ -65,15 +65,15 @@ return TRUE
 end
 
 local daysvalue = days*3600*24
-local storageplayer = getPlayerStorageValue(player, 13700)
+local storageplayer = getPlayerStorageValue(player, 13540)
 local timenow = os.time()
 
 local time = storageplayer <= 0 and (timenow + daysvalue) or (storageplayer + daysvalue)
 
 doPlayerSendTextMessage(player, MESSAGE_INFO_DESCR, "Foram adicionados "..days.." dias de VIP no seu character.")
-setPlayerStorageValue(player, 13700, time)
-local quantity = math.floor((getPlayerStorageValue(player,13700) - timenow)/(3600*24))
-doPlayerSendTextMessage(player, MESSAGE_INFO_DESCR, "Você tem "..quantity.." dias de VIP 3 restantes.")
+setPlayerStorageValue(player, 13540, time)
+local quantity = math.floor((getPlayerStorageValue(player,13540) - timenow)/(3600*24))
+doPlayerSendTextMessage(player, MESSAGE_INFO_DESCR, "Você tem "..quantity.." dias de VIP restantes.")
 end
 
 elseif(words == "/delvip") then
@@ -91,11 +91,11 @@ doPlayerSendTextMessage(cid, MESSAGE_STATUS_CONSOLE_BLUE, "Player with this name
 return TRUE
 end
 
-if(getPlayerStorageValue(C.uid,13700) < C.time)then
+if(getPlayerStorageValue(C.uid,13540) < C.time)then
 doPlayerSendTextMessage(cid,dec,'O jogador '..t[1]..' não possui '..C.days..' dias de vip.')
 else
 doPlayerSendTextMessage(cid,dec,'Você removeu '..C.days..' dias de vip do player '..t[1]..'.')
-setPlayerStorageValue(C.uid,13700,getPlayerStorageValue(C.uid,13700)-C.time)
+setPlayerStorageValue(C.uid,13540,getPlayerStorageValue(C.uid,13540)-C.time)
 end
 doSendMagicEffect(C.pos, math.random(28,30)) 
 end

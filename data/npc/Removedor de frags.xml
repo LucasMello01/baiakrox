@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc name="Removedor de frags" script="data/npc/scripts/Removedor de frags.lua" walkinterval="2000" floorchange="0">
+<health now="100" max="100"/>
+<look type="80" head="2" body="3" legs="3" feet="2" addons="3"/>
+<parameters>
+<parameter key="module_shop" value="1" />
+		<parameter key="shop_buyable" value="removedor de frags,12505,25000000;" />
+        <parameter key="message_greet" value="Welcome, |PLAYERNAME|. What can I do for you?"/>
+        <parameter key="message_farewell" value="Good bye."/>
+		<parameter key="message_walkaway" value="Good bye." />
+		<parameter key="message_sendtrade" value="Of course, just browse through my wares." />
+</parameters>
+</npc>

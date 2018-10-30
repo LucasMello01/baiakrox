@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<monster name="carrion worm" nameDescription="a carrion worm" race="blood" experience="70" speed="190" manacost="280">
+<monster name="carrion worm" nameDescription="a carrion worm" race="blood" experience="900" speed="190" manacost="280">
   <health now="145" max="145"/>
   <look type="192" head="0" body="0" legs="0" feet="0" corpse="6069"/>
   <targetchange interval="2000" chance="0"/>

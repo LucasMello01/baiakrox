@@ -53,7 +53,6 @@
   <loot>
     <item id="2148" countmax="80" chance1="90000" chancemax="45000"/> --Gold
     <item id="2187" chance="5000" /> -- wand of Inferno
-    <item id="2656" chance="400"/>
     <item id="1987" chance="100000">
       <inside>
         <item id="2114" chance="1333"/>

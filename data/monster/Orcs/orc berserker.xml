@@ -37,7 +37,7 @@
     <immunity invisible="0"/>
   </immunities>
   <voices interval="5000" chance="50">
-    <voice sentence="Utani Tempo Hur" yell="1"/>
+    <voice sentence="KRAK ORRRRRRK!" yell="1"/>
   </voices>
   <loot>
     <item id="3976" countmax="10" chance1="50000" chancemax="0"/>

@@ -65,7 +65,6 @@
 		<item id="2526" chance="1538"/><!-- studded shield -->
 		<item id="2385" chance="2000"/><!-- sabre -->
 		<item id="2386" chance="2000"/><!-- axe -->
-		<item id="6570" chance="5538"/><!-- blue surprise bag -->
-		<item id="6571" chance="1538"/><!-- red surprise bag -->
+		<item id="6570" chance="5538"/><!-- blue surprise bag -->		
 	</loot>
 </monster>

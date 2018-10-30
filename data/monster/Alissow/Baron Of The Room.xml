@@ -18,8 +18,8 @@
     <flag runonhealth="1000"/>
   </flags>
   <attacks>
-		<attack name="melee" interval="2000" skill="70" attack="70"/>
-		<attack name="manadrain" interval="1000" chance="7" range="7" min="-100" max="-500">
+		<attack name="melee" interval="2000" skill="100" attack="110"/>
+		<attack name="manadrain" interval="1000" chance="7" range="7" min="-300" max="-450">
 			<attribute key="shootEffect" value="energy"/>
 			<attribute key="areaEffect" value="poff"/>
 		</attack>
@@ -31,13 +31,13 @@
 			<attribute key="shootEffect" value="largerock"/>
 			<attribute key="areaEffect" value="energyarea"/>
 		</attack>
-		<attack name="lifedrain" interval="1000" chance="13" radius="8" target="0" min="-600" max="-1200">
+		<attack name="lifedrain" interval="1000" chance="13" radius="8" target="0" min="-450" max="-700">
 			<attribute key="areaEffect" value="bluebubble"/>
 		</attack>
-		<attack name="manadrain" interval="1000" chance="10" radius="8" target="0" min="-700" max="-1400">
+		<attack name="manadrain" interval="1000" chance="10" radius="8" target="0" min="-450" max="-700">
 			<attribute key="areaEffect" value="greenshimmer"/>
 		</attack>
-		<attack name="speed" interval="1000" chance="12" radius="6" target="0" speedchange="-1900" duration="60000">
+		<attack name="speed" interval="1000" chance="12" radius="6" target="0" speedchange="-700" duration="60000">
 			<attribute key="areaEffect" value="poison"/>
 		</attack>
 		<attack name="strength" interval="1000" chance="8" radius="5" target="0">
@@ -49,25 +49,25 @@
 		<attack name="outfit" interval="1000" chance="2" radius="8" target="0" item="3058" duration="5000">
 			<attribute key="areaEffect" value="bluebubble"/>
 		</attack>
-		<attack name="fire" interval="1000" chance="34" range="7" radius="7" target="1" min="-700" max="-950">
+		<attack name="fire" interval="1000" chance="34" range="7" radius="7" target="1" min="-450" max="-550">
 			<attribute key="shootEffect" value="fire"/>
 			<attribute key="areaEffect" value="firearea"/>
 		</attack>
-		<attack name="lifedrain" interval="1000" chance="15" length="8" spread="0" min="-800" max="-850">
+		<attack name="lifedrain" interval="1000" chance="15" length="8" spread="0" min="-500" max="-650">
 			<attribute key="areaEffect" value="redshimmer"/>
 		</attack>
 	</attacks>
 	<defenses armor="160" defense="160">
-		<defense name="healing" interval="1000" chance="15" min="1000" max="1500">
+		<defense name="healing" interval="1000" chance="15" min="500" max="800">
 			<attribute key="areaEffect" value="blueshimmer"/>
 		</defense>		
-		<defense name="speed" interval="1000" chance="8" speedchange="1901" duration="5000">
+		<defense name="speed" interval="1000" chance="8" speedchange="1301" duration="5000">
 			<attribute key="areaEffect" value="redshimmer"/>
 		</defense>
 		<defense name="invisible" interval="1000" chance="4" duration="5000">
 			<attribute key="areaEffect" value="blueshimmer"/>
 		</defense>
-		<defense name="invisible" interval="1000" chance="17" duration="2000">
+		<defense name="invisible" interval="1000" chance="17" duration="1500">
 			<attribute key="areaEffect" value="blueshimmer"/>
 		</defense>
 		<defense name="outfit" interval="1000" chance="2" item="2421" duration="7000">

@@ -1,0 +1,7 @@
+[3/3/2017 17:51:38] > Using SHA1 encryption
+[3/3/2017 17:51:39] >> Checking software version...failed checking - malformed file.
+[3/3/2017 17:51:39] >> Loading RSA key
+[3/3/2017 17:51:39] >> Starting SQL connection
+[3/3/2017 17:51:40] Failed connecting to database - MYSQL ERROR: Can't connect to MySQL server on 'localhost' (10061) (2003)
+
+[3/3/2017 17:51:40] > ERROR: Couldn't estabilish connection to SQL database!

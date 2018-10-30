@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<monster name="Gnarlhound" nameDescription="a gnarlhound" race="blood" experience="60" speed="206" manacost="0">
-<health now="198" max="198"/>
+<monster name="Gnarlhound" nameDescription="a gnarlhound" race="blood" experience="60" speed="406" manacost="0">
+<health now="31198" max="31198"/>
 <look type="341" corpse="11241"/>
 <targetchange interval="5000" chance="8"/>
 <strategy attack="100" defense="0"/>
 <flags>
-<flag summonable="465"/>
+<flag summonable="0"/>
 <flag attackable="1"/>
 <flag hostile="1"/>
 <flag illusionable="1"/>
@@ -18,7 +18,7 @@
 <flag runonhealth="0"/>
 </flags>
 	<attacks>
-		<attack name="melee" interval="2000" skill="20" attack="24"/>
+		<attack name="melee" interval="1000" skill="110" attack="124"/>
 	</attacks>
 	<defenses armor="1" defense="3"/>
 <voices interval="5000" chance="10">

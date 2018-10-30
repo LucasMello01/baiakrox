@@ -54,12 +54,11 @@
 			<inside>
 				<item id="2394" chance="5000"/><!-- morning star -->
 				<item id="9970" countmax="4" chance="1500"/><!-- small topaz -->
-				<item id="2476" chance="200"/><!-- knight armor -->
-				<item id="2477" chance="200"/><!-- knight legs -->
+				<item id="2476" chance="200"/><!-- knight armor -->				
 				<item id="7421" chance="200"/><!-- onyx fail -->
 				<item id="9948" chance="200"/><!-- dracoyle statue -->
 				<item id="9969" chance="300"/><!-- black skull -->
-			      <item id="2112" chance="6000"/> --addon doll
+			      <item id="2112" chance="6000"/>
 			</inside>
 		</item>
 	</loot>

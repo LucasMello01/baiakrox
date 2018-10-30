@@ -34,14 +34,6 @@
       <attribute key="areaEffect" value="redshimmer"/>
     </defense>
   </defenses>
-  <elements>
-	<element deathPercent="-10"/>
-	<element firePercent="10"/>
-	<element earthPercent="20"/>
-	<element energyPercent="20"/>
-	<element icePercent="10"/>
-	<element holyPercent="20"/>
-  </elements>
   <immunities>
     <immunity invisible="1"/>
   </immunities>
@@ -51,15 +43,15 @@
     <voice sentence="My secrets are mine alone!"/>
   </voices>
   <loot>
-    <item id="2148" countmax="60" chance1="100000" chancemax="0"/> --gps
-	<item id="7620" chance="3200"/> --mana potion
+    <item id="2148" countmax="60" chance1="100000" chancemax="0"/>
+	<item id="7620" chance="3200"/>
 	<item id="1987" chance="100000">
 		<inside>
-			<item id="5934" chance="50000"/> --dead frog
-			<item id="2260" chance="30000"/> --blank rune
-			<item id="2260" chance="20000"/> --blank rune
-			<item id="2260" chance="20000"/> --blank rune
-			<item id="7762" chance="600"/> --enchanted amethyst
+			<item id="5934" chance="50000"/>
+			<item id="2260" chance="30000"/>
+			<item id="2260" chance="20000"/>
+			<item id="2260" chance="20000"/>
+			<item id="7762" chance="600"/>
 		</inside>
     </item>
   </loot>

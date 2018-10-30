@@ -7,16 +7,16 @@ function onUse(cid, item, frompos, item2, topos)
 
 ------------------ Inicio das Config ------------
 
-local castle_one_name = "Castle24h"                  -- Nome do castelo 1
+local castle_one_name = "New Of War"                  -- Nome do castelo 1
 local storages = {154154,54321,123123}               -- Storages ( se vc eh iniciante, deixe como está...)
 
 
 
 -------PREMIOs  I N D I V I D U A L ---------
 
-local premio_por_vezes = 1         -- Premio por vezes de conquista de castelo. (1) = Ativo  (0) = Desativa. 
-local premio_vezes = 130            -- Caso ativo, a quantidade de conquista que o player tem, para ganhar PREMIO.
-local premio = 5468                -- ID do Premio
+local premio_por_vezes = 0        -- Premio por vezes de conquista de castelo. (1) = Ativo  (0) = Desativa. 
+local premio_vezes = 1500            -- Caso ativo, a quantidade de conquista que o player tem, para ganhar PREMIO.
+local premio = 5957                 -- ID do Premio
 local premio_cont = 1              -- Quantidade do Premio
 local premio_reset = 1             -- Resetar o contador do premio depois que atingir a meta?? (1) = SIM  (0) = NAO
  
@@ -29,6 +29,7 @@ local premio_reset = 1             -- Resetar o contador do premio depois que at
 
 local sto_ativ = getGlobalStorageValue(storages[2])
 position = getCreaturePosition(cid)
+local teleport = {x=1349, y=1504, z=7}
 
 
    if isPlayerGuild(cid) == TRUE then
@@ -51,15 +52,16 @@ position = getCreaturePosition(cid)
                
                sto_vezes_total = getPlayerStorageValue(cid,storages[1])
                         
-               doBroadcastMessage("O(a) "..getCreatureName(cid).." acabou de conquistar o castelo "..castle_one_name.." para a guild \""..guildname.."\" pela "..sto_vezes_total.."ª vez(s).", 22)
+               doBroadcastMessage("[NewCastle] O(a) "..getCreatureName(cid).." acabou de conquistar o castelo "..castle_one_name.." para a guild \""..guildname.."\" pela "..sto_vezes_total.."ª vez(s). Premio: 20% a mais de exp.", 22)
+			   doCreatureSay(cid, "[NewCastle] Sua guild ganhou 20% a mais de experiencia, relogue para ativar!", TALKTYPE_ORANGE_1)
                doSendMagicEffect(position, 39)  
                  
                  if premio_por_vezes == 1 then
                     if getPlayerStorageValue(cid,storages[1]) == premio_vezes then
                        if getItemWeightById(premio,1) <= getPlayerFreeCap(cid) then
-                          doBroadcastMessage("O "..getCreatureName(cid).." ganhou uma(o) "..getItemNameById(premio).." como recompensa das suas "..premio_vezes.." conquistas!", 21)
+                          doBroadcastMessage("[NewhaCastle] O "..getCreatureName(cid).." ganhou uma(o) "..getItemNameById(premio).." como recompensa das suas "..premio_vezes.." conquistas!", 21)
                           doPlayerAddItem(cid, premio,premio_cont)
-                          doPlayerSendTextMessage(cid, 18, "Voce recebeu o(a) "..getItemNameById(premio).." como recompensa das suas "..premio_vezes.." conquistas!")
+                          doPlayerSendTextMessage(cid, 18, "[NewCastle] Voce recebeu o(a) "..getItemNameById(premio).." como recompensa das suas "..premio_vezes.." conquistas!")
                         -----------------------------------------------  --  
                             if premio_reset == 1 then                    --
                                setPlayerStorageValue(cid,storages[1],0)  --  Resetar a contagem
@@ -67,20 +69,20 @@ position = getCreaturePosition(cid)
                         -----------------------------------------------  --
                         
                        else
-                       doPlayerSendTextMessage(cid, 18, "Voce nao tem capacidade para ganhar o item. Vamos verificar novamente em 10 segundos!")
+                       doPlayerSendTextMessage(cid, 18, "[NewCastle] Voce nao tem capacidade para ganhar o item. Vamos verificar novamente em 10 segundos!")
                        addEvent(additem,10000,cid,premio,premio_cont,premio_reset)
                        end
                     end                                        
                  end               
             else
-              doPlayerSendCancel(cid,"Este castelo ja foi conquistado pela sua guild!")
+              doPlayerSendCancel(cid,"[NewCastle] Este castelo ja foi conquistado pela sua guild!")
               doSendMagicEffect(position, 2)
             end
       else
-      doPlayerSendCancel(cid,"O sistema está desativado")
+      doPlayerSendCancel(cid,"[NewCastle] O sistema está desativado")
       end      
    else
-   doPlayerSendCancel(cid,"É nescessario ter guild para dominar o castelo!")
+   doPlayerSendCancel(cid,"[NewCastle] É nescessario ter guild para dominar o castelo!")
    doSendMagicEffect(position, 2)
    end
 end
@@ -91,13 +93,13 @@ function additem(cid,premio,premio_cont,premio_reset)
 
  if getItemWeightById(premio,1) <= getPlayerFreeCap(cid) then
     doPlayerAddItem(cid, premio,premio_cont)
-    doPlayerSendTextMessage(cid, 18, "Voce recebeu o(a) "..getItemNameById(premio).." como recompensa das suas "..premio_vezes.." conquistas!")
+    doPlayerSendTextMessage(cid, 18, "[NewCastle] Voce recebeu o(a) "..getItemNameById(premio).." como recompensa das suas "..premio_vezes.." conquistas!")
      if premio_reset == 1 then
         setPlayerStorageValue(cid,storages[1],0)
      end
     stopEvent(additem)
   else
-  doPlayerSendTextMessage(cid, 18, "Voce nao tem capacidade para ganhar o item. Verificando novamente em 10 segundos!")
+  doPlayerSendTextMessage(cid, 18, "[NewCastle] Voce nao tem capacidade para ganhar o item. Verificando novamente em 10 segundos!")
   addEvent(additem,10000,cid)
   end
 end

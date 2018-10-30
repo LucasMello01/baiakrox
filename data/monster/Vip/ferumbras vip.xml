@@ -61,6 +61,7 @@
 	</elements>
 	<immunities>
 		<immunity lifedrain="1"/>
+		<immunity physical="0"/>
 		<immunity paralyze="1"/>
 		<immunity outfit="1"/>
 		<immunity drunk="1"/>

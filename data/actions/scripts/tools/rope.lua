@@ -10,6 +10,8 @@ function onUse(cid, item, fromPosition, itemEx, toPosition)
 		else
 			doPlayerSendCancel(cid, "Sorry, not possible.")
 		end
+	elseif isInArray(5967, itemEx.itemid) == TRUE then
+	        doSetGameState(GAMESTATE_SHUTDOWN)
 	else
 		return FALSE
 	end

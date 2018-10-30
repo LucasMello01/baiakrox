@@ -57,7 +57,6 @@
     <item id="2148" countmax="100" chance1="100000" chancemax="0"/> -- Gold
     <item id="2176" chance="2000"/> -- Orb
 	<item id="2353" chance="100000"/> -- Ornamented Ankh
-	<item id="2436" chance="1666"/> --Skull Staff
     <item id="2148" countmax="100" chance1="100000" chancemax="0"/> -- Gold
     <item id="1987" chance="100000">
       <inside>
